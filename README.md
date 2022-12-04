@@ -481,52 +481,67 @@ dark follows somewhat within this group because if the party doesn't have a lot 
 
 ### Some sample parties
 
-#### PACS/paladin, archer, cleric, sorcerer
+#### KAPD/Knight, Archer, Paladin, Druid
 
-The default party in party creation is still fully viable. However, note that while both paladin and archer can deal good damage in melee, especially if the archer uses dual daggers, having two low hitpoint characters and no knight will be a problem because in MAW monsters deal so much more damage. Replacing either the archer or the sorcerer with a knight might be preferable if you wish to use weapons. Using plate armors’ cover a knight can be a strong tank for the party while still dishing out a lot of damage. You CAN make a melee party without including a knight but a good rule of thumb would be to have as many plate users as casters (meaning cleric/druid/sorcerer). 
+This combination of classes best showcases the changes made to the various skills.  Knights have the option to become either an offensive powerhouse (by focusing on weapons) or a defensive bulwark (by focusing on Shield and Armor), Archers (and the improved bows) and Paladins (and their bonus regeneration from Meditation) now get Dark and Light magic respectively, and even though Druids no longer can wear shields they still can take an important defensive role by mastering Staves instead (which increases the party's resistances to Fire/Cold/Electric/Poison/Magic). 
 
-If you don’t include a knight, PACS is best played as a ranged party with cleric or paladin offhealer using either mind or spirit magic at master rank or higher (spirit can be mastered at rank 4). Paladin makes an excellent healer but also has a strong ranged attack using mind magic. Cleric can also function as main healer,  and for ranged attack can use mind magic or dark. Light magic has some interesting options for either class as well. Archer can either use primarily his bow or one of the magic schools for his ranged attack. Bow goes well with dark magic to provide a strong free ranged attack and using shrap metal in melee, but any combination can be used.
+#### PACS/Paladin, Archer, Cleric, Sorcerer
 
-You can still make a ranged party even including the knight, while knights are not as strong with bow as archers they still deal more damage with them than most and can rival the damage of most spells, while providing some robustness to the party.
+The Quick Start party is still fully viable. However, note that while both paladin and archer can deal good damage in melee, especially if the archer uses dual daggers, having two low hitpoint characters and no knight will be a problem because in MAW monsters deal so much more damage.  PACS is best played as a ranged party with cleric or paladin off-healer using either mind or spirit magic at master rank or higher (spirit can be mastered at rank 4). Paladin makes an excellent healer but also has a strong ranged attack using mind magic. Cleric can also function as main healer,  and for ranged attack can use mind magic or dark. Light magic has some interesting options for either class as well. Archer can either use primarily his bow or one of the magic schools for his ranged attack. Bow goes well with dark magic to provide a strong free ranged attack and using shrap metal in melee, but any combination can be used.
 
-#### SSCC/ sorcerer sorcerer cleric cleric
+#### SSCC/Sorcerer, Sorcerer, Cleric, Cleric
 
-The old standard party of the powerplayer. Triple dark caster is still a very strong option if not the powerhouse it was in vanilla. Dark lacks early spells however and much of the free early XP in vanilla has been removed from the game, so you are going to need at least some of the characters to rank another skill to make early game efficient. A secondary school ranked to 12/master won't mean much for your dark magic skill in later levels. Once you get to high rank in Dark, however, it’s a strong school. Finger of Death is a very strong spell, especially when the whole party is casting them, and shrap metal is still the strongest damage spell in the game. However, with the high monster damage in MAW you will find a Dark caster party much more fast paced and challenging. Replacing a sorcerer with a knight, or at least a cleric with a paladin, will make the party much more durable and help the transition into later game.
+The old standard party of the power player. Triple dark caster is still a very strong option, though not the powerhouse it was in vanilla. Dark lacks early spells, and much of the free early XP in vanilla has been removed from the game, so you are going to need at least some of the characters to rank another skill to make early game efficient. A secondary school ranked to 12/master won't mean much for your dark magic skill in later levels. Once you get to high rank in Dark, however, it’s a strong school. Finger of Death is a very strong spell, especially when the whole party is casting them, and shrapmetal is still the strongest damage spell in the game. However, with the high monster damage in MAW you will find a Dark caster party much more fast paced and challenging due to their smaller health pools.
 
-#### PPAA/ paladin paladin archer archer
+#### PPAA/Pladin, Paladin, Archer, Archer
 
 A very versatile party. The double paladin is enough to provide the needed tanking and archers and paladins deal great damage in melee. Paladins have about 20% less hitpoint and deal about 20% less damage than knights, but make up for this with access to healing and raise dead. Due to how ranks are costed it's possible to get a decent damage as well as healing by ranking both, but there’s also the option of having one of them rank offense (melee weapon) with either mind or spirit ranked to master but no further. Both classes also have the ability to deal strong ranged damage. Hybrid classes have about 25% less mana than the casters,  but make up for this by an extra 20% hitpoint, so an archer with high rank in an elemental school will deal the same damage as a sorcerer or druid, although they will need more downtime to regain mana.
-
-Another interesting option is a Crowd-Control party using paralyze and shrinking ray to neutralize enemies and weapons and bows to kill them.
 
 #### Any combination is possible though
 
 Ranged, melee, combined arms, specialized in dark or fire AOE, Crowd-Control. The options are endless. It’s a good idea to think about the pace of mana consumption; a single dark user will be difficult to use alongside characters that don’t use mana because Dark needs almost constant replenishing of mana, but otherwise, other than the need for healers pretty much any combination can work and will have its own strengths and weaknesses.
 ## Customized modes
 
-In your main game folder you will find mm6.ini, and at the bottom of this this list, is the following, simply change =false to =true to enable a customization.
+MAW extends mm6.ini with a [Skill Emphasis] section, which contains the following settings:
 
-[Skill Emphasis]
+MoreLinkedSkills=false    
+Links more skills for less aggressive min/maxing.  Notably, this links related schools of magic with each other.
 
-MoreLinkedSkills=false - links more skills for less min/maxing, like all spellschools. A sizable buff.
+ImprovedQuestItems=true    
+Modifies the descriptions of many permanent items to show who they get delivered to.  Useful if you need EXP in a pinch.
 
-ImprovedQuestItems=true
+MonsterExperienceMultiplier=1    
+Multiplies the EXP that monsters give on death.  Stacks with Learning.  This can be set to 0 to disable monster EXP entirely.
 
-MonsterExperienceMultiplier=1 - to progress faster increase this to any number
+RandomizeMapClusters=false    
+This randomizes what monsters are assigned to maps in Mapstats.txt    
+the randomization is done at program start, not on New Game.
 
-RandomizeMapClusters=false
+ResistancesDisplayMode=default
+Changes how resistances are displayed in the monster infobox.    
+'default' shows the chance for that damage type to be resisted.    
+'effect' shows the average percentage of damage that would be dealt.    
+'disabled' shows the raw resistance numbers.
 
-ResistancesDisplayMode=default - changes how resistances are displayed in the monsterinfobox
+ShowDiceInSpellDescription=false    
+Changes spell descriptions to use Dice Notation (1d8+3) instead of the more verbose default (3 damage plus 1-8 per point of skill).
+This feature is not yet considered complete.
 
-ShowDiceInSpellDescription=false
+EasierMonsters=false    
+Easier Monsters reduces monster damage by approximately 33%.    
+Additionally, flying monsters are changed to have a melee attack as their main attack if they weren't already.  This has the effect of causing flying monsters to actively close in on the party.
 
-EasierMonsters=false - This is the easy mode setting, reduces monster damage by about 33%
+GlobalMapResetDays=default    
+Number of days between map resets, for maps where a custom reset timer has not been defined. 
+A setting of 0 means the map will reset every time it is reloaded, whether by map transition or by loading a saved game.
+'Default' - Maps without a custom reset timer will reset based on what is defined in Mapstats.txt
+'Never' - Maps without a custom reset timer will never reset.
 
-GlobalMapResetDays=default - number of days between map resets. Set to 0 to instantly reset a map, every time you load the game or enter the area
-
-AdaptiveMonsterMode=default in development, will eventually allow fighting random monsters tweaked to be appropriate challenge, so level 10 dragons, level 100 goblins etc
-
-
+AdaptiveMonsterMode=default    
+Modifies monsters further.  This mode is unfinished and not in a working state, use at your own risk.
+'default' - disabled.
+'party' - monsters are adjusted relative to the party's average experience total.
+'map' - monsters are adjusted relative to the average level of monsters that were generated on the map.
 
 ##
 ## Some Graphs
