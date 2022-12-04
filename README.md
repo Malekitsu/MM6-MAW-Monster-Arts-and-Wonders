@@ -504,46 +504,48 @@ Ranged, melee, combined arms, specialized in dark or fire AOE, Crowd-Control. Th
 
 MAW extends mm6.ini with a [Skill Emphasis] section, which contains the following settings:
 
-MoreLinkedSkills=false    
-Links more skills for less aggressive min/maxing.  Notably, this links related schools of magic with each other.
+`MoreLinkedSkills=false` 
+Links more skills for less aggressive min/maxing.  
+Notably, this links related schools of magic with each other.
 
-ImprovedQuestItems=true    
-Modifies the descriptions of many permanent items to show who they get delivered to.  Useful if you need EXP in a pinch.
+`ImprovedQuestItems=true`    
+Modifies the descriptions of many permanent items to show who they get delivered to.  
 
-MonsterExperienceMultiplier=1    
+`MonsterExperienceMultiplier=1`    
 Multiplies the EXP that monsters give on death.  Stacks with Learning.  This can be set to 0 to disable monster EXP entirely.
 
-RandomizeMapClusters=false    
+`RandomizeMapClusters=false`    
 This randomizes what monsters are assigned to maps in Mapstats.txt    
 The randomization is done at program start, not on New Game start - this means that the monsters will change if you save and quit between map respawns.    
 Certain types of monsters (recruitable peasants, reactors, demon queens) are not available in the randomization.    
 This does not affect the normal spawning of peasants in towns where they 'should' be available.
 
-ResistancesDisplayMode=default
+`ResistancesDisplayMode=default`    
 Changes how resistances are displayed in the monster infobox.    
-'default' shows the chance for that damage type to be resisted.    
-'effect' shows the average percentage of damage that would be dealt.    
-'disabled' shows the raw resistance numbers.
+`default` shows the chance for that damage type to be resisted.    
+`effect` shows the average percentage of damage that would be dealt.    
+`disabled` shows the raw resistance numbers.
 
-ShowDiceInSpellDescription=false    
-Changes spell descriptions to use Dice Notation (1d8+3) instead of the more verbose default (3 damage plus 1-8 per point of skill).
+`ShowDiceInSpellDescription=false`    
+Changes spell descriptions to use Dice Notation (1d8+3) instead of the more verbose default (3 damage plus 1-8 per point of skill).    
 This feature is not yet considered complete.
 
-EasierMonsters=false    
+`EasierMonsters=false`    
 Easier Monsters reduces monster damage by approximately 33%.    
 Additionally, flying monsters are changed to have a melee attack as their main attack if they weren't already.  This has the effect of causing flying monsters to actively close in on the party.
 
-GlobalMapResetDays=default    
-Number of days between map resets, for maps where a custom reset timer has not been defined. 
-A setting of 0 means the map will reset every time it is reloaded, whether by map transition or by loading a saved game.
-'Default' - Maps without a custom reset timer will reset based on what is defined in Mapstats.txt
-'Never' - Maps without a custom reset timer will never reset.
+`GlobalMapResetDays=default`    
+Number of days between map resets, for maps where a custom reset timer has not been defined.    
+A setting of 0 means the map will reset every time it is reloaded, whether by map transition or by loading a saved game.    
+`Default` - Maps without a custom reset timer will reset based on what is defined in Mapstats.txt    
+`Never` - Maps without a custom reset timer will never reset.
 
-AdaptiveMonsterMode=default    
-Modifies monsters further.  This mode is unfinished and not in a working state, use at your own risk.
-'default' - disabled.
-'party' - monsters are adjusted relative to the party's average experience total.
-'map' - monsters are adjusted relative to the average level of monsters that were generated on the map.
+`AdaptiveMonsterMode=default`    
+Modifies monsters further.  This mode is unfinished and not in a state we are happy with, use at your own risk.
+`default` - disabled.    
+`disabled` - disabled.    
+`party` - monsters are adjusted relative to the party's average experience total, then adjusted per-monster based on tier.  Please note that this is specifically *not* the party's current average level.  This mode guarantees that 'Boss' monsters such as the Spider Queen are ten levels higher than the party.    
+`map` - monsters' levels for the map are averaged, then adjusted per-monster based on tier.    
 
 ##
 ## Some Graphs
