@@ -1,7 +1,8 @@
 # MM6-MAW-Monster-Arts-and-Wonders
 The MM6 Rework Mod
-Creators:
-Tnevolin, Rawsugar, Malekith, Eksekk, Raekuul.
+
+Creators: Tnevolin, Rawsugar, Malekith, Eksekk, Raekuul.
+
 Names are not ordered by importance: everyone had a key role and put a lot of effort into this.
 
 Note to users
