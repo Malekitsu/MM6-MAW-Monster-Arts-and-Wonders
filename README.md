@@ -532,9 +532,9 @@ AdaptiveMonsterMode=default in development, will eventually allow fighting rando
 ## Some Graphs
 The Following Graphs take in consideration that investing in 2 separate skills requires more skill points, so for example 20 skill in Sword+Axe is equal to 28 skill points in 2hAxe. 
 
+https://github.com/Malekitsu/MM6-MAW-Monster-Arts-and-Wonders/blob/main/Graphs/KnightAverageBuff.png
 
-
-![](Aspose.Words.efe1d0e2-17b0-467b-bc45-e807b0f09d21.001.png)
+![alt text](https://github.com/Malekitsu/MM6-MAW-Monster-Arts-and-Wonders/blob/main/Graphs/KnightAverageBuff.png?raw=true)
 
 This Graph shows How much damage will do a Knight with an average Item/Buffs/Stats relative to Skill Level.
 Meaning that if you have a lot of strength items, a spirit healer with heroism or a really good weapon, the damage will look more like this:
