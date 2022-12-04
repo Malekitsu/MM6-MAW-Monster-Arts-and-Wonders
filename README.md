@@ -37,7 +37,7 @@ That’s really all you need to know to get started, just install and enjoy the 
 But if you’re curious to know more about the mod and the specific changes, here’s the list:
 ## **Classes**
 
-**Knight:
+**Knight:**
 
 Knights get 1, 1.5, 2 (depending on promotion)  bonus damage with main hand and offhand (shield included) per level of skill.
 
