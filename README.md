@@ -532,22 +532,22 @@ AdaptiveMonsterMode=default in development, will eventually allow fighting rando
 ## Some Graphs
 The Following Graphs take in consideration that investing in 2 separate skills requires more skill points, so for example 20 skill in Sword+Axe is equal to 28 skill points in 2hAxe. 
 
-https://github.com/Malekitsu/MM6-MAW-Monster-Arts-and-Wonders/blob/main/Graphs/KnightAverageBuff.png
 
-![alt text](https://github.com/Malekitsu/MM6-MAW-Monster-Arts-and-Wonders/blob/main/Graphs/KnightAverageBuff.png?raw=true)
+
+![alt text](https://github.com/Malekitsu/MM6-Nightmare-Mode/blob/main/Graphs/KnightAverageBuff.png?raw=true)
 
 This Graph shows How much damage will do a Knight with an average Item/Buffs/Stats relative to Skill Level.
 Meaning that if you have a lot of strength items, a spirit healer with heroism or a really good weapon, the damage will look more like this:
 
-![](Aspose.Words.efe1d0e2-17b0-467b-bc45-e807b0f09d21.002.png)
+![alt text](https://github.com/Malekitsu/MM6-Nightmare-Mode/blob/main/Graphs/KnightHighBuff.png?raw=true)
 You can see that investing just in Dagger skill isn’t enough to make it shine: you will need a lot of external support.
 You could also hire followers, giving and extra boost to Build who use Dual Wield with 2 different weapon types:
 
-![](Aspose.Words.efe1d0e2-17b0-467b-bc45-e807b0f09d21.003.png)
+![alt text](https://github.com/Malekitsu/MM6-Nightmare-Mode/blob/main/Graphs/Knight%2B5.png?raw=true)
 
 
 Down here there are the same graphs but for Archer/Paladin, who have less bonus class damage:
 
-![](Aspose.Words.efe1d0e2-17b0-467b-bc45-e807b0f09d21.004.png)
+![alt text](https://github.com/Malekitsu/MM6-Nightmare-Mode/blob/main/Graphs/PalaArcAverageBuff.png?raw=true)
 
-![](Aspose.Words.efe1d0e2-17b0-467b-bc45-e807b0f09d21.005.png)
+![alt text](https://github.com/Malekitsu/MM6-Nightmare-Mode/blob/main/Graphs/PalaArcHighBuff.png?raw=true)
