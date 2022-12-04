@@ -4,8 +4,6 @@ Creators:
 Tnevolin, Rawsugar, Malekith, Eksekk, Raekuul.
 Names are not ordered by importance, everyone had a key role and put a lot of effort into this.
 
-
-# **Might & Magic 6 mod: MAW; Monsters, Arts & Wonders**
 Note to users
 
 ## **Goal**
