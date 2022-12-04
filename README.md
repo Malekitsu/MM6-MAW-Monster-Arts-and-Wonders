@@ -515,7 +515,9 @@ Multiplies the EXP that monsters give on death.  Stacks with Learning.  This can
 
 RandomizeMapClusters=false    
 This randomizes what monsters are assigned to maps in Mapstats.txt    
-the randomization is done at program start, not on New Game.
+The randomization is done at program start, not on New Game start - this means that the monsters will change if you save and quit between map respawns.    
+Certain types of monsters (recruitable peasants, reactors, demon queens) are not available in the randomization.    
+This does not affect the normal spawning of peasants in towns where they 'should' be available.
 
 ResistancesDisplayMode=default
 Changes how resistances are displayed in the monster infobox.    
