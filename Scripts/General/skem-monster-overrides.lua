@@ -573,7 +573,7 @@ function applyStaticMonsterOverrides(monsterID, easy_flag)
 	Game.MonstersTxt[monsterID] = mergeTables(Game.MonstersTxt[monsterID], monsterArray)
 end
 
-function applyAdaptiveMonsterOverrides(monsterID, monsterArray, adaptive_level)
+function applyAdaptiveMonsterOverrides(index, monsterArray, adaptive_level)
 
 	genericForm = Game.MonstersTxt[monsterArray["Id"]]
 
@@ -610,7 +610,21 @@ function applyAdaptiveMonsterOverrides(monsterID, monsterArray, adaptive_level)
 		end
 	end
 	
-	Map.Monsters[monsterID] = mergeTables(Map.Monsters[monsterID],monsterArray)
+	Map.Monsters[index] = mergeTables(Map.Monsters[index],monsterArray)
+end
+
+function applyUniqueMonsterAdjustments(index, monsterArray)
+	genericForm = Game.MonstersTxt[monsterArray.Id]
+	
+	-- apply the HP multiplier
+	monsterArray.FullHP = genericForm.FullHP * baseHealthMultiplier
+	monsterArray.HP = monsterArray.FullHP
+	
+	-- derive and apply a damage multiplier
+	local damageMultiplier, rankMultiplier = calculateMonsterDamageMultipliers(genericForm, EASY_OVERRIDES)
+	applyMonsterDamageMultipliers(monsterArray, damageMultiplier, rankMultiplier, EASY_OVERRIDES)
+	
+	Map.Monsters[index] = mergeTables(Map.Monsters[index],monsterArray)
 end
 
 mem.asmpatch(0x431A7D, [[
@@ -660,15 +674,22 @@ function events.LoadMap()
 				mapvars["adaptive"] = adaptive_level
 			end
 		end
-		for monsterID = 0, Map.Monsters.high do
-			monsterArray = Map.Monsters[monsterID]
-			if not (monsterArray.Name == "Peasant")
+	end
+	for index = 0, Map.Monsters.high do
+		monsterArray = Map.Monsters[index]
+		if not (Game.MonstersTxt[monsterArray.Id].Name == "Peasant")
+		then
+			if not (monsterArray.Name == Game.MonstersTxt[monsterArray.Id].Name)
 			then
-				applyAdaptiveMonsterOverrides(monsterID, monsterArray, adaptive_level)
+				applyUniqueMonsterAdjustments(index, monsterArray)
+			end
+			if not (ADAPTIVE == "disabled")
+			then
+				applyAdaptiveMonsterOverrides(index, monsterArray, adaptive_level)
 			end
 		end
---		 debug.Message("Adaptive Mode:  "..ADAPTIVE..", using Adaptive Level " .. adaptive_level)
 	end
+--		 debug.Message("Adaptive Mode:  "..ADAPTIVE..", using Adaptive Level " .. adaptive_level)
 end
 
 --[[ monster power spawn event
