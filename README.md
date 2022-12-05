@@ -43,7 +43,7 @@ Knights get 1, 1.5, 2 (depending on promotion)  bonus damage with main hand and 
 
 Knights also get 2 bonus damage per skill point on Bow once Champion.
 
-Paladin:
+**Paladin:**
 
 Paladin can now use light magic.
 
@@ -51,7 +51,7 @@ Paladin hp per level increased to 4-5-6, base mana increased to 8 and mana per l
 
 Paladin gets 0, 0.5, 1 (depending on promotion) bonus damage with main hand and offhand (shield included) per level of skill.
 
-Archer:
+**Archer:**
 
 Archer is now a formidable bow user, and will have the following bonuses: 
 
@@ -69,7 +69,7 @@ Archer hp per level increased to 3-4-5, base mana increased to 8 and mana per le
 
 Archer gets 0-0.5-1 (depending on promotion) bonus damage with main hand and offhand per level of skill.
 
-Druids:
+**Druids:**
 
 Druids can no longer use shields.
 
@@ -82,7 +82,7 @@ Attack speed calculations have been changed, now 10 speed provides a 10% increas
 Dual wield now sums damage, attack speed and attack from both weapons, instead of taking some stats from main weapon and others from off weapon.
 
 
-Staff:
+**Staff:**
 
 Staff has a chance of 10+2% per level of skill to Shrink or Feeblemind.
 
@@ -92,7 +92,7 @@ Expert: Skill adds 1 extra Attack Bonus and increases party’s resistances to e
 
 Master: Resistance bonus doubled
 
-Sword
+**Sword**
 
 Can now be dual wielded at any mastery, but will not grant class bonus damage when equipped in main hand. Base Bonus Speed: 10
 
@@ -102,7 +102,7 @@ Expert: Skill adds 2 Attack Bonus and 2% Attack speed
 
 Master: Skill added to damage bonus
 
-Dagger
+**Dagger**
 
 Dagger can be dual wielded at any mastery but will not grant class bonus damage when main hand. 
 
@@ -116,7 +116,7 @@ Expert: Skill added to Attack Bonus(Double bonus)
 
 Master: Skill added to Attack Speed
 
-Axe
+**Axe**
 
 Axe is one of the best weapon to deal as much damage as possible
 
@@ -130,7 +130,7 @@ Expert: Skill adds 2 Attack bonus, 1 Damage bonus and increases 2% Attack speed
 
 Master: Damage bonus doubled
 
-Spear
+**Spear**
 
 Spear is recommended early game and it's really solid throughout all the game, having a higher chance to hit and less chance to get hit. Base Speed: 10
 
@@ -142,7 +142,7 @@ Expert: Skill adds 2 Attack bonus, 1 Damage bonus and 2 Armor Class
 
 Master: Skill adds 3 Attack bonus, 2 Damage bonus and 4 Armor Class
 
-Bow
+**Bow****
 
 Novice: Skill adds 3 Attack Bonus and 1 Bonus Damage
 
@@ -150,7 +150,7 @@ Expert: Bonus Damage Doubled
 
 Master: Bow fires two arrows on every attack
 
-Mace
+**Mace**
 
 Mace has a 5+0.25% chance per skill level to paralyze.
 
@@ -160,7 +160,7 @@ Expert: Skill added to Attack Damage, Attack Bonus doubled
 
 Master: Attack Damage per Skill doubled
 
-Shield
+**Shield**
 
 Shield skill now reduces ranged damage to all party by 1% per skill level, bonus is tripled on Knights. (Effect is multiplicative, so the actual formula is damage\*0.99^skill)
 
@@ -170,7 +170,7 @@ Expert: Skill added to Armor Class (double effect)
 
 Master: Skill added to Armor Class (triple effect)
 
-Leather
+**Leather**
 
 Leather is now really good to resist magic damage
 
@@ -180,7 +180,7 @@ Expert: Recovery penalty reduced
 
 Master: Recovery penalty eliminated, double resistances bonus
 
-Mail
+**Mail**
 
 Mail now has reduces physical damage by 1% per skill level in addition to reduce some magic damage
 
@@ -190,7 +190,7 @@ Expert: Recovery penalty reduced, each point of skill reduces meele damage taken
 
 Master: Recovery penalty eliminated
 
-Plate
+**Plate**
 
 NEW COVER MECHANIC: Wearers of Plate armor place themselves on the front lines, absorbing attacks otherwise destined for their allies, granting a COVER chance.
 
@@ -200,19 +200,19 @@ Expert: Recovery penalty reduced, Cover chance doubled, each point of skill redu
 
 Master: Recovery penalty eliminated, Cover chance tripled
 
-Bodybuilding
+**Bodybuilding**
 
 Bodybuilding now also increases also 1% of maximum health, making it strong in all stages of the game
 
-Meditation
+**Meditation**
 
 Meditation now also grants mana regeneration.
 
 The formula is: 
 
-Mana^0.5 \* MeditationLevel^2/400 capped to 30 mana/5 minutes (10 seconds in real time), meaning that regeneration depends on both total mana and meditation skill. Paladins gets an extra 50% regeneration.
+Mana^0.5 \* MeditationLevel^2/400 capped to 30 mana/5 minutes (10 seconds in real time), meaning that regeneration depends on both total mana and meditation skill. Paladins with 2nd promotion gets an extra 50% regeneration.
 
-Learning
+**Learning**
 
 Grants 9% bonus exp baseline, and grants following bonuses:
 
@@ -231,15 +231,15 @@ Shared Skills are divided in 3 types:
 
 Main Hand, Off Hand, Armor.
 
-Main Hand:
+**Main Hand:**
 
 Staff, Axe, Spear, Mace
 
-Offhand:
+**Offhand:**
 
 Sword, Dagger
 
-Armors:
+**Armors:**
 
 Leather, Chain, Plate
 
