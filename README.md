@@ -504,12 +504,13 @@ Ranged, melee, combined arms, specialized in dark or fire AOE, Crowd-Control. Th
 
 MAW extends mm6.ini with a [Skill Emphasis] section, which contains the following settings:
 
-`MoreLinkedSkills=false` 
+`MoreLinkedSkills=false`    
 Links more skills for less aggressive min/maxing.  
 Notably, this links related schools of magic with each other.
 
 `ImprovedQuestItems=true`    
-Modifies the descriptions of many permanent items to show who they get delivered to.  
+Modifies the descriptions of many permanent items to show who they get delivered to.    
+This also disambiguates keys whose names overlap with each other in vanilla (mostly this affects the Castle Ironfist Temple of Baa).     
 
 `MonsterExperienceMultiplier=1`    
 Multiplies the EXP that monsters give on death.  Stacks with Learning.  This can be set to 0 to disable monster EXP entirely.
