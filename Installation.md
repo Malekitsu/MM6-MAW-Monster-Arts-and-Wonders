@@ -1,4 +1,4 @@
-# Might & Magic 6: skill emphasis mod installation
+# Might & Magic 6 MAW: Monster Arts and Wonders
 
 [This document in nice formatting](https://github.com/tnevolin/mm6-skill-emphasis-mod/blob/master/Installation.md)
 
