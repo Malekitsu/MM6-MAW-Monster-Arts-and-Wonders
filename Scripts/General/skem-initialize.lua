@@ -15,6 +15,7 @@ local PRESETS = {
 	["ShowDiceInSpellDescription"] = false,
 	["MonsterExperienceMultiplier"] = 1.00,
 	["GlobalMapResetDays"] = "default",
+	HomingProjectiles = true,
 }
 
 SETTINGS = { }

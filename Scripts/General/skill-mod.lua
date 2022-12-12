@@ -2134,16 +2134,16 @@ local function navigateMissile(object)
 end
 
 -- game tick related functionality
-
+local homingProjectiles = SETTINGS.HomingProjectiles
 function events.Tick()
 
 	-- navigateMissiles
-	
-	for objectIndex = 1,Map.Objects.high do
-		local object =  Map.Objects[objectIndex]
-		navigateMissile(object)
+	if homingProjectiles then
+		for objectIndex = 1,Map.Objects.high do
+			local object =  Map.Objects[objectIndex]
+			navigateMissile(object)
+		end
 	end
-	
 end
 
 -- feeblemind fix externalized to spell-overrides as of 0.8.3
