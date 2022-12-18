@@ -454,7 +454,7 @@ Alt+8	WindMaster, WaterMaster	reaching to places
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 |knight|4/6/8|N/A|excellent|bow (ca 75%f damage)||shield|
 |paladin|3/4/6|2/3/3+|good|mind/light (\*)|extra hp, less mana|spirit|
-|archer|3/4/6|2/3/4+|good (and Dark/cold/fire)|bow+elemental+dark||elemental (dark)|
+|archer|3/4/5|2/3/4+|good (and Dark/cold/fire)|bow+elemental+dark||elemental (dark)|
 |cleric|2/3/4|3/4/5|bad (Dark)|mind/dark/light|lots of mana, shield, chain|spirit, light (dark)|
 |sorcerer|2/3/4|3/4/5|bad (Dark)|elemental/dark/light||elemental, light (dark)|
 |druid|2/3/4|3/4/5+|bad|elemental/mind|extra mana, no shield|spirit+elemental|
