@@ -748,7 +748,8 @@ mem.hookcall(0x00421C5C, 0, 0, disableFeeblemindedMonsterCasting)
 
 -- Feeblemind prevents monster to do bad things
 
-local function disableFeeblemindedMonsterSpecialAbility(d, def, playerPointer, thing)
+-- disabled because conflicts with mm6patch
+--[[local function disableFeeblemindedMonsterSpecialAbility(d, def, playerPointer, thing)
 	-- get monster
 	local monsterIndex, monster = GetMonster(d.edi)
 	-- check monster is feebleminded
@@ -759,7 +760,16 @@ local function disableFeeblemindedMonsterSpecialAbility(d, def, playerPointer, t
 		def(playerPointer, thing)
 	end
 end
-mem.hookcall(0x00431DE7, 1, 1, disableFeeblemindedMonsterSpecialAbility)
+mem.hookcall(0x00431DE7, 1, 1, disableFeeblemindedMonsterSpecialAbility)]]
+
+-- this done instead
+mem.autohook2(0x431DE1, function(d)
+	local monsterIndex, monster = GetMonster(d.edi)
+	if monster.SpellBuffs[const.MonsterBuff.Feeblemind].ExpireTime ~= 0 then
+		d:push(0x431DEC)
+		return true
+	end
+end)
 
 -- Guardian Angel changes
 -- supersedes skill-mod.lua:3316-3359
