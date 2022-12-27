@@ -102,13 +102,13 @@ local monsterInfos =
 	[12] = {["SpellChance"] = 2, ["Spell"] = "Dispell Magic", ["SpellSkill"] = JoinSkill(10, const.Novice), },
 	--Priest of Baa
 	[16] = 
-	{["Name"]= "Priest of Baa",["FullHP"] = 220,["Level"] = 40, ["ArmorClass"]=40,["Experience"]= 1144,["Attack1"] = {["Type"] = const.Damage.Elec, ["DamageDiceCount"] = 6, ["DamageDiceSides"] = 6, ["DamageAdd"] = 0, ["Missile"] = missiles["Elec"], },},
+	{["Name"]= "Priest of Baa",["FullHP"] = 220,["Level"] = 54, ["ArmorClass"]=50,["Experience"]= 1144,["Attack1"] = {["Type"] = const.Damage.Elec, ["DamageDiceCount"] = 8, ["DamageDiceSides"] = 12, ["DamageAdd"] = 0, ["Missile"] = missiles["Elec"], },},
 	--Bishop of Baa
 	[17] = 
-	{["Name"]= "Bishop of Baa",["FullHP"] = 340,["Level"] = 50,["ArmorClass"]=50,["Experience"]= 2375,["Attack1"] = {["Type"] = const.Damage.Elec, ["DamageDiceCount"] = 7, ["DamageDiceSides"] = 6, ["DamageAdd"] = 5, ["Missile"] = missiles["Elec"], },["Spell"] = "Harm", ["SpellSkill"] = JoinSkill(6, const.Master),},
+	{["Name"]= "Bishop of Baa",["FullHP"] = 340,["Level"] = 67,["ArmorClass"]=60,["Experience"]= 2375,["Attack1"] = {["Type"] = const.Damage.Elec, ["DamageDiceCount"] = 9, ["DamageDiceSides"] = 12, ["DamageAdd"] = 10, ["Missile"] = missiles["Elec"], },["Spell"] = "Harm", ["SpellSkill"] = JoinSkill(10, const.Master),},
 	--Cardinal of Baa
 	[18] = 
-	{["Name"]= "Cardinal of Baa",["FullHP"] = 510,["Level"] =60,["ArmorClass"]=60,["Experience"]= 4000,["Attack1"] = {["Type"] = const.Damage.Elec, ["DamageDiceCount"] = 10, ["DamageDiceSides"] = 6, ["DamageAdd"] = 10, ["Missile"] = missiles["Elec"], },["Spell"] = "Flying Fist", ["SpellSkill"] = JoinSkill(6, const.Master),},
+	{["Name"]= "Cardinal of Baa",["FullHP"] = 510,["Level"] =80,["ArmorClass"]=70,["Experience"]= 4000,["Attack1"] = {["Type"] = const.Damage.Elec, ["DamageDiceCount"] = 12, ["DamageDiceSides"] = 12, ["DamageAdd"] = 20, ["Missile"] = missiles["Elec"], },["Spell"] = "Flying Fist", ["SpellSkill"] = JoinSkill(10, const.Master),},
 	--devil Spawn
 	[28] = {["FullHP"] = 190,["Level"] = 50,["ArmorClass"]=40,["Experience"]= 2800, ["Attack1"] = {["Type"] = const.Damage.Phys, ["DamageDiceCount"] = 4, ["DamageDiceSides"] = 6, ["DamageAdd"] = 8,},["Attack2"] = {["Type"] = const.Damage.Fire, ["DamageDiceCount"] = 2, ["DamageDiceSides"] = 26, ["DamageAdd"] = 4, ["Missile"] = missiles["Fire"], },["SpellChance"] = 20, ["SpellName"] = "Fire Bolt", ["SpellSkill"] = JoinSkill(12, const.Master),},
 	--devil Worker
@@ -513,9 +513,9 @@ function applyMonsterDamageMultipliers(monsterArray, damageMultiplier, rankMulti
 		
 		if (easy_flag == true)
 		then
-			rank = math.max(1, math.floor(rank * rankMultiplier * 60 / 63))
+			rank = math.max(1, math.floor(rank * 1 + 0 * rankMultiplier * 60 / 63))
 		else
-			rank = math.ceil(math.min(rank * rankMultiplier, 60))
+			rank = math.ceil(math.min(rank * 1 + 0 * rankMultiplier, 60))
 		end
 	
 		monsterArray["SpellSkill"] = JoinSkill(rank, mastery)
@@ -575,26 +575,74 @@ end
 
 function applyAdaptiveMonsterOverrides(monsterID, monsterArray, adaptive_level)
 
+
 	genericForm = Game.MonstersTxt[monsterArray["Id"]]
 
 	oldLevel = math.max(genericForm["Level"],1)
 	offset = calculateTierLevelOffset(genericForm)
-	newLevel = math.max(1, adaptive_level + offset)
-	monsterArray["Level"] = newLevel
+	Mlevel = monsterArray["Level"]
 	
-	levelMultiplier = (newLevel) / (oldLevel)
+	if Mlevel == oldLevel or adaptive_level > (Mlevel*0.7-5) then
 	
-	local damageMultiplier, rankMultiplier = calculateMonsterDamageMultipliers(monsterArray, easy_flag)
-	applyMonsterDamageMultipliers(monsterArray, damageMultiplier, rankMultiplier, easy_flag)
+	xLevel = (adaptive_level+5+offset/4*adaptive_level^0.2) *((57+math.random(1,30)+math.random(1,30))/100)
+	newLevel = math.max(1, xLevel)
 
-	monsterArray["FullHP"] = genericForm["FullHP"] * levelMultiplier
+	levelMultiplier = (newLevel+1) / (oldLevel+1)
 
-	monsterArray["HP"] = monsterArray["FullHP"]
+	bonusx1 = genericForm["Attack1"]["DamageAdd"]
+	dicex1 = genericForm["Attack1"]["DamageDiceCount"]
+	sidesx1 = genericForm["Attack1"]["DamageDiceSides"]
+	
+	bonusx1 = math.max(1, (bonusx1 * levelMultiplier * (newLevel/20 + 1.75)))
+	sidesx1 = math.max(1, (sidesx1  * levelMultiplier^0.5 * (newLevel/20 + 1.75)))
+	dicex1 = math.max(1, (dicex1 * levelMultiplier^0.5))
+
+	if bonusx1 > 250 then
+	sidesx1 = sidesx1 + (bonusx1 - 250) / dicex1
+	bonusx1 =250
+	end
+	
+	monsterArray["Attack1"]["DamageAdd"] = bonusx1
+	monsterArray["Attack1"]["DamageDiceCount"] = dicex1
+	monsterArray["Attack1"]["DamageDiceSides"] = sidesx1
+
+	if not (monsterArray["Attack2Chance"] == 0)
+	then
+
+	bonusx2 = genericForm["Attack2"]["DamageAdd"]
+	dicex2 = genericForm["Attack2"]["DamageDiceCount"]
+	sidesx2 = genericForm["Attack2"]["DamageDiceSides"]
+	
+	bonusx2 = math.max(1, (bonusx2 * levelMultiplier * (newLevel/20 + 1.75)))
+	sidesx2 = math.max(1, (sidesx2 * levelMultiplier^0.5 * (newLevel/20 + 1.75)))
+	dicex2 = math.max(1, (dicex2 * levelMultiplier^0.5))
+
+	if bonusx2 > 250 then
+	sidesx2 = sidesx2 + (bonusx2 - 250) / dicex2
+	bonusx2 =250
+	end
+	
+	monsterArray["Attack2"]["DamageAdd"] = bonusx2
+	monsterArray["Attack2"]["DamageDiceCount"] = dicex2
+	monsterArray["Attack2"]["DamageDiceSides"] = sidesx2
+
+
+	elseif not (monsterArray["SpellChance"] == 0)
+	then
+		r,m = SplitSkill(genericForm["SpellSkill"])
+		r = math.max(1, math.round(r * levelMultiplier/1.5))
+		monsterArray["SpellSkill"] = JoinSkill(r,m)
+	end
+
+
+	monsterArray["FullHP"] = math.round(newLevel*(newLevel/10+3)) * 2
+
+	monsterArray["HP"] = math.round(newLevel*(newLevel/10+3)) * 2
 
 	monsterArray["ArmorClass"] = genericForm["ArmorClass"] * levelMultiplier
-
-	monsterArray["Experience"] = genericForm["Experience"] * levelMultiplier
-	monsterArray["TreasureDiceCount"] = genericForm["TreasureDiceCount"] * levelMultiplier
+	monsterArray["Level"] = newLevel
+	monsterArray["Experience"] = math.round(newLevel*(newLevel+10))
+	monsterArray["TreasureDiceCount"] = genericForm["TreasureDiceCount"] * levelMultiplier^1.2
 	
 	if (adaptive_level > genericForm["Level"])
 	then
@@ -603,14 +651,15 @@ function applyAdaptiveMonsterOverrides(monsterID, monsterArray, adaptive_level)
 			if not (k == "Energy")
 			then
 				key = k .. "Resistance"
-				value = monsterArray[key]
-				value = value * (adaptive_level + 100)/(genericForm["Level"] + 100) + (adaptive_level - genericForm["Level"])/2
+				value = genericForm[key]
+				value = value * (adaptive_level + 100)/(genericForm["Level"] + 100) + (adaptive_level - genericForm["Level"])/5
 				monsterArray[key] = value
 			end
 		end
 	end
 	
 	Map.Monsters[monsterID] = mergeTables(Map.Monsters[monsterID],monsterArray)
+end
 end
 
 mem.asmpatch(0x431A7D, [[

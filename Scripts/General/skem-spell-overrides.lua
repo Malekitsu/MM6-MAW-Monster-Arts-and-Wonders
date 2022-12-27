@@ -18,7 +18,7 @@ local training = {
 
 local spellTxtIds = {}
 
-
+local DifficultyModifier = SETTINGS["DifficultyModifier"]
 
 -- helper functions
 
@@ -202,11 +202,11 @@ local spellDescs = {
 		["Expert"] = "Works if eradicated less than 1 hour per point of skill.\nHeals 100 HP + 15 per point of skill.",
 		["Master"] = "Works if eradicated less than 1 day per point of skill.\nHeals 150 HP + 15 per point of skill.",
 	},
-	["Shared life"] = {
+	["Shared Life"] = {
 		["Description"] = "Shared Life combines the life force of your characters and redistributes it amongst them as evenly as possible.  All current hit points are totaled and 9 extra point per point of skill in Spirit Magic is added to this total.  Then the points are distributed back to the characters, with no individual character being allowed to have more points than his maximum total hit points.",
-		["Normal"] = "Moderate recovery rate",
-		["Expert"] = "Faster recovery rate",
-		["Master"] = "Fastest recovery rate",
+		["Normal"] = "Moderate recovery rate. Heals 9 points pr rank.",
+		["Expert"] = "Faster recovery rate. Heals 9 points pr rank.",
+		["Master"] = "Fastest recovery rate. Heals 9 points pr rank.",
 	},
 	["Cure Poison"] = {
 		["Description"] = "Heals and cures poison in a character if you cast this spell in time.  The greater the skill and rank in Body Magic the longer the character could have been poisoned before the “point of no return” is reached.  After that, the only way to remove the condition short of Divine Intervention is to visit a temple.",
@@ -228,9 +228,9 @@ local spellDescs = {
 	},
 			["Remove Curse"] = {
 		["Description"] = "Heals and removes the cursed condition from a character if you cast this spell in time.  The greater the skill and rank in Spirit Magic the longer the condition could have been present before the “point of no return” is reached.  After that, the only way to remove the condition short of Divine Intervention is to visit a temple.",
-		["Normal"] = "Works if cursed less than 3 minutes per point of skill\nCosts 2 SP.\nHeals 2 HP.",
-		["Expert"] = "Works if cursed less than 1 hour per point of skill\nCosts 4 SP.\nHeals 10 HP.",
-		["Master"] = "Works if cursed less than 1 day per point of skill\nCosts 6 SP.\nHeals 50 HP.",
+		["Normal"] = "Works if cursed less than 3 minutes per point of skill\nCosts 3 SP.\nHeals 5 HP.",
+		["Expert"] = "Works if cursed less than 1 hour per point of skill\nCosts 6 SP.\nHeals 30 HP.",
+		["Master"] = "Works if cursed less than 1 day per point of skill\nCosts 12 SP.\nHeals 70 HP.",
 	},	
 			["Cure Disease"] = {
 		["Description"] = "Heals and cures disease in a character if you cast this spell in time.  The greater the skill and rank in Body Magic the longer the character could have been diseased before the “point of no return” is reached.  After that, the only way to remove the condition short of Divine Intervention is to visit a temple.",
@@ -813,6 +813,8 @@ mem.hookcall(0x0048875B, 1, 1, changedCharacterCalcStatBonusByItems)
 -- supersedes skill-mod.lua:2658-2693
 local function modifiedMonsterCalculateDamage(d, def, monsterPointer, attackType)
 
+Mlevel = monsterArray["Level"]
+
 	-- get monster
 
 	local monsterIndex, monster = GetMonster(d.edi)
@@ -823,11 +825,12 @@ local function modifiedMonsterCalculateDamage(d, def, monsterPointer, attackType
 
 	if attackType == 0 then
 		-- primary attack is calculated correctly
+		damage = damage * DifficultyModifier
 		return damage
 	elseif attackType == 1 then
 		-- secondary attach uses attack1 DamageAdd
 		-- replace Attack1.DamageAdd with Attack2.DamageAdd
-		damage = damage - monster.Attack1.DamageAdd + monster.Attack2.DamageAdd
+		damage = (damage - monster.Attack1.DamageAdd + monster.Attack2.DamageAdd) * DifficultyModifier
 		return damage
 	elseif attackType == 2 and (monster.Spell == 44 or monster.Spell == 95) then
 		-- don't recalculate Mass Distortion or Finger of Death
@@ -837,7 +840,7 @@ local function modifiedMonsterCalculateDamage(d, def, monsterPointer, attackType
 	-- calculate spell damage same way as for party
 
 	local spellSkill, spellMastery = SplitSkill(monster.SpellSkill)
-	damage = Game.CalcSpellDamage(monster.Spell, spellSkill, spellMastery, 0)
+	damage = Game.CalcSpellDamage(monster.Spell, spellSkill, spellMastery, 0) * DifficultyModifier * ((Mlevel/16)+0.75)
 
 	return damage
 
