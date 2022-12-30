@@ -43,7 +43,7 @@ Spell	DelayNormal	DelayExpert	DelayMaster
 41  Rock Blast	110	100	90
 42  Turn to Stone	130	65	33
 43  Death Blossom	120	110	100
-44  Mass Distortion	240	220	200
+44  Mass Distortion	260	260	260
 45  Spirit Arrow	90	80	80
 46  Bless	100	50	25
 47  Healing Touch	100	100	100
@@ -85,17 +85,17 @@ Spell	DelayNormal	DelayExpert	DelayMaster
 83  Day of the Gods	500	400	300
 84  Prismatic Light	150	135	120
 85  Hour of Power	250	200	150
-86  Paralyze	160	140	80
+86  Paralyze	160	140	120
 87  Sun Ray	180	165	150
 88  Divine Intervention	300	300	300
 89  Reanimate	100	100	100
 90  Toxic Cloud	120	110	100
 91  Mass Curse	120	90	60
 92  Shrapmetal	100	90	80
-93  Shrinking Ray	120	100	80
+93  Shrinking Ray	120	120	120
 94  Day of Protection	500	400	300
-95  Finger of Death	130	110	100
+95  Finger of Death	130	130	130
 96  Moon Ray	150	140	100
-97  Dragon Breath	160	140	120
+97  Dragon Breath	160	130	100
 98  Armageddon	250	250	250
 99  Dark Containment	300	200	100
