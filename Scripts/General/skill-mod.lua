@@ -1956,6 +1956,7 @@ formatSkillRankNumber(Game.SkillRecoveryTimes[const.Skills.Shield + 1] * (rank =
 	Game.Classes.SPFactor[const.Class.BattleMage] = 3
 	Game.Classes.SPFactor[const.Class.WarriorMage] = 4	
 	Game.ClassKinds.SPBase[4] = 8
+	Game.Classes.SPFactor[const.Class.ArchMage] = 6
 	
 	----------------------------------------------------------------------------------------------------
 	-- item stats were externalized to skem-item-overrides.lua as of 0.8.2
