@@ -1,7 +1,5 @@
 # Might & Magic 6 MAW: Monster Arts and Wonders
 
-[This document in nice formatting](https://github.com/tnevolin/mm6-skill-emphasis-mod/blob/master/Installation.md)
-
 This mod requires GrayFace patch and Might and Magic Extension (MMExt).
 
 ## Install GrayFace patch
