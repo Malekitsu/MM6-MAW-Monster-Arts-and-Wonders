@@ -812,8 +812,8 @@ function events.LoadMap()
 		end
 		for monsterID = 0, Map.Monsters.high do
 			monsterArray = Map.Monsters[monsterID]
-			then
 			if not (monsterArray.Name == "Peasant")
+				then
 				if (ADAPTIVE == "100") then
 				applyAdaptiveMonsterOverrides100(monsterID, monsterArray, adaptive_level)
 				else
