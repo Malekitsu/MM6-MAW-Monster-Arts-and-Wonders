@@ -525,10 +525,10 @@ local spellPowers =
 mem.asmpatch(0x0043188D, "jmp     0x23", 2)
 
 -- debuff success rate - level is less important
-if ADAPTIVE == "100" then
-else
+--if ADAPTIVE == "100" then
+--else
 mem.asmhook(0x421F06, "shr cl, 2")
-end
+--end
 
 -- spell damage modification
 
