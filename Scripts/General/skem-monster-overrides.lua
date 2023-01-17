@@ -753,7 +753,7 @@ function applyAdaptiveMonsterOverrides100(monsterID, monsterArray, adaptive_leve
 			then
 				key = k .. "Resistance"
 				value = genericForm[key]
-				value = value * (200)/(genericForm["Level"] + (120+genericForm["Level"]-value)/4
+				value = value * 200/(genericForm["Level"]+100) + (120+genericForm["Level"]-value)/4
 				monsterArray[key] = value
 			end
 		end
