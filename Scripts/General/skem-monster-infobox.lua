@@ -9,6 +9,7 @@
 
 local DEBUG = false
 local CHANCE = SETTINGS["ResistancesDisplayMode"]
+local ADAPTIVE = string.lower(SETTINGS["AdaptiveMonsterMode"])
 
 if CHANCE == "default"
 then
@@ -83,7 +84,11 @@ local function getDodgeChance(player, monsterLevel)
 end
 
 function calculateMonsterDebuffRate(level,magicResist,is_resist)
+if ADAPTIVE == "100" then
+	rate = 30/(30 + (level / 1) + magicResist)
+else
 	rate = 30/(30 + (level / 4) + magicResist)
+end
 	if (is_resist == true) then
 		rate = 1 - rate
 	end
