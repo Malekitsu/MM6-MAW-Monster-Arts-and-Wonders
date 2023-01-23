@@ -838,12 +838,10 @@ mem.hookcall(0x0048875B, 1, 1, changedCharacterCalcStatBonusByItems)
 -- supersedes skill-mod.lua:2658-2693
 local function modifiedMonsterCalculateDamage(d, def, monsterPointer, attackType)
 
-Mlevel = monsterArray["Level"]
-
 	-- get monster
 
 	local monsterIndex, monster = GetMonster(d.edi)
-
+	Mlevel = Game.MonstersTxt[monster.Id].Level
 	-- execute original code
 
 	local damage = def(monsterPointer, attackType)
