@@ -266,7 +266,8 @@ local spellCosts =
 	["Ice Bolt"] = {["Master"] = 11},
 	["Acid Burst"] = {["Master"] = 15 + SC},
 	["Fire Bolt"] = {["Master"] = 8},
-	["Deadly Swarm"] = {["Master"] = 6},
+	["Deadly Swarm"] = {["Master"] = 8},
+	["Blades"] = {["Normal"] = 20, ["Expert"] = 20, ["Master"] = 20},
 	["Rock Blast"] = {["Master"] = 15 + SC},
 	["Mind Blast"] = {["Expert"] = 2, ["Master"] = 1},
 	["Lightning Bolt"] = {["Master"] = 14 + SC^0.9},
@@ -417,16 +418,16 @@ local spellPowers =
 	-- Deadly Swarm
 	[37] =
 	{
-		[const.Novice] = {fixedMin = 8, fixedMax = 8, variableMin = 1, variableMax = 5, },
-		[const.Expert] = {fixedMin = 8, fixedMax = 8, variableMin = 1, variableMax = 5, },
-		[const.Master] = {fixedMin = 8, fixedMax = 8, variableMin = 1, variableMax = 5, },
+		[const.Novice] = {fixedMin = 8, fixedMax = 8, variableMin = 1, variableMax = 4, },
+		[const.Expert] = {fixedMin = 8, fixedMax = 8, variableMin = 1, variableMax = 4, },
+		[const.Master] = {fixedMin = 8, fixedMax = 8, variableMin = 1, variableMax = 4, },
 	},
 	-- Blades
 	[39] =
 	{
-		[const.Novice] = {fixedMin = 12, fixedMax = 12, variableMin = 1, variableMax = 8, },
-		[const.Expert] = {fixedMin = 12, fixedMax = 12, variableMin = 1, variableMax = 8, },
-		[const.Master] = {fixedMin = 12, fixedMax = 12, variableMin = 1, variableMax = 8, },
+		[const.Novice] = {fixedMin = 20, fixedMax = 20, variableMin = 1, variableMax = 13, },
+		[const.Expert] = {fixedMin = 20, fixedMax = 20, variableMin = 1, variableMax = 13, },
+		[const.Master] = {fixedMin = 20, fixedMax = 20, variableMin = 1, variableMax = 13, },
 	},
 	-- Rock Blast
 	[41] =
