@@ -17,7 +17,7 @@ Spell	DelayNormal	DelayExpert	DelayMaster
 15  Sparks	110	100	90
 16  Feather Fall	120	60	30
 17  Shield	120	60	30
-18  Lightning Bolt	110	100	90
+18  Lightning Bolt	110	100	65
 19  Jump	110	90	70
 20  Implosion	120	110	100
 21  Fly	250	150	100
@@ -27,7 +27,7 @@ Spell	DelayNormal	DelayExpert	DelayMaster
 25  Protection from Cold	120	60	30
 26  Poison Spray	110	100	90
 27  Water Walk	150	80	40
-28  Ice Bolt	110	100	90
+28  Ice Bolt	110	100	50
 29  Enchant Item	100	50	30
 30  Acid Burst	110	100	90
 31  Town Portal	200	200	200
@@ -36,14 +36,14 @@ Spell	DelayNormal	DelayExpert	DelayMaster
 34  Stun	80	40	20
 35  Magic Arrow	100	90	80
 36  Protection from Magic	120	120	120
-37  Deadly Swarm	110	100	90
+37  Deadly Swarm	110	100	35
 38  Stone Skin	120	120	120
 39  Blades	110	100	90
 40  Stone to Flesh	140	140	140
 41  Rock Blast	110	100	90
 42  Turn to Stone	130	65	33
 43  Death Blossom	120	110	100
-44  Mass Distortion	260	260	260
+44  Mass Distortion	140	120	100
 45  Spirit Arrow	90	80	80
 46  Bless	100	50	25
 47  Healing Touch	100	100	100
