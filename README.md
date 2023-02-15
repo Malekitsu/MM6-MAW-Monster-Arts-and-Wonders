@@ -162,7 +162,7 @@ Master: Attack Damage per Skill doubled
 
 **Shield**
 
-Shield skill now reduces ranged damage to all party by 1% per skill level, bonus is tripled on Knights. (Effect is multiplicative, so the actual formula is damage\*0.99^skill)
+Shield skill now reduces ranged damage to all party by 1% per skill level, bonus is doubled on Knights. (Effect is multiplicative, so the actual formula is damage\*0.99^skill)
 
 Novice: Skill added to Armor Class
 
