@@ -370,9 +370,9 @@ local classMeleeWeaponSkillDamageBonus =
 }
 local classRangedWeaponSkillAttackBonusMultiplier =
 {
-	[const.Class.Archer] = 2,
-	[const.Class.BattleMage] = 2,
-	[const.Class.WarriorMage] = 2,
+	[const.Class.Archer] = 5/3,
+	[const.Class.BattleMage] = 5/3,
+	[const.Class.WarriorMage] = 5/3,
 }
 local classRangedWeaponSkillSpeedBonusMultiplier =
 {
