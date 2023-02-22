@@ -119,7 +119,7 @@ local attributeBreakpoints =
 13,
 11,
 9,
-7,
+-1000,
 }
 
 
