@@ -89,8 +89,41 @@ local meleeRecoveryCap = 10
 
 --
 -- attribute breakpoints
-
 local attributeBreakpoints =
+{
+400,
+350,
+300,
+275,
+250,
+225,
+200,
+180,
+160,
+140,
+120,
+100,
+90,
+80,
+70,
+60,
+50,
+40,
+35,
+30,
+25,
+21,
+19,
+17,
+15,
+13,
+11,
+9,
+7,
+}
+
+
+local attributeEffects =
 {
 80,
 70,
