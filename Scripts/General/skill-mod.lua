@@ -227,7 +227,7 @@ local newWeaponSkillRecoveryBonuses =
 	[const.Skills.Dagger]	= {0, 0, 1, },
 	[const.Skills.Axe]		= {0, 2, 2, },
 	[const.Skills.Spear]	= {0, 0, 0, },
-	[const.Skills.Bow]		= {0, 0, 0, },
+	[const.Skills.Bow]		= {1, 2, 2, },
 	[const.Skills.Mace]		= {0, 0, 0, },
 	[const.Skills.Blaster]	= {0, 0, 0, },
 }
@@ -253,7 +253,7 @@ local newWeaponSkillDamageBonuses =
 	[const.Skills.Dagger]	= {0, 0, 0, },
 	[const.Skills.Axe]		= {0, 1, 2, },
 	[const.Skills.Spear]	= {0, 1, 2, },
-	[const.Skills.Bow]		= {1, 2, 4, },
+	[const.Skills.Bow]		= {1, 2, 2, },
 	[const.Skills.Mace]		= {0, 1, 2, },
 	[const.Skills.Blaster]	= {0, 0, 0, },
 	
@@ -375,11 +375,12 @@ local classRangedWeaponSkillAttackBonusMultiplier =
 	[const.Class.BattleMage] = 5/3,
 	[const.Class.WarriorMage] = 5/3,
 }
+--ranged class speed bonus not working apparently
 local classRangedWeaponSkillSpeedBonusMultiplier =
 {
 	[const.Class.Archer] = 0,
 	[const.Class.BattleMage] = 0,
-	[const.Class.WarriorMage] = 1,
+	[const.Class.WarriorMage] = 0,
 }
 local classRangedWeaponSkillDamageBonus =
 {
@@ -388,7 +389,7 @@ local classRangedWeaponSkillDamageBonus =
 	[const.Class.WarriorMage] = 2,
 	[const.Class.Knight] = 0,
 	[const.Class.Cavalier] = 0,
-	[const.Class.Champion] = 2,
+	[const.Class.Champion] = 1,
 }
 
 -- plate cover chances by rank
@@ -2877,7 +2878,7 @@ function events.ModifyItemDamage(t)
         elseif m == const.Expert then
             masteryBonus = 2
         elseif m == const.Master then
-            masteryBonus = 4
+            masteryBonus = 2
         end
 				-- increase s based on ArmsMaster, WeaponsMaster, or Squire professions of hired NPCs
 		local hiredNPC = Game.Party.HiredNPC
@@ -2900,4 +2901,76 @@ function events.ModifyItemDamage(t)
             t.Result = t.Result + classRangedWeaponSkillDamageBonus[t.Player.Class] * s
         end
     end
+end
+
+
+--FIX FOR UNIQUE MONSTERS
+function events.LoadMap()
+	for i=0, Map.Monsters.High
+		do
+			if not (Map.Monsters[i].Name == Game.MonstersTxt[Map.Monsters[i].Id].Name) or not (Map.Monsters[i].FullHitPoints == Game.MonstersTxt[Map.Monsters[i].Id].FullHitPoints) then
+				if not (Map.Monsters[i].Ally == 1) then
+				Map.Monsters[i].Ally = 1
+				Map.Monsters[i].FullHitPoints = Map.Monsters[i].FullHitPoints*2
+				Map.Monsters[i].HitPoints = Map.Monsters[i].HitPoints*2
+			-- bonus damage
+				DamageMultiplier=Map.Monsters[i].Level/20+1.75
+				--attack 1
+				a=Map.Monsters[i].Attack1.DamageAdd * DamageMultiplier
+				Map.Monsters[i].Attack1.DamageAdd = Map.Monsters[i].Attack1.DamageAdd * DamageMultiplier
+				b=Map.Monsters[i].Attack1.DamageDiceSides * DamageMultiplier
+				Map.Monsters[i].Attack1.DamageDiceSides = Map.Monsters[i].Attack1.DamageDiceSides * DamageMultiplier
+				
+				--attack 2
+				c=Map.Monsters[i].Attack2.DamageAdd * DamageMultiplier
+				Map.Monsters[i].Attack2.DamageAdd = Map.Monsters[i].Attack2.DamageAdd * DamageMultiplier
+				d=Map.Monsters[i].Attack2.DamageDiceSides * DamageMultiplier
+				Map.Monsters[i].Attack2.DamageDiceSides = Map.Monsters[i].Attack2.DamageDiceSides * DamageMultiplier
+				--OVERFLOW FIX
+					--Attack 1 Overflow fix
+					--add damage fix
+					if (a > 250) then
+					Overflow = a - 250
+					Map.Monsters[i].Attack1.DamageAdd = 250
+					Map.Monsters[i].Attack1.DamageDiceSides = Map.Monsters[i].Attack1.DamageDiceSides + (math.round(Overflow/Map.Monsters[i].Attack1.DamageDiceCount))
+					end
+					--Dice Sides fix
+					if (b > 250) then
+					Overflow = b / 250
+					Map.Monsters[i].Attack1.DamageDiceSides = 250
+					--checking for dice count overflow
+					e = Map.Monsters[i].Attack1.DamageDiceCount * Overflow
+					Map.Monsters[i].Attack1.DamageDiceCount = Map.Monsters[i].Attack1.DamageDiceCount * Overflow
+					end
+					--Just in case Dice Count fix
+					if not (e == nil) then
+						if (e > 250) then
+						Map.Monsters[i].Attack1.DamageDiceCount = 250
+						end
+					end
+					--Attack 2 Overflow fix, same formula
+					--add damage fix
+					if (c > 250) then
+					Overflow = c - 250
+					Map.Monsters[i].Attack2.DamageAdd = 250
+					Map.Monsters[i].Attack2.DamageDiceSides = Map.Monsters[i].Attack2.DamageDiceSides + (math.round(Overflow/Map.Monsters[i].Attack2.DamageDiceCount))
+					end
+					--Dice Sides fix
+					if (d > 250) then
+					Overflow = d / 250
+					Map.Monsters[i].Attack2.DamageDiceSides = 250
+					--checking for dice count overflow
+					f=Map.Monsters[i].Attack2.DamageDiceCount * Overflow
+					Map.Monsters[i].Attack2.DamageDiceCount = Map.Monsters[i].Attack2.DamageDiceCount * Overflow
+					end
+					--Just in case Dice Count fix
+					if not (f ==nil) then
+						if (f > 250) then
+						Map.Monsters[i].Attack2.DamageDiceCount = 250
+						end
+					end
+				end
+			end
+		end
+		
 end
