@@ -892,7 +892,8 @@ function events.LoadMap()
 					if (a > 250) then
 					Overflow = a - 250
 					Map.Monsters[i].Attack1.DamageAdd = 250
-					Map.Monsters[i].Attack1.DamageDiceSides = Map.Monsters[i].Attack1.DamageDiceSides + (math.round(Overflow/Map.Monsters[i].Attack1.DamageDiceCount))
+					b=b + (math.round(2*Overflow/Map.Monsters[i].Attack1.DamageDiceCount))
+					Map.Monsters[i].Attack1.DamageDiceSides = b 
 					end
 					--Dice Sides fix
 					if (b > 250) then
@@ -913,7 +914,8 @@ function events.LoadMap()
 					if (c > 250) then
 					Overflow = c - 250
 					Map.Monsters[i].Attack2.DamageAdd = 250
-					Map.Monsters[i].Attack2.DamageDiceSides = Map.Monsters[i].Attack2.DamageDiceSides + (math.round(Overflow/Map.Monsters[i].Attack2.DamageDiceCount))
+					d=d + (math.round(2*Overflow/Map.Monsters[i].Attack2.DamageDiceCount))
+					Map.Monsters[i].Attack2.DamageDiceSides = d
 					end
 					--Dice Sides fix
 					if (d > 250) then
