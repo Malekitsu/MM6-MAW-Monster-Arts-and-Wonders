@@ -65,7 +65,7 @@ Archers also have bonus critical damage with Daggers (175% with 1 dagger, 300% w
 
 Archer can now use dark magic.
 
-Archer hp per level increased to 3-4-5, base mana increased to 8 and mana per level increased to 2-3-4.
+Archer hp per level increased to 3-4-5, base mana increased to 8 and mana per level increased to 2-3-4 (+50% mana regen from meditaton on 2nd promotion).
 
 Archer gets 0-0.5-1 (depending on promotion) bonus damage with main hand and offhand per level of skill.
 
