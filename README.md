@@ -73,12 +73,15 @@ Archer gets 0-0.5-1 (depending on promotion) bonus damage with main hand and off
 
 Druids can no longer use shields.
 
-
 **Sorcerer:**
 
 2nd promotions will now provide 6 mana (up to 5)
 
-Many starting abilities have been changed.
+___
+
+In general many starting abilities have been changed.
+
+
 ## **Skills**
 Most skills have been reworked to provide meaningful and rewarding choices.
 
