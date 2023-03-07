@@ -12,6 +12,18 @@ end
 
 function calculateMeditationSPRegen(rank, mastery, fullSP)
 	scaled = math.ceil(fullSP^0.5 * rank^2/400)
+		if ASSASSIN==true and (class == const.Class.WarriorMage)then
+		scaled=40
+			else if ASSASSIN==true and (class == const.Class.BattleMage)then
+			scaled=30
+				else if ASSASSIN==true and (class == const.Class.Archer)then
+				scaled=20
+				end
+			end
+		end
+	if BERSERKER and (class == const.Class.Hero) or (class == const.Class.Crusader) or (class == const.Class.Paladin) then
+		scaled = -20
+	end
 	return math.floor(scaled)
 end
 
@@ -19,8 +31,10 @@ function events.Regeneration(t)
 	v = Party[t.PlayerIndex]
 	class = v.Class
 	mediFactor = 1
-	if (class == const.Class.Hero) or (class == const.Class.WarriorMage)
-	then
+	if ASSASSIN~=true and (class == const.Class.WarriorMage) then
+		mediFactor = 3/2
+	end
+	if BERSERKER~=true and (class == const.Class.Hero) then
 		mediFactor = 3/2
 	end
 	
