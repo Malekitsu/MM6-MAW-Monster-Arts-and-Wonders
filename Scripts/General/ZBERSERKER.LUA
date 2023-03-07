@@ -47,6 +47,7 @@ end
 --No light, SP base to 100 and factor to 0
 function events.GameInitialized2()
 	Game.ClassKinds.StartingSkills[3][const.Skills.Light] = 0
+	Game.ClassKinds.StartingSkills[3][const.Skills.Plate] = 0
 	Game.Classes.SPFactor[const.Class.Paladin] = 0
 	Game.Classes.SPFactor[const.Class.Crusader] = 0
 	Game.Classes.SPFactor[const.Class.Hero] = 0
