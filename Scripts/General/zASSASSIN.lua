@@ -45,6 +45,7 @@ function events.GameInitialized2()
 	Game.ClassKinds.StartingSkills[4][const.Skills.Dark] = 0
 	Game.ClassKinds.StartingSkills[4][const.Skills.Axe] = 0
 	Game.ClassKinds.StartingSkills[4][const.Skills.Spear] = 0
+	Game.ClassKinds.StartingSkills[4][const.Skills.Chain] = 0
 	Game.ClassKinds.StartingSkills[4][const.Skills.Bodybuilding] = 2
 	Game.ClassKinds.SPBase[4] = 100
 end
