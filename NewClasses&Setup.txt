@@ -1,0 +1,46 @@
+SETUP INSTRUCTION
+Download latest version of MAW MOD
+Start the game once
+Go to mm6.ini and set the class you want to change to "true"
+
+Assassin:
+Stats:
+-2-3-4 HP per level (depending on promotion)
+-100 SP base
+-no SP per level
+-can use Elemental Spells
+
+SP will be called Energy from now on.
+-Each 5 point in Speed will increase damage by 1%
+-Attack will consume 30 energy to deal 50% increased damage (can crit) and will add a combo point, up to 5
+-Spell cast will consume all combo points, and will deal 20% increased damage per combo point consumed; if 5 combo point are consume damage will increase by 250%.
+-Melee attacks have a 30% chance to restore 15 energy.
+-You will automatically restore 40 energy every 10 seconds
+-SP increasing item will instead increase MAX energy by 20% of the effect.
+
+Berserker
+-3-4-6 HP per level (depending on promotion)
+-100 SP base
+-no SP per level
+-Can use Spirit/Mind/Body
+
+SP will be called Rage from now on
+-Each 5 point in Might will increase damage by 1%
+-Rage will decay at a rate of 20 every 10 seconds
+-Each attack will increase rage by 15
+-When at 100 or above rage your melee attacks have 50% to Make you go berserker
+-When in berserker your might will be increased by 50, your damage are increased by 50%, your attacks will heal you by 10% of damage dealt
+-When in berserker your attacks will consume 10 mana
+-Once mana is depled, Berserker status will over with next attack
+-As for assassins, SP increasing item will instead increase MAX Rage by 20% of the effect.
+
+
+Blood Knight
+Skills and stats are same as knight
+-Each 5 point in Might will increase damage by 1%
+-When above 33% of health your attacks will consume 8% of your HP
+-Your damage are increased by 1% for each 1% of health missing (so being at 40% hp will mean your damage will increase by 60%)
+-Attacking when below 33% will make your next 3 attack to heal you by 10% of the damage dealt
+
+More classes and balance tuning incoming.
+
