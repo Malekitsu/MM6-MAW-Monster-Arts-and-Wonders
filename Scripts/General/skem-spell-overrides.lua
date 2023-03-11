@@ -512,8 +512,8 @@ local spellPowers =
 	--Toxic Cloud
 	[90] =
 	{
-		[const.Novice] = {fixedMin = 12, fixedMax = 12, variableMin = 1, variableMax = 9, },
-		[const.Expert] = {fixedMin = 22, fixedMax = 22, variableMin = 1, variableMax = 15, },
+		[const.Novice] = {fixedMin = 9, fixedMax = 9, variableMin = 1, variableMax = 5, },
+		[const.Expert] = {fixedMin = 16, fixedMax = 16, variableMin = 1, variableMax = 10, },
 		[const.Master] = {fixedMin = 32, fixedMax = 32, variableMin = 1, variableMax = 20, },
 	},
 	-- Shrapmetal deals physical damage, so should use vanilla numbers
