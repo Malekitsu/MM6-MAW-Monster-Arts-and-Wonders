@@ -284,8 +284,9 @@ local spellCosts =
 	["Dark Containment"] = {["Master"] = 100},
 	["Poison Spray"] = {["Master"] = 13 + SC},
 	["Sparks"] = {["Master"] = 13 + SC},
-	["Shrap Metal"] = {["Master"] = 50 + SC^0.65},
+	["Shrap Metal"] = {["Normal"] = 10, ["Expert"] = 30, ["Master"] = 50 + SC^0.65},
 	["Mass Distortion"] = {["Master"] = 30 + SC * 3},
+	["Toxic Cloud"] = {["Normal"] = 4, ["Expert"] = 12, ["Master"] = 30},
 	
 	--debuff spells
 	["Slow"] = {["Master"] = 5},
@@ -508,20 +509,20 @@ local spellPowers =
 		[const.Expert] = {fixedMin = 90, fixedMax = 90, variableMin = 1, variableMax = 60, },
 		[const.Master] = {fixedMin = 90, fixedMax = 90, variableMin = 1, variableMax = 60, },
 	},
-	-- Toxic Cloud
+	--Toxic Cloud
 	[90] =
 	{
-		[const.Novice] = {fixedMin = 20, fixedMax = 20, variableMin = 1, variableMax = 20, },
-		[const.Expert] = {fixedMin = 20, fixedMax = 20, variableMin = 1, variableMax = 20, },
-		[const.Master] = {fixedMin = 20, fixedMax = 20, variableMin = 1, variableMax = 20, },
+		[const.Novice] = {fixedMin = 12, fixedMax = 12, variableMin = 1, variableMax = 9, },
+		[const.Expert] = {fixedMin = 22, fixedMax = 22, variableMin = 1, variableMax = 15, },
+		[const.Master] = {fixedMin = 32, fixedMax = 32, variableMin = 1, variableMax = 20, },
 	},
-	--[[ Shrapmetal deals physical damage, so should use vanilla numbers
+	-- Shrapmetal deals physical damage, so should use vanilla numbers
 	[92] =
 	{
-		[const.Novice] = {fixedMin = 3, fixedMax = 3, variableMin = 1, variableMax = 5, },
-		[const.Expert] = {fixedMin = 3, fixedMax = 3, variableMin = 1, variableMax = 5, },
-		[const.Master] = {fixedMin = 3, fixedMax = 3, variableMin = 1, variableMax = 5, },
-	}, ]]
+		[const.Novice] = {fixedMin = 6, fixedMax = 6, variableMin = 1, variableMax = 6, },
+		[const.Expert] = {fixedMin = 6, fixedMax = 6, variableMin = 1, variableMax = 6, },
+		[const.Master] = {fixedMin = 6, fixedMax = 6, variableMin = 1, variableMax = 6, },
+	},
 }
 
 
