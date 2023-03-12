@@ -1,3 +1,9 @@
+local Rebalance
+if SETTINGS["ImbaSubClasses"]==false then
+Rebalance = 0.95
+Rebalanze = 0
+end
+
 ASSASSIN=SETTINGS["ArcherAsAssassin"]
 if ASSASSIN==true then
 
@@ -8,7 +14,7 @@ function events.CalcDamageToMonster(t)
 	if data.Player and (data.Player.Class==const.Class.WarriorMage or data.Player.Class==const.Class.BattleMage or data.Player.Class==const.Class.Archer) and t.DamageKind==0 and data.Object==nil then
 			speed=data.Player:GetSpeed()
 			bonusDamage=speed/500
-			t.Result=t.Result*(1+bonusDamage)
+			t.Result=t.Result*(1+bonusDamage*Rebalanze)*Rebalance
 		end
 	
 end
