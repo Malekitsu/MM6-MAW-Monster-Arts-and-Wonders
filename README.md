@@ -417,7 +417,7 @@ The following has been left in the game despite not being part of the balance an
 * Followers that add ranks to offensive skills
 
 ### Attributes
-Attributes will now be relevant during all the game and from 25 on, every 5 attribute points grants +1 effect, up to 300 attribute points (+60 effect). Check here for an accurate description of effects. (credits to grayface) https://grayface.github.io/mm/mechanics/ .
+Attributes will now be relevant during all the game and from 25 on, every 5 attribute points grants +1 effect, up to 1000 attribute points (+200 effect). Check here for an accurate description of effects. (credits to grayface) https://grayface.github.io/mm/mechanics/ .
 
 Pilgrimage can now be done at any time of the year. Even if years pass you can take all years' bonus.
 
