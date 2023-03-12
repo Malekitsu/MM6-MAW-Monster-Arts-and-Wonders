@@ -37,6 +37,7 @@ That’s really all you need to know to get started, just install and enjoy the 
 
 ### **New modes**
 While the object of the mod has been to perfect rather than change the original game, we have added some new modes and optional additions. See the section below for more detail.
+
 **Adaptive mode : party** ; Assigns stats to monsters based on the characters current level. Gives player more freedom in where to go. Be aware that monsters that are high level in vanilla will be somewhat stronger to compensate for the better loot.
 **Party mode** can be combined with random monsters for a completely new experience with many fun and silly surprises.
 
