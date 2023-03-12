@@ -3245,7 +3245,7 @@ hooks.asmpatch(0x484FB1, "mov edx, dword [esp + 0x10]", 7)
 -- condition effect on statistics
 -- effects are in percentages, no more than 255
 
--- example usage: setConditionEffects(const.Condition.Insane, {200, 200, 200, 200, 200, 200, 200}) -- insanity doubles each stat now
+-- example usage: setConditionEffects(const.Condition.Insane, {[const.Stats.Might] = 200, 200, 200, 200, 200, 200, 200}) -- insanity doubles each stat now
 --[[
 setConditionEffects({
 	[const.Condition.Paralyzed] = {
