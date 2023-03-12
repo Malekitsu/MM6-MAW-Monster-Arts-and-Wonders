@@ -342,7 +342,7 @@ General changes;
 |Moon Ray|1d4 pr rank|1d4 pr rank|unchanged|
 |Dragon Breath|1d25 pr rank|1d30 pr rank|damage adjusted|
 |Armageddon|50+1 pr rank|1d5 pr rank|150|
-|mass distortion||cast time doubled|effect is unchanged, however with double monster hitpoint and max resist at 120, even casting it half as fast its still one of the strongest spells in the game|
+|mass distortion||Effect changed to 15+1% pr rank|With double monster hitpoint and max resist at 120, even at half effect its still one of the strongest spells in the game|
 |dark containment|||cost reduced to 100|
 |||||
 |charm||Casts 10 times as fast|Even at max 120 resist spell is too often resisted to be worthwhile. Casting it very fast makes it a strong spell with high chance of taking effect|
@@ -410,23 +410,7 @@ New Sorpigal Portal to dragonsands moved into the Oasis, instead of the shrine o
 #### Hirelings
 We've changed the probability of different professions appearing based on nice analysis here.
 
-Some useless professions should not appear at all. Some professioncosts are adjusted.
-
-
-
-|Hireling|Cost|
-| :-: | :-: |
-|ArmsMaster|1500|
-|WeaponsMaster|3000|
-|Squire|3000|
-|Burglar|500|
-|Factor|100|
-|Banker|200|
-|Instructor|1500|
-|Teacher|800|
-|Apprentice|1500|
-|SpellMaster|2500|
-|Mystic|4000|
+Some useless professions should not appear at all. 
 
 ### Bringing needed hirelings to party
 This is a convenience fix. I am tired of reloading game hundreds of times just to find the needed hireling. Time waste. I have implemented a keyboard shortcut that brings available outside walking peasants to the party and set their professions. I've added just two now but can do more if people need more shortcuts.
@@ -463,7 +447,7 @@ Alt+8	WindMaster, WaterMaster	reaching to places
 |paladin|3/4/6|2/3/3+|good|mind/light (\*)|extra hp, less mana|spirit|
 |archer|3/4/5|2/3/4+|good (and Dark/cold/fire)|bow+elemental+dark||elemental (dark)|
 |cleric|2/3/4|3/4/5|bad (Dark)|mind/dark/light|lots of mana, shield, chain|spirit, light (dark)|
-|sorcerer|2/3/4|3/4/5|bad (Dark)|elemental/dark/light||elemental, light (dark)|
+|sorcerer|2/3/4|3/4/6|bad (Dark)|elemental/dark/light|Very high mana|elemental, light (dark)|
 |druid|2/3/4|3/4/5+|bad|elemental/mind|extra mana, no shield|spirit+elemental|
 
 Characters fall roughly within 3 roles; melee, ranged, healer. the party can be combined by any number of melee or ranged, but its highly advisable to always include a healer.
