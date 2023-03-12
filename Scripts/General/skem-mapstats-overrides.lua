@@ -157,6 +157,7 @@ localSubstitutions = {
 	[MapIDs["Temple of Baa"]] = { Monster1Pic = "Monk" },
 	[MapIDs["Free Haven Sewer"]] = { Monster2Pic = "Monk" },
 	[MapIDs["Castle Darkmoor"]] = { Monster3Pic = "KnightPlate" },
+	[MapIDs["Temple of the Sun"]] = { Monster2Pic = "Ogre" },
 }
 
 function monsterSubstitutions()
