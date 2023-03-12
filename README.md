@@ -37,10 +37,10 @@ That’s really all you need to know to get started, just install and enjoy the 
 
 ### **New modes**
 While the object of the mod has been to perfect rather than change the original game, we have added some new modes and optional additions. See the section below for more detail.
-Adaptive mode : party ; Assigns stats to monsters based on the characters current level. Gives player more freedom in where to go. Be aware that monsters that are high level in vanilla will be somewhat stronger to compensate for the better loot.
-Party mode can be combined with random monsters for a completely new experience with many fun and silly surprises.
-Adaptive mode : 100 ; increases monster level by 50% and +100, and adjusts stats accordingly. Can be used as either a "Hell" mode for a second playthrough, or you can use a save game editor to create a level 100 party to play the game as normal but level 100 to ~250 rather than 1 to ~100.
-Nightmare mode: An offshoot of the core, balanced mode with focus on adding new content. Adds many new encounters and even dungeons.
+**Adaptive mode : party** ; Assigns stats to monsters based on the characters current level. Gives player more freedom in where to go. Be aware that monsters that are high level in vanilla will be somewhat stronger to compensate for the better loot.
+**Party mode** can be combined with random monsters for a completely new experience with many fun and silly surprises.
+**Adaptive mode : 100** ; increases monster level by 50% and +100, and adjusts stats accordingly. Can be used as either a "Hell" mode for a second playthrough, or you can use a save game editor to create a level 100 party to play the game as normal but level 100 to ~250 rather than 1 to ~100.
+**Nightmare mode**: An offshoot of the core, balanced mode with focus on adding new content. Adds many new encounters and even dungeons.
 
 But if you’re curious to know more about the mod and the specific changes, read on:
 ## **Classes**
