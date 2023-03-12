@@ -333,10 +333,10 @@ General changes;
 |Psychic Shock|12+1d12 pr rank|47+1d30 pr rank|Due to being magic damage psychic shock gets +50% damage|
 |Ice Blast|12+1d2 pr rank|6+1d9 pr rank|High damage boost, while it sometimes miss small targets entirely, at this damage it just needs to hit twice which it will often against large targets or groups|
 |Starburst|20+1 pr rank|1d6 pr rank|increased damage at higher ranks; accounts for monster hp being doubled and rewards high rank more|
-|Toxic Cloud|25+1d10 pr rank|20+1d20 pr rank|damage adjusted|
+|Toxic Cloud|4/12/30|20+1d10 pr rank|9/16/32+1d5/1d10/1d20 pr rank|damage adjusted|
 |Incinerate|15+1d15 pr rank|32+1d21 pr rank|damage adjusted|
 |Destroy Undead|16+1d16 pr rank|50+1d40 pr rank|damage adjusted|
-|Shrap Metal|6+1d6 pr rank|6+1d6 pr rank|unchanged|
+|Shrap Metal|10/30/50|6+1d6 pr rank|6+1d6 pr rank|unchanged|
 |Prismatic Light|25+1 pr rank|25+1d7 pr rank|damage adjusted|
 |Sun Ray|20+1d20 pr rank|60+1d40 pr rank|damage adjusted|
 |Moon Ray|1d4 pr rank|1d4 pr rank|unchanged|
@@ -354,7 +354,7 @@ General changes;
 |<p>Several debuff heal spells have been given a heal hit point effect, aside from at the rank just when you get expert or master they are somewhat worse than dedicated heal spells.</p><p>Mind has been given some fairly powerful heal spells and while Spirit is still stronger for healing, and Body stronger still, Mind is a good option for an offhealer.</p>|
 |Healing Touch|5/7/9|5/10/15+2/3/5 pr rank|cost 3/6/12|
 |Remove curse|N/A|5/30/70|cost 3/6/12, since spirit can be master even at rank 4, spirit becomes a decent healing school for few skillpoints thanks to this spell|
-|Shared Life||cost reduced to 12, casts 3 times as fast,|due to high cast speed is now the second best heal spell in the game with good value for skillpoints|
+|Shared Life||heal increased to 9 pr skill rank,|Is now the second best heal spell in the game with good value for skillpoints|
 |Resurrection||150+15 pr rank|Cost increased to 200, recovery time reduced from 1000 to 300 (around 4 times Cure Wounds)|
 |Remove fear|N/A|2/10/50|Cost 2/4/6|
 |Cure Insanity|N/A|15/25/35+4/5/6 pr rank|Cost 20/30/40|
