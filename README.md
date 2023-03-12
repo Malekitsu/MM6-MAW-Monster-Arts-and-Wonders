@@ -31,7 +31,7 @@ The mod has been balanced to be medium difficulty for veteran players. There is 
 - It's a good idea to do the letter quest early on. Be aware that you can sneak up the hill at castle ironfist from the lower village. running up the road will agro monsters.
 - Because monsters move faster than you and you can't dodge their attacks, pulling monsters is now key to victory, and carelessly alerting too many monsters will get you killed very fast.
 - Try to fight monsters that aren’t too much higher level than you, monster and player strength increases exponentially with level
-- The fungeon in Mist is now a level ~8 dungeon and the easiest step after New Sorpigal. Dungeons in Bootleg Bay are also easier and now level ~10-14.
+- The dungeon in Mist is now a level ~8 dungeon and the easiest step after New Sorpigal. Dungeons in Bootleg Bay are also easier and now level ~10-14.
 
 That’s really all you need to know to get started, just install and enjoy the fun 🙂
 
