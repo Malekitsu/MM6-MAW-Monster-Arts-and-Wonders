@@ -2871,7 +2871,7 @@ end)
 --Bow Calculation
 function events.ModifyItemDamage(t)
     local s, m = SplitSkill(t.Player.Skills[const.Skills.Bow])
-    if t.Item:T().EquipStat == const.ItemType.Missile - 1 then
+    if t.Item:T().EquipStat == const.ItemType.Missile - 1 and t.Item.Bonus2 ~= 3 then
         local masteryBonus = 0
         if m == const.Basic then
             masteryBonus = 1
@@ -3241,3 +3241,59 @@ hooks.asmpatch(0x484F69, [[
 ]], 0x23)
 
 hooks.asmpatch(0x484FB1, "mov edx, dword [esp + 0x10]", 7)
+
+-- condition effect on statistics
+-- effects are in percentages, no more than 255
+
+-- example usage: setConditionEffects(const.Condition.Insane, {200, 200, 200, 200, 200, 200, 200}) -- insanity doubles each stat now
+--[[
+setConditionEffects({
+	[const.Condition.Paralyzed] = {
+		[const.Stats.Might] = 200
+	}
+}) -- paralyzed doubles might
+
+setConditionEffects({
+	[const.Condition.Paralyzed] = {
+		[const.Stats.Luck] = 0,
+		[const.Stats.Personality] = 50
+	},
+	[const.Condition.Weak] = {
+		[const.Stats.Endurance] = 0
+	}
+}) -- paralyzed zeroes luck and halves personality, weakness zeroes endurance
+]]
+local conditionEffectBase = 0x4C27B4
+local u1 = mem.u1
+function setConditionEffects(cond, percentages)
+	if type(cond) == "number" then -- single condition passed - set all effects for it (table indexed by stat)
+		for stat, val in pairs(percentages) do
+			u1[conditionEffectBase + cond + stat * 18] = val -- 18 = condition count (including "good")
+		end
+	else -- multiple conditions passed - set all effects for them (table indexed by condition, then stat)
+		local condTable = cond -- for readability purposes
+		for cond, values in pairs(condTable) do
+			for stat, val in pairs(values) do
+				u1[conditionEffectBase + cond + stat * 18] = val
+			end
+		end
+	end
+end
+
+-- returns values like above input
+function getConditionEffects(cond)
+	local out = {}
+	if cond then -- condition passed - get all effects for it (table indexed by stat)
+		for stat = 0, const.Stats.Luck do
+			out[stat] = u1[conditionEffectBase + cond + stat * 18]
+		end
+	else -- condition not passed - get all effects for all conditions (table indexed by condition, then stat)
+		for cond = 0, const.Condition.Good do
+			out[cond] = {}
+			for stat = 0, const.Stats.Luck do
+				out[cond][stat] = u1[conditionEffectBase + cond + stat * 18]
+			end
+		end
+	end
+	return out
+end
