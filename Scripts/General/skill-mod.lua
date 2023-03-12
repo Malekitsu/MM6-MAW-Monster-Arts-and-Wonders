@@ -2871,7 +2871,7 @@ end)
 --Bow Calculation
 function events.ModifyItemDamage(t)
     local s, m = SplitSkill(t.Player.Skills[const.Skills.Bow])
-    if t.Item:T().EquipStat == const.ItemType.Missile - 1 and t.Item.Bonus2 ~= 3 then
+    if t.Item:T().EquipStat == const.ItemType.Missile - 1 then
         local masteryBonus = 0
         if m == const.Basic then
             masteryBonus = 1
