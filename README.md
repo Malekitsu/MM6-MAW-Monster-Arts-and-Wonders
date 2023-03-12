@@ -311,8 +311,10 @@ General changes;
 - Magic resistance is still very common but magic damage spells (mind magic, mass distortion) have been balanced to deal +50% damage
 - All stat boost spells affect the whole party at novice level.
 - Spells that incapacitate monsters have been buffed significantly, reducing either cost or casting time
+- Spells that remove minor debuffs have been given a healing effect, less effective than actual healing spells. Gives Mind access to healing.
 - Spells that have been buffed significantly are arrow spells/mind blast, ice blast, sun ray
 - Day of protection has been significantly nerfed making Dark magic an option among others.
+- Toxic Cloud and Shrap Metal have been giver lower cost and effect at Novice/Expert.
 
 
 |Spell name|Vanilla damage|New damage/effect|Comment|
