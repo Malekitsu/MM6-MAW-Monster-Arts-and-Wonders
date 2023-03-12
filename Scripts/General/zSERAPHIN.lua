@@ -1,3 +1,10 @@
+local Rebalance
+if SETTINGS["ImbaSubClasses"]==false then
+Rebalance = 0.95
+Rebalanze = 0
+end
+
+
 SERAPHIN=SETTINGS["ClericAsSeraphin"]
 if SERAPHIN==true then
 
@@ -127,7 +134,7 @@ function events.CalcDamageToMonster(t)
 			might=data.Player:GetMight()
 			personality=data.Player:GetPersonality()
 			bonusDamage=might/1000 + personality/1000
-			t.Result=t.Result*(1+bonusDamage)
+			t.Result=t.Result*(1+bonusDamage*Rebalanze)*Rebalance
 		end
 end
 
