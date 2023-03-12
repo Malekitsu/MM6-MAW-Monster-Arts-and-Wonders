@@ -31,10 +31,18 @@ The mod has been balanced to be medium difficulty for veteran players. There is 
 - It's a good idea to do the letter quest early on. Be aware that you can sneak up the hill at castle ironfist from the lower village. running up the road will agro monsters.
 - Because monsters move faster than you and you can't dodge their attacks, pulling monsters is now key to victory, and carelessly alerting too many monsters will get you killed very fast.
 - Try to fight monsters that aren’t too much higher level than you, monster and player strength increases exponentially with level
+- The fungeon in Mist is now a level ~8 dungeon and the easiest step after New Sorpigal. Dungeons in Bootleg Bay are also easier and now level ~10-14.
 
 That’s really all you need to know to get started, just install and enjoy the fun 🙂
 
-But if you’re curious to know more about the mod and the specific changes, here’s the list:
+### **New modes**
+While the object of the mod has been to perfect rather than change the original game, we have added some new modes and optional additions. See the section below for more detail.
+Adaptive mode : party ; Assigns stats to monsters based on the characters current level. Gives player more freedom in where to go. Be aware that monsters that are high level in vanilla will be somewhat stronger to compensate for the better loot.
+Party mode can be combined with random monsters for a completely new experience with many fun and silly surprises.
+Adaptive mode : 100 ; increases monster level by 50% and +100, and adjusts stats accordingly. Can be used as either a "Hell" mode for a second playthrough, or you can use a save game editor to create a level 100 party to play the game as normal but level 100 to ~250 rather than 1 to ~100.
+Nightmare mode: An offshoot of the core, balanced mode with focus on adding new content. Adds many new encounters and even dungeons.
+
+But if you’re curious to know more about the mod and the specific changes, read on:
 ## **Classes**
 
 **Knight:**
@@ -399,7 +407,12 @@ Increased cost of some of the strongest followers.
 
 Inn and Temples cost now depends on missing health and level.
 ### Balance
-MAW has been designed to be somewhat challenging gameplay for the experienced player, however, until you find your footing it may be too hard. Furthermore then last dungeon(s) have been balanced to present a reasonable challenge to even a very strong party, leveled to 100 or more. You might not want to kill all those dragons and titans needed to rise to quite so high level, however. At the same time the existence of “of X spellschool” items (of Dark etc) and the wells that increase level are impossible to balance around since we don’t know when or even if the player will use them. For that reason the game has been balanced as if these things didn’t exist but we haven’t removed them from the game. Their use is optional. The game has been designed to be challenging but possible to clear without them, but if you wish to finish early or faster they are still around for you to use. Think of them as mildly abusive cheatcodes that help you speed things along if you need them.
+MAW has been designed to be somewhat challenging gameplay for the experienced player, however, until you find your footing it may be too hard. Furthermore then last dungeon(s) have been balanced to present a reasonable challenge to even a very strong party, leveled to 100 or more. You might not want to kill all those dragons and titans needed to rise to quite so high level, however. 
+The following has been left in the game despite not being part of the balance and thus being somewhat "OP". Think of them as mildly abusive cheatcodes that help you speed things along if you need them.
+* Wells that add temporary levels, particularly the +30 levels one in Kriegspire
+* “Of X spellschool” items (of Dark etc) - there's simply no way to balance around items that increase damage by up to 125% that player may or may not have.
+* Followers that add ranks to offensive skills
+
 ### Attributes
 Attributes will now be relevant during all the game and from 25 on, every 5 attribute points grants +1 effect, up to 300 attribute points (+60 effect). Check here for an accurate description of effects. (credits to grayface) https://grayface.github.io/mm/mechanics/ .
 
@@ -495,6 +508,9 @@ Ranged, melee, combined arms, specialized in dark or fire AOE, Crowd-Control. Th
 
 MAW extends mm6.ini with a [Skill Emphasis] section, which contains the following settings:
 
+DifficultyModifier=1
+A modifier that is multiplied with monster damage. To play MAW at a difficulty similar to vanilla 0.5 will halve damage taken. Or the modifier can be reduced or increased for minor adjustments.
+
 `MoreLinkedSkills=false`    
 Links more skills for less aggressive min/maxing.  
 Notably, this links related schools of magic with each other.
@@ -537,7 +553,9 @@ Modifies monsters further.  This mode is unfinished and not in a state we are ha
 `default` - disabled.    
 `disabled` - disabled.    
 `party` - monsters are adjusted relative to the party's average experience total, then adjusted per-monster based on tier.  Please note that this is specifically *not* the party's current average level.  This mode guarantees that 'Boss' monsters such as the Spider Queen are ten levels higher than the party.    
-`map` - monsters' levels for the map are averaged, then adjusted per-monster based on tier.    
+`map` - monsters' levels for the map are averaged, then adjusted per-monster based on tier.  
+`100` - increases monster level by 50% and +100 (level 20 becomes 130), and adjusts stats accordingly. Can be used as either a "Hell" mode for a second playthrough, or you can use a save game editor to create a level 100 party to play the game as normal but level 100 to ~250 rather than 1 to ~100.
+
 
 ##
 ## Some Graphs
