@@ -1,4 +1,6 @@
 local Rebalance
+Rebalance = 1
+Rebalanze = 1
 if SETTINGS["ImbaSubClasses"]==false then
 Rebalance = 0.95
 Rebalanze = 0
