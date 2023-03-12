@@ -1,3 +1,9 @@
+local Rebalance
+if SETTINGS["ImbaSubClasses"]==false then
+Rebalance = 0.95
+Rebalanze = 0
+end
+
 NECROMANCER=SETTINGS["SorcererAsNecromancer"]
 if NECROMANCER==true then
 --Intellect increases damage
@@ -5,7 +11,7 @@ function events.CalcSpellDamage(t)
 	local data = WhoHitMonster()
 	if data.Player and (data.Player.Class==const.Class.ArchMage or data.Player.Class==const.Class.Wizard or data.Player.Class==const.Class.Sorcerer) then	
 	intellect=data.Player:GetIntellect()
-	t.Result=t.Result*(1+intellect/500)
+	t.Result=t.Result*(1+intellect/500*Rebalanze)*Rebalance
 	end
 end
 --mastery increasing damage by 10% and cost by 5%
