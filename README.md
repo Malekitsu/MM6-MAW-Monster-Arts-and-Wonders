@@ -47,7 +47,7 @@ Knights also get 2 bonus damage per skill point on Bow once Champion.
 
 Paladin can now use light magic.
 
-Paladin hp per level increased to 4-5-6, base mana increased to 8 and mana per level increased to 2-3-3 and gets a bonus of 50% mana regeneration (check meditation skill for more info).
+Paladin hp per level increased to 3-4-6, base mana increased to 8 and mana per level increased to 2-3-3 and gets a bonus of 50% mana regeneration (check meditation skill for more info).
 
 Paladin gets 0, 0.5, 1 (depending on promotion) bonus damage with main hand and offhand (shield included) per level of skill.
 
