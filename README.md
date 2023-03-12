@@ -97,7 +97,7 @@ Novice: Adds 1 Attack bonus and 2 Armor Class per point of skill
 
 Expert: Skill adds 1 extra Attack Bonus and increases party’s resistances to everything by 1
 
-Master: Resistance bonus doubled
+Master: Resistance bonus doubled, Skill added to damage bonus
 
 **Sword**
 
