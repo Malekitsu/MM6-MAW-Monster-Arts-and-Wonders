@@ -1,3 +1,9 @@
+local Rebalance
+if SETTINGS["ImbaSubClasses"]==false then
+Rebalance = 0.95
+Rebalanze = 0
+end
+
 BLOODKNIGHT=SETTINGS["KnightAsBloodKnight"]
 if BLOODKNIGHT==true then
 
@@ -9,7 +15,7 @@ function events.CalcDamageToMonster(t)
 		might=data.Player:GetMight()
 		bonusDamage=might/500
 		end
-	t.Result=t.Result*(1+bonusDamage)
+	t.Result=t.Result*(1+bonusDamage*Rebalanze)*Rebalance
 end
 --when above 33% health every attack will cost 8% of hp but will deal 1% more damage for each 1% of missing health
 function events.CalcDamageToMonster(t)
