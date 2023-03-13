@@ -1,3 +1,11 @@
+local Rebalance
+Rebalance = 1
+Rebalanze = 1
+if SETTINGS["ImbaSubClasses"]==false then
+Rebalance = 0.95
+Rebalanze = 0
+end
+
 BERSERKER=SETTINGS["PaladinAsBerseker"]
 if BERSERKER==true then
 
@@ -30,7 +38,7 @@ local data = WhoHitMonster()
 	if data.Player and (data.Player.Class==const.Class.Hero or data.Player.Class==const.Class.Crusader or data.Player.Class==const.Class.Paladin) and t.DamageKind==0 then
 		might=data.Player:GetMight()
 		bonusDamage=might/500
-		t.Result=t.Result*(1+bonusDamage)
+		t.Result=t.Result*(1+bonusDamage*Rebalanze)*Rebalance
 	end
 	
 end
