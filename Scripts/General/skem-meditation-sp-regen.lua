@@ -49,6 +49,6 @@ function events.Regeneration(t)
 	r,m = SplitSkill(v.Skills[const.Skills.Meditation])
 	cap = v:GetFullSP()
 	cur = v.SpellPoints
-	gain = t.SP + (calculateMeditationSPRegen(r, m, cap) * mediFactor)
+	gain = t.SP + math.min(calculateMeditationSPRegen(r, m, cap) * mediFactor)
 	v.SpellPoints = math.min(cap,cur+gain)
 end
