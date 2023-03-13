@@ -1,11 +1,3 @@
-local Rebalance
-Rebalance = 1
-Rebalanze = 1
-if SETTINGS["ImbaSubClasses"]==false then
-Rebalance = 0.95
-Rebalanze = 0
-end
-
 BERSERKER=SETTINGS["PaladinAsBerseker"]
 if BERSERKER==true then
 
@@ -38,7 +30,7 @@ local data = WhoHitMonster()
 	if data.Player and (data.Player.Class==const.Class.Hero or data.Player.Class==const.Class.Crusader or data.Player.Class==const.Class.Paladin) and t.DamageKind==0 then
 		might=data.Player:GetMight()
 		bonusDamage=might/500
-		t.Result=t.Result*(1+bonusDamage*Rebalanze)*Rebalance
+		t.Result=t.Result*(1+bonusDamage)
 	end
 	
 end
@@ -160,6 +152,18 @@ function events.CalcDamageToPlayer(t)
 		end			
 		t.Player.SP=t.Player.SP+(t.Result/baseHP)*100
 	end
+end
+
+--mana regen
+function events.LoadMap(wasInGame)
+local function restoreManaWarriorMage() 
+	for _, pl in Party do 
+		if pl.Class == const.Class.Hero or pl.Class == const.Class.Crusader or pl.Class == const.Class.Paladin then 
+			pl.SP = math.max(pl.SP -1, 0) 
+		end 
+	end 
+end
+Timer(restoreManaWarriorMage, const.Minute/2) 
 end
 
 end
