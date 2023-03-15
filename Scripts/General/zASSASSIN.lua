@@ -60,8 +60,6 @@ function events.CalcSpellDamage(t)
 --get mastery
 
 	local data = WhoHitMonster()
-
-
 	if data.Player and (data.Player.Class==const.Class.WarriorMage or data.Player.Class==const.Class.BattleMage or data.Player.Class==const.Class.Archer) then	
 	
 	mastery=data.Player.Skills[const.Skills.Thievery]
@@ -153,6 +151,7 @@ function events.GameInitialized2()
 	Game.ClassKinds.StartingSkills[4][const.Skills.Chain] = 0
 	Game.ClassKinds.StartingSkills[4][const.Skills.Bodybuilding] = 2
 	Game.ClassKinds.StartingSkills[4][const.Skills.Thievery] = 1
+	Game.ClassKinds.StartingSkills[4][const.Skills.Meditation] = 0
 	Game.ClassKinds.SPBase[4] = 100
 Game.ClassNames[const.Class.Archer]="Rogue"
 Game.ClassNames[const.Class.BattleMage]="Shadow"
