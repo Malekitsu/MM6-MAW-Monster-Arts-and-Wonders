@@ -142,7 +142,7 @@ end
 
 --AUTORESS SKILL
 function events.CalcDamageToPlayer(t)
-	if (t.Player.Class==const.Class.HighPriest or t.Player.Class==const.Class.Priest or t.Player.Class==const.Class.Cleric) and t.Player.Unconscious==0 and t.Player.Dead==0 and t.Player.Eradicated==0  and ressed~=1 then
+	if (t.Player.Class==const.Class.HighPriest or t.Player.Class==const.Class.Priest or t.Player.Class==const.Class.Cleric) and t.Player.Unconscious==0 and t.Player.Dead==0 and t.Player.Eradicated==0 then
 		if t.Result>=t.Player.HP then
 			totMana=t.Player:GetFullSP()
 			currentMana=t.Player.SP
@@ -159,14 +159,77 @@ function events.CalcDamageToPlayer(t)
 				end
 				t.Player.HP=t.Player.HP+(totMana/4)*(1+mastery*0.05)
 			
---			ressed=1
---			Sleep(16000)
-			ressed=0
+
 
 			end
 		end	
 	end
 end
+
+-- DIVINE SHIELD 
+--tables
+function events.LoadMap(wasInGame)
+vars.divineShieldTime=vars.divineShieldTime or {}
+vars.divineShieldCooldown=vars.divineShieldCooldown or {}
+vars.divineShield=vars.divineShield or {}
+end
+--end table
+function events.CalcDamageToPlayer(t)
+	if (t.Player.Class==const.Class.HighPriest or t.Player.Class==const.Class.Priest or t.Player.Class==const.Class.Cleric) and t.Player.Unconscious==0 and t.Player.Dead==0 and t.Player.Eradicated==0  and vars.divineShield[t.PlayerIndex]==1 then
+	t.Result=0
+	Game.ShowStatusText("Immune")
+	end
+end
+--activation button	
+function Keys.E(t)
+CPI=Game.CurrentPlayer
+	if CPI==-1 then
+	return
+	end
+if Party[CPI].Class==const.Class.HighPriest or Party[CPI].Class==const.Class.Priest or Party[CPI].Class==const.Class.Cleric then
+	if vars.divineShield[CPI]==1 then
+	Game.ShowStatusText(string.format("Divine Shield is already Active, expiring in %s seconds. ",math.max(math.floor((vars.divineShieldTime[CPI] - Game.Time) / 128 * 10) / 10,0)))
+		else if vars.divineShieldCooldown[CPI] ~= nil and vars.divineShieldCooldown[CPI] > Game.Time then
+		Game.ShowStatusText(string.format("Divine Shield is on cooldown. Try again in %s seconds.",math.floor((vars.divineShieldCooldown[CPI] - Game.Time) / 128 * 10) / 10))
+			else
+				cost=Party[CPI].LevelBase+5
+				if Party[CPI].SP>cost then
+				Party[CPI].SP=Party[CPI].SP-cost
+				Game.ShowStatusText(string.format("%s activates 'Divine Shield'",Party[CPI].Name))
+				vars.divineShield[CPI] = 1
+				vars.divineShieldTime[CPI] = Game.Time + const.Minute * 6
+				vars.divineShieldCooldown[CPI] = Game.Time + const.Minute * 60
+				else 
+				Game.ShowStatusText(string.format("Not enought mana (%s mana needed)",cost))
+				end
+			end
+		end
+	end
+end
+--
+function events.LoadMap(wasInGame)
+local function divineShieldTimer() 
+	for i = 0, 3 do
+		if vars.divineShieldTime[i]~=nil and vars.divineShield[i]~=0 then
+			if vars.divineShieldTime[i]<Game.Time then
+			vars.divineShield[i]=0
+			Game.ShowStatusText(string.format("%s's Divine Shield effect expired",Party[i].Name))
+			end 
+		end
+	end
+end
+Timer(divineShieldTimer, const.Minute/2) 
+end
+--reduced damage when in divine shield
+function events.CalcDamageToMonster(t)
+	 data=WhoHitMonster()
+	 ind=data.Player:GetIndex()
+		if data.Player and (data.Player.Class==const.Class.HighPriest or data.Player.Class==const.Class.Priest or data.Player.Class==const.Class.Cleric) and vars.divineShield[ind]==1 then
+			t.Result=t.Result/2
+		end
+end
+
+-------------end of divine shield---------------
 
 
 
