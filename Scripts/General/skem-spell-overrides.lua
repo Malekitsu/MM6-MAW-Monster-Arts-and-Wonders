@@ -764,6 +764,21 @@ mem.asmpatch(0x004283DF, "lea     ecx, [eax+eax*" .. (spellStatsBuffPowers["Stat
 mem.asmpatch(0x004283D1, "lea     edx, [eax+eax*" .. (spellStatsBuffPowers["StatsBuff"]["proportional"] - 1) .. "+0Ah]", 0x4)
 mem.asmpatch(0x004283C7, "lea     ecx, [eax+eax*" .. (spellStatsBuffPowers["StatsBuff"]["proportional"] - 1) .. "+0Ah]", 0x4)
 
+-- Bless affects whole party on novice
+-- no choose target screen
+mem.asmpatch(0x4220BF, [[
+	cmp esi, 0x2C ; bless
+	je absolute 0x422104
+	mov ecx,dword [esp+0x18]
+	test ecx,ecx
+]], 6)
+
+-- affect everyone
+-- jump to same code as expert if novice
+mem.prot(true)
+mem.u4[0x4266E9] = 0xF4
+mem.prot()
+
 -- Feeblemind Fixes
 -- supersedes skill-mod.lua:2703-2732
 
