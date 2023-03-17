@@ -3297,3 +3297,66 @@ function getConditionEffects(cond)
 	end
 	return out
 end
+
+-- 1/n spell skills
+-- when ranking up spell skill, let n be number of other spell skills at equal or greater skill level
+-- then cost is (old cost / (n + 1)), no less than 1
+
+local function getNewSkillCost(pl, currentS, skillId)
+	local equalOrHigherCount = 0
+	if skillId >= const.Skills.Fire and skillId <= const.Skills.Dark then
+		for i = const.Skills.Fire, const.Skills.Dark do
+			if i ~= skillId then
+				local otherS, _ = SplitSkill(pl.Skills[i])
+				if otherS >= currentS then
+					equalOrHigherCount = equalOrHigherCount + 1
+				end
+			end
+		end
+	end
+	local newCost = currentS + 1
+	if equalOrHigherCount >= 1 then
+		newCost = math.max(1, math.ceil(newCost / (equalOrHigherCount + 1)))
+	end
+	return newCost
+end
+
+local newCode = mem.asmpatch(0x42D0E4, [[
+	; edx = current skill value
+	; esi - current skill points
+	; [esp + 0x10] - skill id
+	; ecx - player ptr
+	and edx,0x3F
+	inc edx
+	nop
+	nop
+	nop
+	nop
+	nop
+	cmp esi,edx
+]], 6)
+
+local newCost
+-- checking if enough skill points
+mem.hook(newCode + 4, function(d)
+	local skillId = mem.u4[d.esp + 0x14]
+	local currentS = d.dl - 1
+	local _, pl = GetPlayer(d.ecx)
+	newCost = getNewSkillCost(pl, currentS, skillId)
+	d.dl = newCost
+end)
+
+-- actually subtracting skill points
+-- need to do entire hook, because two earlier jumps might mess things up
+mem.autohook(0x42D109, function(d)
+	d.eax = assert(newCost)
+end)
+
+-- display on mouseover
+mem.hook(0x41F8E9, function(d)
+	local skillId = mem.u4[d.esi + 0x24]
+	local currentS, _ = SplitSkill(d.al)
+	local _, pl = GetPlayer(d.ecx)
+	newCost = getNewSkillCost(pl, currentS, skillId)
+	d.eax = newCost
+end, 10)
