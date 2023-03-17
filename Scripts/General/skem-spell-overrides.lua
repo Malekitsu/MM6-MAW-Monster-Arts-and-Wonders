@@ -1145,9 +1145,9 @@ local healingSpellPowers =
 	},
 	[const.Spells.CureDisease] =
 	{
-	[const.Novice] = {fixedMin = 25, fixedMax = 25, variableMin = 0, variableMax = 0, },
-	[const.Expert] = {fixedMin = 40, fixedMax = 40, variableMin = 0, variableMax = 0, },
-	[const.Master] = {fixedMin = 90, fixedMax = 90, variableMin = 0, variableMax = 0, },
+		[const.Novice] = {fixedMin = 25, fixedMax = 25, variableMin = 0, variableMax = 0, },
+		[const.Expert] = {fixedMin = 40, fixedMax = 40, variableMin = 0, variableMax = 0, },
+		[const.Master] = {fixedMin = 90, fixedMax = 90, variableMin = 0, variableMax = 0, },
 	},
 	[const.Spells.SharedLife] =
 	{
@@ -1177,7 +1177,7 @@ local function modifiedHealCharacterWithSpell(d, def, targetPtr, amount)
 	t.TargetIndex, t.Target = GetPlayer(targetPtr) -- also index u2[spellStructurePtr + 4]
 	t.Spell = mem.u2[spellStructurePtr]
 	t.CasterIndex, t.Caster = mem.u2[spellStructurePtr + 2], Party.PlayersArray[mem.u2[spellStructurePtr + 2] ]
-	t.Skill, t.Mastery = SplitSkill(mem.u1[spellStructurePtr + 0xA])
+	t.Skill, t.Mastery = SplitSkill(t.Caster.Skills[const.Skills.Fire + math.ceil(t.Spell / 11) - 1])
 	events.call("HealingSpellPower", t)
 	def(targetPtr, t.Result)
 end
@@ -1207,8 +1207,7 @@ end
 function events.HealingSpellPower(t)
 	local power = healingSpellPowers[t.Spell]
 	if power then
-		local skill = t.Caster.Skills[const.Skills.Fire + math.ceil(t.Spell / 11) - 1]
-		local s, m = SplitSkill(skill)
+		local s, m = t.Skill, t.Mastery
 		local entry = power[m]
 		if t.Spell == const.Spells.SharedLife then
 			t.Result = t.Result - t.Skill * t.Mastery + Randoms(entry.variableMin, entry.variableMax, s) + math.random(entry.fixedMin or 0, entry.fixedMax or 0)
@@ -1225,7 +1224,7 @@ mem.hookfunction(0x484840, 1, 3, function(d, def, playerPtr, cond, timeLow,  tim
 	local t = {Condition = cond, Spell = mem.u2[d.ebx]}
 	t.CasterIndex, t.Caster = mem.u2[d.ebx + 2], Party.PlayersArray[mem.u2[d.ebx + 2] ]
 	t.TargetIndex, t.Target = GetPlayer(playerPtr)
-	t.Skill, t.Mastery = SplitSkill(mem.u1[d.ebx + 0xA])
+	t.Skill, t.Mastery = SplitSkill(t.Caster.Skills[const.Skills.Fire + math.ceil(t.Spell / 11) - 1])
 	-- time is calculated by subtracting spell's time limit from Game.Time, and then
 	-- checking if result is <= condition affect time,
 	-- so to calc spell time limit we need to subtract time from Game.Time
@@ -1243,19 +1242,38 @@ end)
 
 -- always call removeConditionBySpell() for cure insanity
 
-local cureInsanityTmp = mem.StaticAlloc(1) -- temporary to store whether to inflict weakness
+local weaknessFromCureConditionTmp = mem.StaticAlloc(1) -- temporary to store whether to inflict weakness
 mem.asmpatch(0x427A90, [[
 	je @noweak
-	mov byte []] .. cureInsanityTmp .. [[], 1
+	mov byte []] .. weaknessFromCureConditionTmp .. [[], 1
 	jmp absolute 0x427A96
 	@noweak:
-	mov byte []] .. cureInsanityTmp .. [[], 0
+	mov byte []] .. weaknessFromCureConditionTmp .. [[], 0
 	jmp absolute 0x427AB5
 ]], 6)
 
 mem.asmhook(0x427AFC, [[
-	cmp byte []] .. cureInsanityTmp .. [[], 0
+	mov dword [esp + 0x24], 1
+	cmp byte []] .. weaknessFromCureConditionTmp .. [[], 0
 	je absolute 0x427B33
+]])
+
+-- for resurrection
+mem.asmpatch(0x427309, [[
+	push eax ; offset from first player start to affected player (to not recalculate it)
+	je @noweak
+	mov byte []] .. weaknessFromCureConditionTmp .. [[], 1
+	jmp @exit
+	@noweak:
+	mov byte []] .. weaknessFromCureConditionTmp .. [[], 0
+	@exit:
+]])
+
+-- remove death unconditionally
+mem.asmhook(0x42732E, [[
+	pop eax
+	and dword [eax+0x90A324], 0
+	and dword [eax+0x90A328], 0
 ]])
 
 local spellToCondition = {
@@ -1273,6 +1291,11 @@ local spellToCondition = {
 }
 
 function events.RemoveConditionBySpell(t)
+	-- if eradication, we need to remove it here, otherwise subsequent heal doesn't work because of existing eradication
+	-- (call happens before original code removes it)
+	if t.Condition == const.Condition.Eradicated and t.Target.Eradicated ~= 0 and Game.Time - t.TimeLimit <= t.Target.Eradicated then
+		t.Target.Eradicated = 0
+	end
 	local sp = spellToCondition[t.Condition]
 	if sp then
 		local t2 = table.copy(t)
