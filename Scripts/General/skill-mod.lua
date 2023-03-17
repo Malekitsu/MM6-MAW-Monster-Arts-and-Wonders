@@ -3299,22 +3299,22 @@ function getConditionEffects(cond)
 end
 
 -- 1/n spell skills
--- when ranking up spell skill, let n be number of other spell skills at equal or greater skill level
+-- when ranking up spell skill, let n be number of other spell skills at skill level equal to or greater than next rank
 -- then cost is (old cost / (n + 1)), no less than 1
 
-local function getNewSkillCost(pl, currentS, skillId)
+local function getNewSkillCost(pl, newS, skillId)
 	local equalOrHigherCount = 0
 	if skillId >= const.Skills.Fire and skillId <= const.Skills.Dark then
 		for i = const.Skills.Fire, const.Skills.Dark do
 			if i ~= skillId then
 				local otherS, _ = SplitSkill(pl.Skills[i])
-				if otherS >= currentS then
+				if otherS >= newS then
 					equalOrHigherCount = equalOrHigherCount + 1
 				end
 			end
 		end
 	end
-	local newCost = currentS + 1
+	local newCost = newS
 	if equalOrHigherCount >= 1 then
 		newCost = math.max(1, math.ceil(newCost / (equalOrHigherCount + 1)))
 	end
@@ -3340,9 +3340,9 @@ local newCost
 -- checking if enough skill points
 mem.hook(newCode + 4, function(d)
 	local skillId = mem.u4[d.esp + 0x14]
-	local currentS = d.dl - 1
+	local newS = d.dl
 	local _, pl = GetPlayer(d.ecx)
-	newCost = getNewSkillCost(pl, currentS, skillId)
+	newCost = getNewSkillCost(pl, newS, skillId)
 	d.dl = newCost
 end)
 
@@ -3355,8 +3355,8 @@ end)
 -- display on mouseover
 mem.hook(0x41F8E9, function(d)
 	local skillId = mem.u4[d.esi + 0x24]
-	local currentS, _ = SplitSkill(d.al)
+	local newS, _ = SplitSkill(d.al) + 1
 	local _, pl = GetPlayer(d.ecx)
-	newCost = getNewSkillCost(pl, currentS, skillId)
+	newCost = getNewSkillCost(pl, newS, skillId)
 	d.eax = newCost
 end, 10)
