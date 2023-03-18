@@ -101,8 +101,8 @@ local spellStatsBuffPowers =
 {
 	["StatsBuff"] =
 	{
-		["fixed"] = 10,
-		["proportional"] = 2,
+		["fixed"] = 5,
+		["proportional"] = 1,
 	},
 }
 
@@ -217,14 +217,14 @@ local spellDescs = {
 	},	
 		["Cure Insanity"] = {
 		["Description"] = "Heals and cures insanity if you cast this spell in time.  The greater the skill and rank in Mind Magic the longer the character could have been insane before the “point of no return” is reached.  After that, the only way to remove the condition short of Divine Intervention is to visit a temple.",
-		["Normal"] = "Works if insane less than 3 minutes per point of skill\nCosts 20 SP.\nHeals 15+4 HP per point of skill.",
-		["Expert"] = "Works if insane less than 1 hour per point of skill\nCosts 30 SP.\nHeals 25+5 HP per point of skill.",
-		["Master"] = "Works if insane less than 1 day per point of skill\nCosts 40 SP.\nHeals 35+6 HP per point of skill.",
+		["Normal"] = "Works if insane less than 3 minutes per point of skill\nCosts 20 SP.\nHeals 15+6 HP per point of skill.",
+		["Expert"] = "Works if insane less than 1 hour per point of skill\nCosts 30 SP.\nHeals 25+8 HP per point of skill.",
+		["Master"] = "Works if insane less than 1 day per point of skill\nCosts 40 SP.\nHeals 35+10 HP per point of skill.",
 	},	
 			["Remove Fear"] = {
 		["Description"] = "Heals and removes fear if you cast this spell in time.  The greater the skill and rank in Mind Magic the longer the character could have been insane before the “point of no return” is reached.  After that, the only way to remove the condition short of Divine Intervention is to visit a temple.",
-		["Normal"] = "Works if afraid less than 3 minutes per point of skill\nCosts 2 SP.\nHeals 3 HP.",
-		["Expert"] = "Works if afraid less than 1 hour per point of skill\nCosts 4 SP.\nHeals 10 HP.",
+		["Normal"] = "Works if afraid less than 3 minutes per point of skill\nCosts 2 SP.\nHeals 5 HP.",
+		["Expert"] = "Works if afraid less than 1 hour per point of skill\nCosts 4 SP.\nHeals 15 HP.",
 		["Master"] = "Works if afraid less than 1 day per point of skill\nCosts 6 SP.\nHeals 50 HP.",
 	},
 			["Remove Curse"] = {
@@ -474,7 +474,7 @@ local spellPowers =
 		[const.Expert] = {fixedMin = 47, fixedMax = 47, variableMin = 1, variableMax = 30, },
 		[const.Master] = {fixedMin = 47, fixedMax = 47, variableMin = 1, variableMax = 30, },
 	},
-	--[[ Harm deals physical damage, so should use vanilla numbers
+	-- Harm deals physical damage, so should use vanilla numbers
 	[70] =
 	{
 		[const.Novice] = {fixedMin = 8, fixedMax = 8, variableMin = 1, variableMax = 4, },
@@ -484,10 +484,10 @@ local spellPowers =
 	-- Flying Fist deals physical damage, so should use vanilla numbers
 	[76] =
 	{
-		[const.Novice] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 15, },
-		[const.Expert] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 15, },
-		[const.Master] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 15, },
-	},]]
+		[const.Novice] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 11, },
+		[const.Expert] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 11, },
+		[const.Master] = {fixedMin = 30, fixedMax = 30, variableMin = 1, variableMax = 11, },
+	},
 	-- Destroy Undead
 	[82] =
 	{
@@ -623,7 +623,7 @@ mem.asmpatch(
 	0x2D
 )
 -- duration = skill * 2 hours
--- mem.asmpatch(0x00423719, "shl     eax, 5", 3)
+-- mem.asmpatch(0x00423719, "shl     eax, 5", 2)
 
 -- Protection from Electricity
 mem.asmpatch(
@@ -638,7 +638,7 @@ mem.asmpatch(
 )
 
 -- duration = skill * 2 hours
--- mem.asmpatch(0x004243D4, "shl     eax, 15", 3)
+-- mem.asmpatch(0x004243D4, "shl     eax, 15", 2)
 
 -- Protection from Cold
 mem.asmpatch(
@@ -652,7 +652,7 @@ mem.asmpatch(
 )
 
 -- duration = skill * 2 hours
--- mem.asmpatch(0x00424FD0, "shl     eax, 5", 3)
+-- mem.asmpatch(0x00424FD0, "shl     eax, 5", 2)
 
 -- Protection from Magic
 mem.asmpatch(
@@ -666,7 +666,7 @@ mem.asmpatch(
 )
 
 -- duration = skill * 2 hours
--- mem.asmpatch(0x004260BE, "shl     eax, 5", 3)
+-- mem.asmpatch(0x004260BE, "shl     eax, 5", 2)
 
 -- Protection from Poison
 mem.asmpatch(
@@ -680,7 +680,7 @@ mem.asmpatch(
 )
 
 -- duration = skill * 2 hours
--- mem.asmpatch(0x00427EF1, "shl     eax, 5", 3)
+-- mem.asmpatch(0x00427EF1, "shl     eax, 5", 2)
 
 -- Day of Protection
 
@@ -1115,15 +1115,15 @@ local healingSpellPowers =
 	},
 	[const.Spells.RemoveFear] =
 	{
-		[const.Novice] = {fixedMin = 2, fixedMax = 2, variableMin = 0, variableMax = 0, },
-		[const.Expert] = {fixedMin = 10, fixedMax = 10, variableMin = 0, variableMax = 0, },
+		[const.Novice] = {fixedMin = 4, fixedMax = 4, variableMin = 0, variableMax = 0, },
+		[const.Expert] = {fixedMin = 15, fixedMax = 15, variableMin = 0, variableMax = 0, },
 		[const.Master] = {fixedMin = 50, fixedMax = 50, variableMin = 0, variableMax = 0, },
 	},
 	[const.Spells.CureInsanity] =
 	{
-		[const.Novice] = {fixedMin = 15, fixedMax = 15, variableMin = 4, variableMax = 4, },
-		[const.Expert] = {fixedMin = 25, fixedMax = 25, variableMin = 5, variableMax = 5, },
-		[const.Master] = {fixedMin = 35, fixedMax = 35, variableMin = 6, variableMax = 6, },
+		[const.Novice] = {fixedMin = 15, fixedMax = 15, variableMin = 6, variableMax = 6, },
+		[const.Expert] = {fixedMin = 25, fixedMax = 25, variableMin = 8, variableMax = 8, },
+		[const.Master] = {fixedMin = 35, fixedMax = 35, variableMin = 10, variableMax = 10, },
 	},
 	[const.Spells.CurePoison] =
 	{
