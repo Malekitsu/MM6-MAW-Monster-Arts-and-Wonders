@@ -130,7 +130,6 @@ end
 -- Regional Reset stuff
 
 localResets = {
-	[MapIDs["The Hive"]] = 0,
 	[MapIDs["The Arena"]] = 0,
 }
 
