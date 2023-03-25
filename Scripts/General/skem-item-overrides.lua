@@ -133,12 +133,12 @@ function skemApplyBookValue(itemID, is_mirror)
 		bookBase = 300
 		bookMultiplier = 1
 	end
-	local spellId = itemID - 300
+	itemTxt = Game.ItemsTxt[itemID]
+	local spellId = itemID - 300 + 1
 	if specificModifiedBookValues[spellId] then
 		itemTxt["Value"] = specificModifiedBookValues[spellId]
 		return -- skip following code
 	end
-	itemTxt = Game.ItemsTxt[itemID]
 	bookLevel = math.fmod((itemID - bookBase), 11)
 	itemTxt["Value"] = modifiedBookValues[bookLevel] * bookMultiplier
 end
