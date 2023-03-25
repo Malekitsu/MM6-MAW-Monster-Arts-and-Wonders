@@ -24,6 +24,16 @@ local modifiedBookValues =
 	[10] = 60000,
 }
 
+local darkLightMultiplier = 10
+
+-- spell names are from here: https://grayface.github.io/mm/ext/ref/#const.Spells
+local specificModifiedBookValues =
+{
+	[const.Spells.LloydsBeacon] = 50000,
+	[const.Spells.SharedLife] = 60000,
+	[const.Spells.Incinerate] = 20000,
+}
+
 function skemWeaponOverrides(itemId)
 	local itemTxt = Game.ItemsTxt[itemId]
 		
@@ -118,10 +128,15 @@ function skemApplyBookValue(itemID, is_mirror)
 	if (is_mirror == true)
 	then
 		bookBase = 377
-		bookMultiplier = 10
+		bookMultiplier = darkLightMultiplier
 	else
 		bookBase = 300
 		bookMultiplier = 1
+	end
+	local spellId = itemID - 300
+	if specificModifiedBookValues[spellId] then
+		itemTxt["Value"] = specificModifiedBookValues[spellId]
+		return -- skip following code
 	end
 	itemTxt = Game.ItemsTxt[itemID]
 	bookLevel = math.fmod((itemID - bookBase), 11)
