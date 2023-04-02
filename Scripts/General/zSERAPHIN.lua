@@ -157,7 +157,7 @@ function events.CalcDamageToPlayer(t)
 				totMana=t.Player:GetFullSP()
 				currentMana=t.Player.SP
 				treshold=totMana/4
-				if currentMana>treshold then
+				if currentMana>=treshold then
 				t.Player.SP=t.Player.SP-(totMana/4)
 				--calculate healing
 				mastery=t.Player.Skills[const.Skills.Thievery]
