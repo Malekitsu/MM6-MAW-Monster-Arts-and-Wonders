@@ -2021,10 +2021,20 @@ local function BBHook(amountReg)
 		local i, pl = GetPlayer(d.esi)
 		local amount = d[amountReg]
 		local s, m = SplitSkill(pl.Skills[const.Skills.Bodybuilding])
-		if s == 0 then return end
-		d[amountReg] = amount + math.round(amount * 0.01 * s)
+		
+		enduranceBonus=pl:GetEndurance()/500
+		if s == 0 then	
+		if SETTINGS["StatsRework"]==true then
+		d[amountReg] = d[amountReg] * (1+enduranceBonus)
+		end
+		return end
+		d[amountReg] = amount + math.round(amount * 0.01 * s)		
+		if SETTINGS["StatsRework"]==true then
+		d[amountReg] = d[amountReg] * (1+enduranceBonus)
+		end
 	end
 end
+
 
 -- GetFullHP()
 mem.autohook(0x482089, BBHook("eax"))
