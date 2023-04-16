@@ -136,13 +136,13 @@ function events.CalcDamageToPlayer(t)
 		m4=m4-64
 		end
 		
-t.Result=t.Result*(m1^0.5/10-0.09)-m4^1.25
+t.Result=t.Result*(1-m1^0.5/10-0.09)-m4^1.25
 end
 end
 
 function events.CalcDamageToMonster(t)	
 local data = WhoHitMonster()
-	if data.Player and (data.Player.Class==const.Class.ArchDruid or data.Player.Class==const.Class.GreatDruid or data.Player.Class==const.Class.Druid) then	
+	if data.Player and (data.Player.Class==const.Class.ArchDruid or data.Player.Class==const.Class.GreatDruid or data.Player.Class==const.Class.Druid) and t.DamageKind==0 and data.Object==nil then	
 	mastery=data.Player.Skills[const.Skills.Thievery]
 	if mastery>=64 then 
 	mastery=mastery-64
@@ -203,8 +203,8 @@ local data = WhoHitMonster()
 		end
 m8=m2+m3+m4+m5+m1+m6+m7
 data.Player.SP=data.Player.SP+m7
-t.Result=(t.Result+m8*(mastery^0.15-1))*(1+m5/100)+t.Monster.HP*(m3^0.5/50)
-data.Player.HP=(data.Player.HP+m6)+(1+m2/100)
+t.Result=(t.Result+m8*(mastery^0.15))*(1+m5/100)+t.Monster.HP*(m3^0.5/500)
+data.Player.HP=(data.Player.HP+m6)+m2/100*t.Result
 end
 end
 
