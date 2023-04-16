@@ -872,6 +872,7 @@ end
 
 --FIX FOR UNIQUE MONSTERS
 function events.LoadMap()
+	if ADAPTIVE == "disabled" then
 	for i=0, Map.Monsters.High
 		do
 			if not (Map.Monsters[i].Name == Game.MonstersTxt[Map.Monsters[i].Id].Name) or not (Map.Monsters[i].FullHitPoints == Game.MonstersTxt[Map.Monsters[i].Id].FullHitPoints) then
@@ -941,4 +942,5 @@ function events.LoadMap()
 			end
 		end
 		
+end
 end
