@@ -56,7 +56,7 @@ function events.CalcDamageToPlayer(t)
 	modi = t.Player.LevelBase+3
 	t.Player.SP=t.Player.SP+t.Result/modi
 	t.Result=t.Result/100*mastery
-	Game.ShowStatusText("t.Result Absorbed")
+	Game.ShowStatusText("Absorbed")
 	end
 end
 end
