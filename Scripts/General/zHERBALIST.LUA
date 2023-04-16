@@ -55,7 +55,7 @@ end
 
 function events.GameInitialized2()
 Game.ClassNames[const.Class.Druid]="Herbalist"
-Game.ClassNames[const.Class.GreatDruid]="Gardener"
+Game.ClassNames[const.Class.GreatDruid]="Mender"
 Game.ClassNames[const.Class.ArchDruid]="Restorer"
 Game.ClassKinds.StartingSkills[5][const.Skills.Light] = 1
 Game.ClassKinds.StartingSkills[5][const.Skills.Earth] = 0
