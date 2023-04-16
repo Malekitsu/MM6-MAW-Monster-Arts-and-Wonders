@@ -85,7 +85,7 @@ function events.CalcDamageToMonster(t)
 	bonusDamage=0
 	local data = WhoHitMonster()
 		if data.Player and (data.Player.Class==const.Class.Champion or data.Player.Class==const.Class.Cavalier or data.Player.Class==const.Class.Knight) and t.DamageKind==0 then	
-	t.Result=t.Result*0.85
+	t.Result=t.Result*0.9
 end
 end
 end
