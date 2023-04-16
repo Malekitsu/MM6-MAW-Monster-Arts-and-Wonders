@@ -81,7 +81,13 @@ if y < x*mastery^0.55/10 then
 
 	end
 end
+function events.CalcDamageToMonster(t)
+	bonusDamage=0
+	local data = WhoHitMonster()
+		if data.Player and (data.Player.Class==const.Class.Champion or data.Player.Class==const.Class.Cavalier or data.Player.Class==const.Class.Knight) and t.DamageKind==0 then	
+	t.Result=t.Result*0.85
 end
 end
-
+end
+end
 end
