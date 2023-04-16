@@ -360,7 +360,7 @@ local spellPowers =
 	{
 		[const.Novice] = {fixedMin = 5, fixedMax = 5, variableMin = 1, variableMax = 1, },
 		[const.Expert] = {fixedMin = 12, fixedMax = 12, variableMin = 1, variableMax = 1, },
-		[const.Master] = {fixedMin = 20*SD^2, fixedMax = 20*SD^2, variableMin = 1*SD^2, variableMax = 1*SD^2, },
+		[const.Master] = {fixedMin = 20*SD^2, fixedMax = 20*SD^2, variableMin = 1, variableMax = 1*SD^2, },
 	},
 	-- Sparks
 	[15] =
