@@ -209,7 +209,13 @@ local monsterInfos =
 	[113] = {["FullHP"] = 325,["Level"] = 44,["ArmorClass"]=50, ["Attack1"] = {["Type"] = const.Damage.Phys, ["DamageDiceCount"] = 8, ["DamageDiceSides"] = 7, ["DamageAdd"] = 16,}, ["Experience"]= 2376},
 	--Swordsman C
 	[114] = {["FullHP"] = 453,["Level"] = 54,["ArmorClass"]=60, ["Attack1"] = {["Type"] = const.Damage.Phys, ["DamageDiceCount"] = 9, ["DamageDiceSides"] = 7, ["DamageAdd"] = 20,},["Attack2"] = {["Type"] = const.Damage.Phys, ["DamageDiceCount"] = 9, ["DamageDiceSides"] = 7, ["DamageAdd"] = 50}, ["Experience"]= 3456},
-
+	--LizardArch A
+	[97] = {["FullHP"] = 30,["Level"] = 8,["ArmorClass"]=10, ["Attack1"] = {["Type"] = const.Damage.Phys, ["DamageDiceCount"] = 1, ["DamageDiceSides"] = 10, ["DamageAdd"] = 3,["Missile"] = missiles["Phys"],}, ["Experience"]= 144},
+	--LizardArch B
+	[98] = {["FullHP"] = 45,["Level"] = 11,["ArmorClass"]=14, ["Attack1"] = {["Type"] = const.Damage.Phys, ["DamageDiceCount"] = 1, ["DamageDiceSides"] = 12, ["DamageAdd"] = 5,}, ["Attack2"] = {["Type"] = const.Damage.Fire, ["DamageDiceCount"] = 1, ["DamageDiceSides"] = 12, ["DamageAdd"] = 5,}, ["Experience"]= 231}, 
+	--LizardArch C
+	[99] = {["FullHP"] = 61,["Level"] = 14,["ArmorClass"]=20, ["Attack1"] = {["Type"] = const.Damage.Phys, ["DamageDiceCount"] = 1, ["DamageDiceSides"] = 14, ["DamageAdd"] = 7,}, ["SpellChance"] = 40, ["SpellName"] = "Lightning Bolt", ["SpellSkill"] = JoinSkill(4, const.Novice), ["Experience"]= 336,},
+--["SpellChance"] = 40, ["SpellName"] = "Lightning Bolt", ["SpellSkill"] = JoinSkill(3, const.Novice), ["Experience"]= 336,
 
 	--The Unpeasanting
 	[103] = {["Name"] = "Manservant", ["Level"] = 4,},
