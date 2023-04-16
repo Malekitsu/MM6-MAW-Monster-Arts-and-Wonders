@@ -19,7 +19,7 @@ function calculateMeditationSPRegen(rank, mastery, fullSP)
 		if ASSASSIN==true and (class == const.Class.WarriorMage or class == const.Class.BattleMage or class == const.Class.Archer)then
 		scaled=0
 		end
-	if BERSERKER and (class == const.Class.Hero) or (class == const.Class.Crusader) or (class == const.Class.Paladin) then
+	if BERSERKER and (class == const.Class.Hero or class == const.Class.Crusader or class == const.Class.Paladin) then
 		scaled = 0
 	end
 	return math.floor(scaled)
@@ -49,6 +49,6 @@ function events.Regeneration(t)
 	r,m = SplitSkill(v.Skills[const.Skills.Meditation])
 	cap = v:GetFullSP()
 	cur = v.SpellPoints
-	gain = t.SP + math.min(calculateMeditationSPRegen(r, m, cap) * mediFactor)
+	gain = t.SP + (calculateMeditationSPRegen(r, m, cap) * mediFactor)
 	v.SpellPoints = math.min(cap,cur+gain)
 end
