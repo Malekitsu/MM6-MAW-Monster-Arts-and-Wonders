@@ -257,11 +257,11 @@ Game.ClassKinds.StartingSkills[1][const.Skills.Thievery] = 1
 Game.ClassKinds.StartingSkills[1][const.Skills.Dark] = 0
 
     Game.Classes.HPFactor[const.Class.Cleric] = 3
-	Game.Classes.SPFactor[const.Class.Cleric] = 2
+	Game.Classes.SPFactor[const.Class.Cleric] = 1+Rebalanze
 	Game.Classes.HPFactor[const.Class.Priest] = 4
-	Game.Classes.SPFactor[const.Class.Priest] = 3
+	Game.Classes.SPFactor[const.Class.Priest] = 2+Rebalanze
 	Game.Classes.HPFactor[const.Class.HighPriest] = 5
-	Game.Classes.SPFactor[const.Class.HighPriest] = 4
+	Game.Classes.SPFactor[const.Class.HighPriest] = 3+Rebalanze
 --LORE BONUS Seraphin are blessed with divine powers, giving him +20 starting hp and +10 mana and light skill
 	Game.ClassKinds.HPBase[1] = 40
 	Game.ClassKinds.SPBase[1] = 20
