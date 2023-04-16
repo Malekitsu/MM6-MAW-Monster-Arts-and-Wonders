@@ -45,6 +45,10 @@ While the object of the mod has been to perfect rather than change the original 
 
 **Nightmare mode**: An offshoot of the core, balanced mode with focus on adding new content. Adds many new encounters and even dungeons.
 
+**Equalized mode**: Equalized mode (set =true in MM6.ini to enable) will smoothen out difficulty. It compares monster level to player level so that monsters that are higher level than player will deal less damage and monsters that are lower level will deal more. High level monsters are still stronger regardless of your current level, in terms of strength the effect is ca to halve the difference in level (a level 55 player fighting a level 5 monster will take and deal damage as if fighting a level 30 monster).
+This gives a lot more freedom of movement, letting you, with difficulty, clear areas that before would be nigh impossible, while also making sure lower level dungeons arent too easy. Dungeons with high gaps in level between monsters provide a more constant, fun threat level.
+You may want to enable this on your first playthrough.
+
 But if you’re curious to know more about the mod and the specific changes, read on:
 ## **Classes**
 
