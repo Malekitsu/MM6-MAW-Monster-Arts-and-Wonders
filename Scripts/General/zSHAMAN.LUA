@@ -56,7 +56,7 @@ function events.HealingSpellPower(t)
 		end
 m8=m2+m3+m4+m5+m1+m6+m7
 
-t.Result =t.Result+t.Result*m8/100
+t.Result =t.Result+t.Result*m8/200
 end
 end
 
@@ -114,7 +114,7 @@ function events.CalcSpellDamage(t)
 		end
 m8=m2+m3+m4+m5+m1+m6+m7
 
-t.Result =t.Result+t.Result*m8/100
+t.Result =t.Result+t.Result*m8/200
 end
 end
 
@@ -202,7 +202,7 @@ local data = WhoHitMonster()
 		end
 m8=m2+m3+m4+m5+m1+m6+m7
 data.Player.SP=data.Player.SP+m7
-t.Result=(t.Result+m8*(mastery^0.15))*(1+m5/100)+t.Monster.HP*(m3^0.5/500)
+t.Result=(t.Result+m8*(mastery^0.15-1))*(1+m5/100)+t.Monster.HP*(m3^0.5/500)
 data.Player.HP=(data.Player.HP+m6)+m2/100*t.Result
 end
 end
