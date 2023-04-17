@@ -135,7 +135,7 @@ function events.CalcDamageToPlayer(t)
 		m4=m4-64
 		end
 		
-t.Result=t.Result*(1-m1^0.5/10-0.09)-m4^1.25
+t.Result=t.Result*(1-m1^0.5/10+0.09)-m4^1.25
 end
 end
 
