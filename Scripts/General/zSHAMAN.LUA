@@ -5,50 +5,49 @@ if HERBALIST==false then
 if SHAMAN==true then
 
 function events.HealingSpellPower(t)
-	if (t.Caster.Class==const.Class.ArchDruid or t.Caster.Class==const.Class.GreatDruid or t.Caster.Class==const.Class.Druid) then
-	m1=data.Player.Skills[const.Skills.Air]
+	if (t.Caster.Class==const.Class.ArchDruid or t.Caster.Class==const.Class.GreatDruid or t.Caster.Class==const.Class.Druid) then	m1=t.Caster.Skills[const.Skills.Air]
 		if m1>=64 then 
 		m1=m1-64
 		end
 		if m1>=64 then
 		m1=m1-64
 		end
-	m2=data.Player.Skills[const.Skills.Earth]
+	m2=t.Caster.Skills[const.Skills.Earth]
 		if m2>=64 then 
 		m2=m2-64
 		end
 		if m2>=64 then
 		m2=m2-64
 		end
-	m3=data.Player.Skills[const.Skills.Fire]
+	m3=t.Caster.Skills[const.Skills.Fire]
 		if m3>=64 then 
 		m3=m3-64
 		end
 		if m3>=64 then
 		m3=m3-64
 		end
-	m4=data.Player.Skills[const.Skills.Water]
+	m4=t.Caster.Skills[const.Skills.Water]
 		if m4>=64 then 
 		m4=m4-64
 		end
 		if m4>=64 then
 		m4=m4-64
 		end
-	m5=data.Player.Skills[const.Skills.Spirit]
+	m5=t.Caster.Skills[const.Skills.Spirit]
 		if m5>=64 then 
 		m5=m5-64
 		end
 		if m5>=64 then
 		m5=m5-64
 		end
-	m6=data.Player.Skills[const.Skills.Body]
+	m6=t.Caster.Skills[const.Skills.Body]
 		if m6>=64 then 
 		m6=m6-64
 		end
 		if m6>=64 then
 		m6=m6-64
 		end
-	m7=data.Player.Skills[const.Skills.Mind]
+	m7=t.Caster.Skills[const.Skills.Mind]
 		if m7>=64 then 
 		m7=m7-64
 		end
