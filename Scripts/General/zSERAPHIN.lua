@@ -113,7 +113,7 @@ function events.CalcDamageToMonster(t)
 		min_index = indexof({a, b, c, d}, min_value)
 		min_index = min_index - 1
 		--Calculate heal value and apply
-		healValue=2*body*rankBonus+mastery*3+math.max(4*spirit-2*light-mastery, 0)
+		healValue=2*body*rankBonus+mastery*3+math.max(4*spirit-2*light-mastery*2+body, 0)
 		evt[min_index].Add("HP",healValue)		
 		--bug fix
 		if Party[min_index].HP>0 then
