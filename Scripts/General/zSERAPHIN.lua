@@ -53,6 +53,28 @@ function events.CalcDamageToMonster(t)
 		if mastery>=64 then
 		mastery=mastery-64
 		end
+				--get light
+		light=data.Player.Skills[const.Skills.Light]
+		rankBonus=1
+		if light>=64 then 
+		light=light-64
+		rankBonus=1
+		end
+		if light>=64 then
+		light=light-64
+		rankBonus=1
+		end
+		--get spirit
+		spirit=data.Player.Skills[const.Skills.Spirit]
+		rankBonus=1
+		if body>=64 then 
+		spirit=spirit-64
+		rankBonus=1
+		end
+		if spirit>=64 then
+		spirit=spirit-64
+		rankBonus=1
+		end
 		
 		--bunch of code for healing most injured player
 		function indexof(table, value)
@@ -91,7 +113,7 @@ function events.CalcDamageToMonster(t)
 		min_index = indexof({a, b, c, d}, min_value)
 		min_index = min_index - 1
 		--Calculate heal value and apply
-		healValue=2*body*rankBonus+mastery*3
+		healValue=2*body*rankBonus+mastery*3+math.max(4*spirit-2*light-mastery, 0)
 		evt[min_index].Add("HP",healValue)		
 		--bug fix
 		if Party[min_index].HP>0 then
