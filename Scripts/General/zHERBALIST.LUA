@@ -18,7 +18,11 @@ function events.HealingSpellPower(t)
 			end
 FHP = t.Target:GetFullHP()
 CHP = t.Target.HP
-t.Result =(t.Result * 2 - 3 * body)*(1.75-CHP/FHP)
+CSP = t.Target.SP
+if t.Target.SP > 0 then
+t.Target.SP = t.Target.SP + t.Result * 0.1
+end
+t.Result =(t.Result * 2 - 4 * body)*(1.5-CHP/FHP)
 end
 end
 
