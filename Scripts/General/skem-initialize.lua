@@ -29,6 +29,8 @@ local PRESETS = {
 	["DruidAsHerbalist"] = false,
 	["DruidAsShaman"] = false,
 	["EqualizedMode"] = false,
+	["ItemRework"] = false,
+	["StatsRework"] = false,
 }
 
 SETTINGS = { }
