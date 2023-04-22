@@ -103,7 +103,7 @@ function events.Regeneration(t)
 	if (ko == 0) then
 	cap = v:GetFullSP()
 	cur = v.SpellPoints
-	gain = mastery
+	gain = (1+mastery^2.25/10)*(cap^0.15-0.4)
 	v.SpellPoints = math.min(cap,cur+gain)
 end
 end
