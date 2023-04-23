@@ -22,7 +22,7 @@ CSP = t.Target.SP
 if t.Target.SP > 0 then
 t.Target.SP = t.Target.SP + t.Result * 0.1
 end
-t.Result =(t.Result * 2 - 4 * body)*(1.5-CHP/FHP)
+t.Result =(t.Result * 1.5 - 2 * body)*(1.5-CHP/FHP)
 end
 end
 
