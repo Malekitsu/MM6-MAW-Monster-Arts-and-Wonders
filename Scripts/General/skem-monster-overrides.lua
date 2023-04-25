@@ -607,7 +607,7 @@ function applyAdaptiveMonsterOverrides(monsterID, monsterArray, adaptive_level)
 	dicex1 = math.max(1, (dicex1 * levelMultiplier^0.5))
 
 	if bonusx1 > 250 then
-	sidesx1 = sidesx1 + (bonusx1 - 250) / dicex1
+	sidesx1 = sidesx1 + (bonusx1 - 250) / dicex1 * 2
 	bonusx1 =250
 	end
 	
@@ -627,7 +627,7 @@ function applyAdaptiveMonsterOverrides(monsterID, monsterArray, adaptive_level)
 	dicex2 = math.max(1, (dicex2 * levelMultiplier^0.5))
 
 	if bonusx2 > 250 then
-	sidesx2 = sidesx2 + (bonusx2 - 250) / dicex2
+	sidesx2 = sidesx2 + (bonusx2 - 250) / dicex2 * 2
 	bonusx2 =250
 	end
 	
@@ -701,7 +701,7 @@ function applyAdaptiveMonsterOverrides100(monsterID, monsterArray, adaptive_leve
 	end	
 
 	if bonusx1 > 250 then
-	sidesx1 = sidesx1 + (bonusx1 - 250) / dicex1
+	sidesx1 = sidesx1 + (bonusx1 - 250) / dicex1 * 2
 	bonusx1 =250
 	end
 	
@@ -729,7 +729,7 @@ function applyAdaptiveMonsterOverrides100(monsterID, monsterArray, adaptive_leve
 	end
 
 	if bonusx2 > 250 then
-	sidesx2 = sidesx2 + (bonusx2 - 250) / dicex2
+	sidesx2 = sidesx2 + (bonusx2 - 250) / dicex2 *2
 	bonusx2 =250
 	end
 	
