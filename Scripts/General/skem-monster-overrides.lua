@@ -704,6 +704,11 @@ function applyAdaptiveMonsterOverrides100(monsterID, monsterArray, adaptive_leve
 	sidesx1 = sidesx1 + (bonusx1 - 250) / dicex1 * 2
 	bonusx1 =250
 	end
+				
+	if sidesx1 > 250 then
+	dicex1 = dicex1 + (sidesx1 - 250) * dicex1 / 250
+	sidesx1 = 250
+	end
 	
 	monsterArray["Attack1"]["DamageAdd"] = bonusx1
 	monsterArray["Attack1"]["DamageDiceCount"] = dicex1
@@ -733,6 +738,11 @@ function applyAdaptiveMonsterOverrides100(monsterID, monsterArray, adaptive_leve
 	bonusx2 =250
 	end
 	
+	if sidesx2 > 250 then
+	dicex2 = dicex2 + (sidesx2 - 250) * dicex2 / 250
+	sidesx2 = 250
+	end	
+			
 	monsterArray["Attack2"]["DamageAdd"] = bonusx2
 	monsterArray["Attack2"]["DamageDiceCount"] = dicex2
 	monsterArray["Attack2"]["DamageDiceSides"] = sidesx2
