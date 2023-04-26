@@ -191,6 +191,8 @@ function modifiedDrawMonsterInfoName(d, def, dialog, font, left, top, color, str
 		end
 	end
 	
+	oldLevel = Game.MonstersTxt[monster.Id].Level
+	
 	table.insert(textLines, {["key"] = "Level", ["value"] = string.format("%d", monster.Level)})
 	table.insert(textLines, {["key"] = "Max HP", ["value"] = string.format("%d", monster["FullHP"])})
 	table.insert(textLines, {["key"] = "Armor Class", ["value"] = string.format("%d", monster.ArmorClass)})
@@ -204,7 +206,7 @@ function modifiedDrawMonsterInfoName(d, def, dialog, font, left, top, color, str
 	elseif not (monster.SpellChance == 0) 
 	then
 		local spellLevel, spellMastery = SplitSkill(monster.SpellSkill)
-		table.insert(textLines, {["key"] = string.format("Spell: %s (%s.%d)", Game.SpellsTxt[monster.Spell].Name, masteries[spellMastery], ((0.75+monster.Level/16)*spellLevel)), ["value"] = ""})
+		table.insert(textLines, {["key"] = string.format("Spell: %s (%s.%d)", Game.SpellsTxt[monster.Spell].Name, masteries[spellMastery], ((0.75+monster.Level/16*monster.Level/oldLevel)*spellLevel)), ["value"] = ""})
 	end
 
 	table.insert(textLines,{["key"] = "", ["value"] = rezstr})
