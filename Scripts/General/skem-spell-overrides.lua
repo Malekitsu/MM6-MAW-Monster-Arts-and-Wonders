@@ -872,7 +872,9 @@ local function modifiedMonsterCalculateDamage(d, def, monsterPointer, attackType
 if ((ADAPTIVE == "default") or (ADAPTIVE == "disabled")) then 
 	Mlevel = Game.MonstersTxt[monster.Id].Level
 else
+Xlevel = Game.MonstersTxt[monster.Id].Level
 Mlevel = monsterArray["Level"]
+Mlevel = monsterArray["Level"] * math.max(1, Mlevel/Xlevel)
 end
 	-- execute original code
 
