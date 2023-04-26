@@ -751,7 +751,7 @@ function applyAdaptiveMonsterOverrides100(monsterID, monsterArray, adaptive_leve
 	elseif not (monsterArray["SpellChance"] == 0)
 	then
 		r,m = SplitSkill(genericForm["SpellSkill"])
-		r = math.max(1, math.round(r * levelMultiplier/1.5))
+		r = math.max(1, math.round(r))
 		monsterArray["SpellSkill"] = JoinSkill(r,m)
 	end
 
