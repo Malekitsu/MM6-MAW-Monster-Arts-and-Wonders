@@ -81,6 +81,7 @@ if y < x*mastery^0.55/10 then
 
 	end
 end
+			end
 function events.CalcDamageToMonster(t)
 	bonusDamage=0
 	local data = WhoHitMonster()
@@ -90,4 +91,4 @@ end
 end
 end
 end
-end
+
