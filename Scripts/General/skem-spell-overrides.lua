@@ -1185,7 +1185,12 @@ local function modifiedHealCharacterWithSpell(d, def, targetPtr, amount)
 	t.TargetIndex, t.Target = GetPlayer(targetPtr) -- also index u2[spellStructurePtr + 4]
 	t.Spell = mem.u2[spellStructurePtr]
 	t.CasterIndex, t.Caster = mem.u2[spellStructurePtr + 2], Party.PlayersArray[mem.u2[spellStructurePtr + 2] ]
-	t.Skill, t.Mastery = SplitSkill(t.Caster.Skills[const.Skills.Fire + math.ceil(t.Spell / 11) - 1])
+	if mem.u1[spellStructurePtr + 8]:And(1) ~= 0 then -- casted by scroll?
+		t.Skill, t.Mastery = SplitSkill(mem.u1[spellStructurePtr + 10])
+		t.FromScroll = true
+	else
+		t.Skill, t.Mastery = SplitSkill(t.Caster.Skills[const.Skills.Fire + math.ceil(t.Spell / 11) - 1])
+	end
 	events.call("HealingSpellPower", t)
 	def(targetPtr, t.Result)
 end
@@ -1238,7 +1243,12 @@ mem.hookfunction(0x484840, 1, 3, function(d, def, playerPtr, cond, timeLow,  tim
 	local t = {Condition = cond, Spell = mem.u2[d.ebx]}
 	t.CasterIndex, t.Caster = mem.u2[d.ebx + 2], Party.PlayersArray[mem.u2[d.ebx + 2] ]
 	t.TargetIndex, t.Target = GetPlayer(playerPtr)
-	t.Skill, t.Mastery = SplitSkill(t.Caster.Skills[const.Skills.Fire + math.ceil(t.Spell / 11) - 1])
+	if mem.u1[d.ebx + 8]:And(1) ~= 0 then -- casted by scroll?
+		t.Skill, t.Mastery = SplitSkill(mem.u1[d.ebx + 10])
+		t.FromScroll = true
+	else
+		t.Skill, t.Mastery = SplitSkill(t.Caster.Skills[const.Skills.Fire + math.ceil(t.Spell / 11) - 1])
+	end
 	-- time is calculated by subtracting spell's time limit from Game.Time, and then
 	-- checking if result is <= condition affect time,
 	-- so to calc spell time limit we need to subtract time from Game.Time
