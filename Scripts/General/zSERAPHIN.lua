@@ -286,7 +286,7 @@ Game.ClassKinds.StartingSkills[1][const.Skills.Dark] = 0
 	Game.Classes.SPFactor[const.Class.HighPriest] = 3+Rebalanze
 --LORE BONUS Seraphin are blessed with divine powers, giving him +20 starting hp and +10 mana and light skill
 	Game.ClassKinds.HPBase[1] = 40 * Rebalance
-	Game.ClassKinds.SPBase[1] = 20 * Rebalanze
+	Game.ClassKinds.SPBase[1] = 20  / (2-rebalanze)
 
 Game.ClassNames[const.Class.Cleric]="Seraphin"
 Game.ClassNames[const.Class.Priest]="Angel"
