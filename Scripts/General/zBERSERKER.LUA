@@ -1,9 +1,7 @@
 local Rebalance
 Rebalance = 1
-Rebalanze = 1
 if SETTINGS["ImbaSubClasses"]==false then
 Rebalance = 0.95
-Rebalanze = 0
 end
 
 BERSERKER=SETTINGS["PaladinAsBerseker"]
@@ -32,16 +30,6 @@ function events.CalcDamageToMonster(t)
 end
 
 
---scales with might
-function events.CalcDamageToMonster(t)
-local data = WhoHitMonster()
-	if data.Player and (data.Player.Class==const.Class.Hero or data.Player.Class==const.Class.Crusader or data.Player.Class==const.Class.Paladin) and t.DamageKind==0 then
-		might=data.Player:GetMight()
-		bonusDamage=might/500
-		t.Result=t.Result*(1+bonusDamage*Rebalanze)*Rebalance
-	end
-	
-end
 --when insane deals 50% extra damage and attack will consume 10 sp, when no SP insane will be removed
 function events.CalcDamageToMonster(t)	
 local data = WhoHitMonster()	
