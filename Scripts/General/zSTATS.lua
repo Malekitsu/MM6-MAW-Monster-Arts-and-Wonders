@@ -2,12 +2,11 @@ if SETTINGS["StatsRework"]==true then
 function events.CalcDamageToMonster(t)
 	local data = WhoHitMonster()	
 	--might bonus
-		if t.DamageKind==0 and data.Object==nil then
+		if t.DamageKind==0 and (data.Object==nil or data.Object.Spell==100) then
 		might=data.Player:GetMight()
 		damageBonus=might/500		
 		t.Result=t.Result*(1+damageBonus)
 		end
-	--luck/accuracy bonus moved in skill-mod	
 end
 
 --speed
