@@ -3236,7 +3236,7 @@ local patches =
 	-- 00484F69 done below
 	{0x487D10, "eax", "ebp", 27, function() hooks.asmpatch(0x487D46, "mov eax, ebp") end},
 	{0x487E8B, "eax", "ebp", 27, function() hooks.asmpatch(0x487EC1, "mov eax, ebp") end},
-	{0x4884E6, "eax", "ebx", 27, function() hooks.asmpatch(0x48851E, "mov edx, ebx") end},
+	{0x4884E6, "edi", "ebx", 27, function() hooks.asmpatch(0x48851E, "mov edx, ebx") end},
 }
 
 for i, v in ipairs(patches) do
