@@ -31,6 +31,9 @@ local PRESETS = {
 	["EqualizedMode"] = false,
 	["ItemRework"] = false,
 	["StatsRework"] = false,
+	["ShowDamageTaken"] = false,
+	["StatusRework"] = false,
+	["ReworkedMagicDamageCalculation"] = false
 }
 
 SETTINGS = { }
