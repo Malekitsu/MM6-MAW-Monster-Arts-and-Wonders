@@ -652,6 +652,8 @@ function applyAdaptiveMonsterOverrides(monsterID, monsterArray, adaptive_level)
 	monsterArray["Level"] = newLevel
 	monsterArray["Experience"] = math.round(newLevel*(newLevel+10))
 	monsterArray["TreasureDiceCount"] = genericForm["TreasureDiceCount"] * levelMultiplier^1.2
+	monsterArray["TreasureItemPercent"] = genericForm["TreasureItemPercent"]*levelMultiplier
+	monsterArray["TreasureItemLevel"] = genericForm["TreasureItemLevel"]+newLevel^0.4-oldLevel^0.4
 	
 	if (adaptive_level > genericForm["Level"])
 	then
@@ -765,6 +767,8 @@ function applyAdaptiveMonsterOverrides100(monsterID, monsterArray, adaptive_leve
 	monsterArray["Experience"] = math.round(newLevel*(newLevel+10)/3)
 	monsterArray["TreasureDiceCount"] = genericForm["TreasureDiceCount"] * levelMultiplier
 	monsterArray["TreasureDiceSides"] = genericForm["TreasureDiceSides"] * (newLevel / 100) * levelMultiplier
+	monsterArray["TreasureItemPercent"] = (100-genericForm["TreasureItemPercent"])/5+genericForm["TreasureItemPercent"]
+	monsterArray["TreasureItemLevel"] = genericForm["TreasureItemLevel"]+math.random(0,6-genericForm["TreasureItemLevel"])
 	
 	if (adaptive_level > 0)
 	then
