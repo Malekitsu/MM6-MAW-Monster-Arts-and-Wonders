@@ -2028,7 +2028,9 @@ local function BBHook(amountReg)
 			d[amountReg] = d[amountReg] * (1+enduranceBonus)
 			end
 		return end
-		d[amountReg] = amount + s^2		
+		if m > 2 then
+		d[amountReg] = amount + s^2 - s * 4
+			end
 		if SETTINGS["StatsRework"]==true then
 		d[amountReg] = d[amountReg] * (1+enduranceBonus)
 		end
@@ -2863,6 +2865,7 @@ if not DaggerCritsIgnoreElementalBonuses and mem.dll.kernel32.GetPrivateProfileI
 	end, 0x7)
 end
 
+if SETTINGS["StatsRework"]==true then
 function events.CalcDamageToMonster(t)
 	local data = WhoHitMonster()	
 	--luck/accuracy bonus
@@ -2876,6 +2879,7 @@ function events.CalcDamageToMonster(t)
 			crit2=true
 		end
 end
+	end
 mem.autohook2(0x431276, function(d)
 	if crit or crit2 then
 		d.eax = mem.topointer(CritStrings.kill)		
