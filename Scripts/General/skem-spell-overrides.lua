@@ -261,7 +261,8 @@ end
 local spellCosts =
 {
 	-- healing spells
-	["Healing Touch"] = {["Normal"] = 3, ["Expert"] = 6, ["Master"] = 12},
+	["Healing Touch"] = {["Normal"] = 3, ["Expert"] = 6, ["Master"] = 12 + SC},
+	["Power Cure"] = {["Master"] = 30+SC},
 	["Cure Wounds"] = {["Normal"] = 5, ["Expert"] = 8, ["Master"] = 16},
 	["First Aid"] = {["Expert"] = 3,["Master"] = 100},
 	["Remove Fear"] = {["Normal"] = 2, ["Expert"] = 4, ["Master"] = 6},
@@ -290,9 +291,9 @@ local spellCosts =
 	
 	--debuff spells
 	["Slow"] = {["Master"] = 5},
-	["Paralyze"] = {["Master"] = 25},
-	["Mass Curse"] = {["Master"] = 20},
-	["Shrinking Ray"] = {["Master"] = 16},
+	["Paralyze"] = {["Master"] = 25+SD^4},
+	["Mass Curse"] = {["Master"] = 20+SD^4},
+	["Shrinking Ray"] = {["Master"] = 16+SD^4},
 
 	
 }
@@ -874,7 +875,7 @@ if ((ADAPTIVE == "default") or (ADAPTIVE == "disabled")) then
 else
 Xlevel = Game.MonstersTxt[monster.Id].Level
 Mlevel = monsterArray["Level"]
-Mlevel = monsterArray["Level"] * math.max(1, Mlevel/Xlevel)
+Mlevel = monsterArray["Level"] * (2+Mlevel)/(2+Xlevel)
 end
 	-- execute original code
 
@@ -1119,13 +1120,13 @@ local healingSpellPowers =
 	{
 		[const.Novice] = {fixedMin = 5, fixedMax = 5, variableMin = 0, variableMax = 0, },
 		[const.Expert] = {fixedMin = 30, fixedMax = 30, variableMin = 0, variableMax = 0, },
-		[const.Master] = {fixedMin = 70, fixedMax = 70, variableMin = 0, variableMax = 0, },
+		[const.Master] = {fixedMin = 70*SD, fixedMax = 70*SD, variableMin = 0, variableMax = 0, },
 	},
 	[const.Spells.RemoveFear] =
 	{
 		[const.Novice] = {fixedMin = 4, fixedMax = 4, variableMin = 0, variableMax = 0, },
 		[const.Expert] = {fixedMin = 15, fixedMax = 15, variableMin = 0, variableMax = 0, },
-		[const.Master] = {fixedMin = 50, fixedMax = 50, variableMin = 0, variableMax = 0, },
+		[const.Master] = {fixedMin = 50*SD, fixedMax = 50*SD, variableMin = 0, variableMax = 0, },
 	},
 	[const.Spells.CureInsanity] =
 	{
@@ -1137,13 +1138,13 @@ local healingSpellPowers =
 	{
 		[const.Novice] = {fixedMin = 15, fixedMax = 15, variableMin = 0, variableMax = 0, },
 		[const.Expert] = {fixedMin = 30, fixedMax = 30, variableMin = 0, variableMax = 0, },
-		[const.Master] = {fixedMin = 65, fixedMax = 65, variableMin = 0, variableMax = 0, },
+		[const.Master] = {fixedMin = 65*SD, fixedMax = 65*SD, variableMin = 0, variableMax = 0, },
 	},
 	[const.Spells.HealingTouch] =
 	{
 		[const.Novice] = {fixedMin = 5, fixedMax = 5, variableMin = 2, variableMax = 2, },
 		[const.Expert] = {fixedMin = 10, fixedMax = 10, variableMin = 3, variableMax = 3, },
-		[const.Master] = {fixedMin = 15, fixedMax = 15, variableMin = 5, variableMax = 5, },
+		[const.Master] = {fixedMin = 15, fixedMax = 15, variableMin = 5*SD^1.5, variableMax = 5*SD^1.5, },
 	},
 	[const.Spells.CureWounds] =
 	{
@@ -1155,7 +1156,7 @@ local healingSpellPowers =
 	{
 		[const.Novice] = {fixedMin = 25, fixedMax = 25, variableMin = 0, variableMax = 0, },
 		[const.Expert] = {fixedMin = 40, fixedMax = 40, variableMin = 0, variableMax = 0, },
-		[const.Master] = {fixedMin = 90, fixedMax = 90, variableMin = 0, variableMax = 0, },
+		[const.Master] = {fixedMin = 90*SD, fixedMax = 90*SD, variableMin = 0, variableMax = 0, },
 	},
 	[const.Spells.SharedLife] =
 	{
@@ -1167,7 +1168,7 @@ local healingSpellPowers =
 	{
 		[const.Novice] = {fixedMin = 10, fixedMax = 10, variableMin = 3, variableMax = 3, },
 		[const.Expert] = {fixedMin = 10, fixedMax = 10, variableMin = 3, variableMax = 3, },
-		[const.Master] = {fixedMin = 10, fixedMax = 10, variableMin = 3, variableMax = 3, },
+		[const.Master] = {fixedMin = 10, fixedMax = 10, variableMin = 3, variableMax = 3*SD, },
 	},
 	[const.Spells.Resurrection] =
 	{
