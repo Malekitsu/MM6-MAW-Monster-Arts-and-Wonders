@@ -2864,22 +2864,24 @@ if not DaggerCritsIgnoreElementalBonuses and mem.dll.kernel32.GetPrivateProfileI
 		end
 	end, 0x7)
 end
-
 if SETTINGS["StatsRework"]==true then
-function events.CalcDamageToMonster(t)
-	local data = WhoHitMonster()	
-	--luck/accuracy bonus
-		luck=data.Player:GetLuck()
-		accuracy=data.Player:GetAccuracy()
-		critDamage=accuracy/250
-		critChance=5+luck/10
-		roll=math.random(1, 100)
-		if roll <= critChance then
-			t.Result=t.Result*(1.5+critDamage)
-			crit2=true
-		end
-end
+	function events.CalcDamageToMonster(t)
+		local data = WhoHitMonster()	
+		--luck/accuracy bonus
+			luck=data.Player:GetLuck()
+			accuracy=data.Player:GetAccuracy()
+			critDamage=accuracy/250
+			critChance=5+luck/10
+			roll=math.random(1, 100)
+			if roll <= critChance then
+				t.Result=t.Result*(1.5+critDamage)
+				crit2=true
+			end
 	end
+else
+crit2=false
+end
+
 mem.autohook2(0x431276, function(d)
 	if crit or crit2 then
 		d.eax = mem.topointer(CritStrings.kill)		
@@ -2935,7 +2937,6 @@ function events.ModifyItemDamage(t)
         end
     end
 end
-
 
 local vals = 
 {	1000,	200,
@@ -3275,6 +3276,7 @@ hooks.asmpatch(0x484F69, [[
 
 hooks.asmpatch(0x484FB1, "mov edx, dword [esp + 0x10]", 7)
 
+
 -- condition effect on statistics
 -- effects are in percentages, no more than 255
 
@@ -3296,6 +3298,20 @@ setConditionEffects({
 	}
 }) -- paralyzed zeroes luck and halves personality, weakness zeroes endurance
 ]]
+
+
+
+
+if SETTINGS["StatsRework"]==true then
+	function events.GameInitialized2()
+	setConditionEffects(const.Condition.Poison1, {[const.Stats.Might] = 100, 100, 100, 100, 100, 100, 100})
+	setConditionEffects(const.Condition.Poison2, {[const.Stats.Might] = 100, 100, 100, 100, 100, 100, 100})
+	setConditionEffects(const.Condition.Poison3, {[const.Stats.Might] = 100, 100, 100, 100, 100, 100, 100})
+	setConditionEffects(const.Condition.Insane, {[const.Stats.Might] = 110, 65, 65, 105, 50, 105, 100})
+	setConditionEffects(const.Condition.Afraid, {[const.Stats.Might] = 105, 80, 80, 100, 80, 105, 100})
+	end
+end
+
 local conditionEffectBase = 0x4C27B4
 local u1 = mem.u1
 function setConditionEffects(cond, percentages)
@@ -3393,3 +3409,54 @@ mem.hook(0x41F8E9, function(d)
 	newCost = getNewSkillCost(pl, newS, skillId)
 	d.eax = newCost
 end, 10)
+
+if SETTINGS["ShowDamageTaken"]==true then
+--show damage taken
+	function events.CalcDamageToPlayer(t)
+	local i=t.Player:GetIndex() 
+		if i==3 then
+	Game.ShowStatusText(string.format("                                                   %s",t.Result))
+			else if i==2 then
+			Game.ShowStatusText(string.format("              %s",t.Result))
+				else if i==1 then
+				Game.ShowStatusText(string.format("%s                       ",30))
+					else if i==0 then
+					Game.ShowStatusText(string.format("%s                                                             ",30))
+					end
+				end
+			end
+		end
+	end
+end
+
+if SETTINGS["ReworkedMagicDamageCalculation"]==true then
+damage1=0
+	function events.CalcDamageToPlayer(t)
+		if t.DamageKind==1 or t.DamageKind==2 or t.DamageKind==3 or t.DamageKind==4 or t.DamageKind==5 then
+		--get resistances
+			if t.DamageKind==1 then
+			res=t.Player:GetMagicResistance()
+			end
+			if t.DamageKind==2 then
+			res=t.Player:GetFireResistance()
+			end
+			if t.DamageKind==3 then
+			res=t.Player:GetElectricityResistance()
+			end
+			if t.DamageKind==4 then
+			res=t.Player:GetColdResistance()
+			end
+			if t.DamageKind==5 then
+			res=t.Player:GetPoisonResistance()
+			end
+			luck=t.Player:GetLuck()/5
+			--start of new formula
+			roll = 1
+			while (math.random() < (1 - 30/(30 + res + luck))) and (roll <= 4) do
+				damage1 = t.Damage / (1 + 0.5 * roll)
+				roll = roll + 1
+			end
+			t.Result = damage1 * (1 / (1 + (res+luck)^0.7 / 100))
+		end
+	end
+end
