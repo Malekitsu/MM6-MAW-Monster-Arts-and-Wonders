@@ -1,5 +1,7 @@
 SHADOW=SETTINGS["SorcererAsShadow"]
 NECROMANCER=SETTINGS["SorcererAsNecromancer"]
+Mastery=SETTINGS["Mastery"]
+if Mastery==true then
 if NECROMANCER==false then
 if SHADOW==false then
 
@@ -63,4 +65,4 @@ Game.ClassKinds.StartingSkills[5][const.Skills.Thievery] = 1
 end
 end
 end
-
+end
