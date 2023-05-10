@@ -65,11 +65,11 @@ function events.CalcSpellDamage(t)
 	end
 	if comboPoint==0 then
 		if data.Player.Class==const.Class.Archer then 			
-		t.Result=t.Result*0.5
+		t.Result=t.Result*0.25
 			else if data.Player.Class==const.Class.BattleMage then
-			t.Result=t.Result*0.65
+			t.Result=t.Result*0.5
 				else if data.Player.Class==const.Class.WarriorMage then
-					t.Result=t.Result*0.8
+					t.Result=t.Result*0.75
 				end
 			end
 		end			
