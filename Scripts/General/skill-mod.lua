@@ -3460,3 +3460,30 @@ damage1=0
 		end
 	end
 end
+
+local newCode = mem.asmpatch(0x41330E, [[
+	nop
+	nop
+	nop
+	nop
+	nop
+	cmp edx,0x19
+	ja absolute 0x41386E
+]])
+
+mem.hook(newCode, function(d)
+	local t = {Stat = d.edx}
+	events.call("ShowStatDescription", t)
+end)
+
+mem.autohook(0x41386E, function(d)
+	events.call("AfterShowStatDescription")
+end)
+
+function events.ShowStatDescription(t)
+	debug.Message(string.format("stat: %d", t.Stat))
+end
+
+function events.AfterShowStatDescription()
+	debug.Message("after")
+end
