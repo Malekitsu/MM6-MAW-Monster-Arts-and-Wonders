@@ -2029,7 +2029,7 @@ local function BBHook(amountReg)
 			end
 		return end
 		if m > 2 then
-		d[amountReg] = amount + s^2 - s * 4
+		d[amountReg] = amount + s^2 - s * 6
 			end
 		if SETTINGS["StatsRework"]==true then
 		d[amountReg] = d[amountReg] * (1+enduranceBonus)
