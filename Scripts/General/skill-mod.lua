@@ -3531,6 +3531,7 @@ do
 	}
 
 	local cs = const.Stats
+	-- you can add additional stats if you wish
 	local statToText = {
 		Might = cs.Might,
 		Personality = cs.Personality,
@@ -3613,16 +3614,16 @@ do
 	}
 	
 	function events.CanTeachSkillMastery(t)
+		-- exit if no active player (idk if can happen)
 		if Game.CurrentPlayer == -1 then return end
 		local pl = Party[Game.CurrentPlayer]
-		-- get locations of requirements from text
 		local req = (requirements[t.Skill] or {})[t.Mastery + 2]
 		if req then -- custom requirements
 			local allow = true
 			local currentS, currentM = SplitSkill(pl.Skills[t.Skill])
 			local trainM = t.Mastery + 2
 			local cannotTrainReason -- nil by default
-			if pl.Unconscious ~= 0 or pl.Eradicated ~= 0 or pl.Paralyzed ~= 0 or pl.Stoned ~= 0 or pl.Dead ~= 0 then
+			if pl.Unconscious ~= 0 or pl.Eradicated ~= 0 or pl.Paralyzed ~= 0 or pl.Stoned ~= 0 or pl.Dead ~= 0 or pl.Asleep ~= 0 then
 				allow = false
 				cannotTrainReason = cannotTrainTextIds.unconscious
 			elseif currentM == 0 then
@@ -3659,14 +3660,8 @@ do
 				end
 			end
 			t.Allow = allow
-			local newText, replaced = t.Text
+			local newText = t.Text
 			if allow then
-				--[[
-				newText, replaced = newText:gsub("%d*( [Gg]old)", (req.Gold or 0) .. "%1")
-				if replaced ~= 1 then
-					msgf("Couldn't find gold text to replace for skill %s", invSkill[t.Skill])
-				end
-				]]
 				newText = string.format("Become %s in %s for %d gold", textToMastery[trainM], Game.GlobalTxt[271 + t.Skill], t.Cost)
 			elseif cannotTrainReason then
 				newText = Game.NPCText[cannotTrainReason]
