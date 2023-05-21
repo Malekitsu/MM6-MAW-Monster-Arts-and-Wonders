@@ -3493,6 +3493,8 @@ end
 -- new scope ("do" block) to allow short local names without name clashes
 do
 	local requirements = {
+		-- examples:
+		--[[
 		[const.Skills.Fire] = {
 			[const.Expert] = {
 				Rank = 12,
@@ -3528,6 +3530,7 @@ do
 				Text = "12 gold and you're set"
 			}
 		}
+		]]
 	}
 
 	local cs = const.Stats
@@ -3544,13 +3547,13 @@ do
 	local textToStat = table.invert(statToText)
 	local invSkill = table.invert(const.Skills)
 	local textToMastery = {[const.Expert] = "Expert", [const.Master] = "Master"}
-	local canShowConsole = false -- don't flood console if error occurs
+	local canShowConsole = true -- don't flood console if error occurs
 	function events.EnterNPC()
 		canShowConsole = true -- only once per npc enter
 	end
 	local function msgf(...)
 		if canShowConsole then
-			debug.Message(string.format(...))
+			debug.Message(string.format(...)) -- if you get this message, pass "Text" argument with custom requirements as in fire master example
 		end
 	end
 
@@ -3574,11 +3577,15 @@ do
 				end
 			end
 			if req.Stat then
-				local id, val = next(req.Stat) -- only one stat supported (next() returns first [key, value] pair from table)
-				local done = false
+				local replacement = {}
+				for id, val in pairs(req.Stat) do
+					replacement[#replacement + 1] = string.format("%s %d", textToStat[id], val)
+				end
+				local done
+				replacement = table.concat(replacement, ", ")
 				for name, value in pairs(statToText) do
 					newText, replaced = newText:gsub(
-						string.format("%s %%d*", name), string.format("%s %d", textToStat[id], val)
+						string.format("%s %%d*", name), replacement
 					)
 					if replaced == 1 then
 						done = true
