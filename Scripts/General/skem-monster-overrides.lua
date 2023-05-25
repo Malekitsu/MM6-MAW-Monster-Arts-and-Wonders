@@ -607,7 +607,13 @@ function applyAdaptiveMonsterOverrides(monsterID, monsterArray, adaptive_level)
 	
 	xLevel = (adaptive_level+2+offset/4*adaptive_level^0.2) *((57+math.random(1,30)+math.random(1,30))/100)
 	newLevel = math.max(1, xLevel)
+ItemMod = 1
+if SETTINGS["ItemRework"]==true	then	
 	ItemMod = (newLevel^1.15-1)/1000+1
+			end
+	if SETTINGS["StatsRework"]==true then
+ItemMod = ItemMod * (newLevel^1.15-1)/1000+1
+end
 
 	levelMultiplier = (newLevel+1) / (oldLevel+1)
 
@@ -615,8 +621,8 @@ function applyAdaptiveMonsterOverrides(monsterID, monsterArray, adaptive_level)
 	dicex1 = genericForm["Attack1"]["DamageDiceCount"]
 	sidesx1 = genericForm["Attack1"]["DamageDiceSides"]
 	
-	bonusx1 = math.max(1, (bonusx1 * levelMultiplier * (newLevel/20 + 1.75)*ItemMod))
-	sidesx1 = math.max(1, (sidesx1  * levelMultiplier^0.5 * (newLevel/20 + 1.75)*ItemMod))
+	bonusx1 = math.max(1, (bonusx1 * levelMultiplier * (newLevel/20 + 1.75)*ItemMod^0.5))
+	sidesx1 = math.max(1, (sidesx1  * levelMultiplier^0.5 * (newLevel/20 + 1.75)*ItemMod^0.5))
 	dicex1 = math.max(1, (dicex1 * levelMultiplier^0.5)*ItemMod)
 
 	if bonusx1 > 250 then
@@ -635,8 +641,8 @@ function applyAdaptiveMonsterOverrides(monsterID, monsterArray, adaptive_level)
 	dicex2 = genericForm["Attack2"]["DamageDiceCount"]
 	sidesx2 = genericForm["Attack2"]["DamageDiceSides"]
 	
-	bonusx2 = math.max(1, (bonusx2 * levelMultiplier * (newLevel/20 + 1.75)*ItemMod))
-	sidesx2 = math.max(1, (sidesx2 * levelMultiplier^0.5 * (newLevel/20 + 1.75)*ItemMod))
+	bonusx2 = math.max(1, (bonusx2 * levelMultiplier * (newLevel/20 + 1.75)*ItemMod^0.5))
+	sidesx2 = math.max(1, (sidesx2 * levelMultiplier^0.5 * (newLevel/20 + 1.75)*ItemMod^0.5))
 	dicex2 = math.max(1, (dicex2 * levelMultiplier^0.5*ItemMod))
 
 	if bonusx2 > 250 then
@@ -697,7 +703,13 @@ function applyAdaptiveMonsterOverrides100(monsterID, monsterArray, adaptive_leve
 	if Mlevel == oldLevel or Mlevel == (200 + oldLevel) then
 	xLevel = oldLevel * 1.5 + 100
 	newLevel = math.max(1, xLevel)
-
+ItemMod = 1
+if SETTINGS["ItemRework"]==true	then	
+	ItemMod = (newLevel^1.15-1)/1000+1
+			end
+	if SETTINGS["StatsRework"]==true then
+ItemMod = ItemMod * (newLevel^1.15-1)/1000+1
+end
 	levelMultiplier = (100+2) / (oldLevel+2)
 	
 
@@ -706,8 +718,8 @@ function applyAdaptiveMonsterOverrides100(monsterID, monsterArray, adaptive_leve
 	sidesx1 = genericForm["Attack1"]["DamageDiceSides"]
 	damax1 = dicex1 *(1+sidesx1) / 2 + bonusx1
 	
-	bonusx1 = math.max(1, (bonusx1 * levelMultiplier * (newLevel/20 + 1.75)) *(newLevel/100))
-	sidesx1 = math.max(1, (sidesx1 * levelMultiplier^0.5 * (newLevel/20 + 1.75)^0.5) *(newLevel/100)^0.5)
+	bonusx1 = math.max(1, (bonusx1 * levelMultiplier * (newLevel/20 + 1.75)) *(newLevel/100)*ItemMod^0.5)
+	sidesx1 = math.max(1, (sidesx1 * levelMultiplier^0.5 * (newLevel/20 + 1.75)^0.5) *(newLevel/100)^0.5*ItemMod^0.5)
 	dicex1 = math.max(1, (dicex1 * levelMultiplier^0.5 * (newLevel/20 + 1.75)^0.5) *(newLevel/100)^0.5)
 
 	if newLevel>35 and (genericForm["Attack1"]["Type"] == const.Damage.Phys) or (genericForm["Attack1"]["Type"] == const.Damage.Energy) then
@@ -737,8 +749,8 @@ function applyAdaptiveMonsterOverrides100(monsterID, monsterArray, adaptive_leve
 	sidesx2 = genericForm["Attack2"]["DamageDiceSides"]
 	damax2 = dicex2 *(1+sidesx2) / 2 + bonusx2
 			
-	bonusx2 = math.max(1, (bonusx2 * levelMultiplier * (newLevel/20 + 1.75) *(newLevel/100)))
-	sidesx2 = math.max(1, (sidesx2 * levelMultiplier^0.5 * (newLevel/20 + 1.75)^0.5) *(newLevel/100)^0.5)
+	bonusx2 = math.max(1, (bonusx2 * levelMultiplier * (newLevel/20 + 1.75) *(newLevel/100)*ItemMod^0.5))
+	sidesx2 = math.max(1, (sidesx2 * levelMultiplier^0.5 * (newLevel/20 + 1.75)^0.5) *(newLevel/100)^0.5*ItemMod^0.5)
 	dicex2 = math.max(1, (dicex2 * levelMultiplier^0.5 * (newLevel/20 + 1.75)^0.5) *(newLevel/100)^0.5)
 
 	if newLevel>35 and (genericForm["Attack2"]["Type"] == const.Damage.Phys) or (genericForm["Attack2"]["Type"] == const.Damage.Energy) then
