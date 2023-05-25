@@ -3659,7 +3659,7 @@ do
 			end
 			if allow and req.Stat then
 				for id, val in pairs(req.Stat) do
-					if val > pl.Stats[id] then
+					if val > pl.Stats[id].Base then
 						allow = false
 						cannotTrainReason = cannotTrainTextIds.other
 						break
