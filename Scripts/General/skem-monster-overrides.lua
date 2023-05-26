@@ -783,9 +783,9 @@ end
 	end
 
 
-	monsterArray["FullHP"] = math.round(100*(100/10+3)) * 2  * newLevel / 125
+	monsterArray["FullHP"] = math.round(100*(100/10+3)) * 2  * newLevel / 125*ItemMod
 
-	monsterArray["HP"] = math.round(100*(100/10+3)) * 2  * newLevel / 125
+	monsterArray["HP"] = math.round(100*(100/10+3)) * 2  * newLevel / 125*ItemMod
 
 	monsterArray["ArmorClass"] = genericForm["ArmorClass"] * levelMultiplier * newLevel / 100
 	monsterArray["Level"] = newLevel
@@ -990,6 +990,7 @@ end
 end
 --fix for item/stats rework
 function events.LoadMap()	
+		if ADAPTIVE == "disabled" then
 if SETTINGS["ItemRework"]==true and SETTINGS["StatsRework"]==true then
 	for i=0, Map.Monsters.High do
 	if not (Map.Monsters[i].Ally == 2) then
@@ -1058,5 +1059,6 @@ if SETTINGS["ItemRework"]==true and SETTINGS["StatsRework"]==true then
 
 		end
 	end
+end
 end
 end
