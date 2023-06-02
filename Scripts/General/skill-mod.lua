@@ -3481,11 +3481,11 @@ mem.autohook(0x41386E, function(d)
 end)
 
 function events.ShowStatDescription(t)
-	debug.Message(string.format("stat: %d", t.Stat))
+	--debug.Message(string.format("stat: %d", t.Stat))
 end
 
 function events.AfterShowStatDescription()
-	debug.Message("after")
+	--debug.Message("after")
 end
 
 -- allow changing mastery learning requirements
