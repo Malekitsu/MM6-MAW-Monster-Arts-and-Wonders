@@ -1,4 +1,4 @@
-local mysteriousScrollId = 579
+local mysteriousScrollId = 580
 local oracle, seer = 8, 9 -- npc IDs
 local NG = "newGamePlus" -- quest ID as a string, mmext quests are identified by them
 vars.Quests = vars.Quests or {} -- just in case, this is the table where quest data is saved by default
@@ -34,8 +34,8 @@ end
 
 local qBits = {seer = 238, oracle = 239, controlCenter = 240}
 Game.QuestsTxt[qBits.seer] = "You found mysterious scroll. Go talk to seer to shed some light on its purpose."
-Game.QuestsTxt[qBits.oracle] = "Go to oracle with the scroll."
-Game.QuestsTxt[qBits.controlCenter] = "Clear control center and return to the oracle."
+Game.QuestsTxt[qBits.oracle] = "Ask the Oracle about the Misterious Scroll"
+Game.QuestsTxt[qBits.controlCenter] = "Open the dimensional prison in Control Center."
 
 -- give scroll to queen
 function events.AfterLoadMap()
@@ -95,8 +95,8 @@ Quest {
         -- evt.All.Sub("Inventory", mysteriousScrollId)
     end,
     Texts = {
-        Topic = "Imminent Danger", -- topic text
-        GoToOracle = "Ah, seeker of truth, your arrival heralds a long-awaited moment, for the scroll you possess holds within it the means to unlock the dimensional prison in control center, a place where an insidious and malevolent evil has been locked away for ages, festering in darkness, and I, as the keeper of prophecies, have patiently awaited its arrival so that we may join forces and wield the combined might of the scroll and your valiant spirit to vanquish this ancient threat once and for all, restoring peace and harmony to our troubled world." -- message text shown on "GoToOracle" quest state
+        Topic = "Dimensional Prison", -- topic text
+        GoToOracle = "Ah, seeker of truth, your arrival heralds a long-awaited moment, for the scroll you possess holds within it the means to unlock the dimensional prison in control center, a place where an insidious and malevolent evil has been locked away for ages, and I, as the keeper of prophecies, have patiently awaited its arrival so that we may join forces and wield the combined might of the scroll and your valiant spirit to vanquish this ancient threat once and for all, restoring peace and harmony to our troubled world." -- message text shown on "GoToOracle" quest state
     }
 }
 
@@ -124,9 +124,9 @@ Quest {
         -- enable new game stuff here
     end,
     Texts = {
-        Topic = "Success!",
+        Topic = "The End",
         TopicDone = false,
-        ControlCenterDone = "Good job! Now you may reset the game."
+        ControlCenterDone = "Heroes of unwavering valor, you have proven yourselves capable of defeating the Creator, but in the process, a space-time fracture has manifested within the control center; should you choose to investigate it, be aware that there might be no coming back, yet the opportunity to uncover hidden truths and mend the shattered reality awaits those who dare to venture forth."
     }
 }
 
