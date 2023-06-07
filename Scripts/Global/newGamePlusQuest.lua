@@ -68,7 +68,7 @@ Quest {
     end,
     Texts = {
         Topic = "Mysterious Scroll",
-        Give = "Some lengthy flavor text telling to go to oracle",
+        Give = "Ah, the scroll you bring holds the key to a forgotten prophecy, seek the wisdom of the Oracle to unveil its true purpose.",
         TopicGiven = false, -- no topic if quest is in "Given" state
         TopicDone = false, -- no topic if quest is in "Done" state
     },
@@ -96,7 +96,7 @@ Quest {
     end,
     Texts = {
         Topic = "Imminent Danger", -- topic text
-        GoToOracle = "Good that you've come with the scroll. But first, you need to deal with the danger in control center." -- message text shown on "GoToOracle" quest state
+        GoToOracle = "Ah, seeker of truth, your arrival heralds a long-awaited moment, for the scroll you possess holds within it the means to unlock the dimensional prison in control center, a place where an insidious and malevolent evil has been locked away for ages, festering in darkness, and I, as the keeper of prophecies, have patiently awaited its arrival so that we may join forces and wield the combined might of the scroll and your valiant spirit to vanquish this ancient threat once and for all, restoring peace and harmony to our troubled world." -- message text shown on "GoToOracle" quest state
     }
 }
 
