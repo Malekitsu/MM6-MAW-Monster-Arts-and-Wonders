@@ -3,9 +3,6 @@ local oracle, seer = 8, 9 -- npc IDs
 local NG = "newGamePlus" -- quest ID as a string, mmext quests are identified by them
 vars.Quests = vars.Quests or {} -- just in case, this is the table where quest data is saved by default
 local Q = vars.Quests -- convenient alias
-local qBit = 500
---Game.QuestsTxt[qBit] = "asdgsdfgdsfdfs"
---Party.QBits[qBit] = true
 -- helpers for testing
 function goToQueen()
     evt.MoveToMap{Name = "hive.blv", X = 3970, Y = 26861, Z = -2287}
@@ -35,28 +32,12 @@ function getState()
     return Q[NG]
 end
 
-Quest {
-    NG, -- quest id
-    NPC = seer, -- NPC who manages quest
-    Slot = 2, -- topic number (0-2 in mm6, 0-5 in mm7+) which will host quest topic
-    CheckDone = false, -- quest can't be completed here, can also be a function which returns whether quest is completed
-    CanShow = function() -- if it returns false, no topic will appear
-        return evt.All.Cmp("Inventory", mysteriousScrollId) and not Q[NG] -- has item and quest is not started
-    end,
-    Texts = {
-        Quest = "You found mysterious scroll. Go talk to oracle to shed some light on its purpose.", -- TODO: not working
-        QuestGoToOracle = "test",
-        Topic = "Mysterious Scroll",
-        Give = "Some lengthy flavor text telling to go to oracle",
-        TopicGiven = false,
-        TopicDone = false,
-    },
-    Give = function() -- run on topic click if quest is given
-        Q[NG] = "GoToOracle" -- custom quest state
-    end
-}
+local qBits = {seer = 238, oracle = 239, controlCenter = 240}
+Game.QuestsTxt[qBits.seer] = "You found mysterious scroll. Go talk to seer to shed some light on its purpose."
+Game.QuestsTxt[qBits.oracle] = "Go to oracle with the scroll."
+Game.QuestsTxt[qBits.controlCenter] = "Clear control center and return to the oracle."
 
--- give scroll
+-- give scroll to queen
 function events.AfterLoadMap()
     if Map.Name == "hive.blv" then
         if mapvars.scrollAdded then return end
@@ -70,7 +51,35 @@ function events.AfterLoadMap()
     end
 end
 
-NPCTopic {
+-- add quest "go to seer" if queen is looted
+function events.PickCorpse(t)
+    if Map.Name == "hive.blv" and t.Monster.Name == "Demon Queen" then
+        evt.Set("QBits", qBits.seer)
+    end
+end
+
+Quest {
+    NG, -- quest id
+    NPC = seer, -- NPC who manages quest
+    Slot = 2, -- topic number (0-2 in mm6, 0-5 in mm7+) which will host quest topic
+    CheckDone = false, -- quest can't be completed here, can also be a function which returns whether quest is completed
+    CanShow = function() -- if it returns false, no topic will appear
+        return evt.All.Cmp("Inventory", mysteriousScrollId) and not Q[NG] -- has item and quest is not started
+    end,
+    Texts = {
+        Topic = "Mysterious Scroll",
+        Give = "Some lengthy flavor text telling to go to oracle",
+        TopicGiven = false, -- no topic if quest is in "Given" state
+        TopicDone = false, -- no topic if quest is in "Done" state
+    },
+    Give = function() -- run on topic click if quest is given
+        Q[NG] = "GoToOracle" -- custom quest state
+        evt.Sub("QBits", qBits.seer) -- remove "go to seer" quest
+        evt.Set("QBits", qBits.oracle) -- add "go to oracle" quest
+    end
+}
+
+Quest {
     BaseName = NG, -- link to other quest, means that it's another part of same quest
     NPC = oracle,
     Slot = 2,
@@ -80,33 +89,37 @@ NPCTopic {
     end,
     GoToOracle = function() -- run on "GoToOracle" quest state
         Q[NG] = "ControlCenter"
+        evt.Add("QBits", qBits.controlCenter)
+        evt.Sub("QBits", qBits.oracle)
+        -- uncomment to remove item from inventory
+        -- evt.All.Sub("Inventory", mysteriousScrollId)
     end,
-    "Imminent Danger", -- topic text
-    [[Good that you've come with the scroll. But first, you need to deal with the danger in control center.]], -- message text
     Texts = {
-        Quest = "Clear control center and return to the oracle",
-        GoToOracle = "You need to clear control center first." -- shown on "GoToOracle" quest state
+        Topic = "Imminent Danger", -- topic text
+        GoToOracle = "Good that you've come with the scroll. But first, you need to deal with the danger in control center." -- message text shown on "GoToOracle" quest state
     }
 }
 
 function events.LeaveMap()
+    -- put check for having cleared control center here
     if Map.Name == "sci-fi.blv" and Q[NG] == "ControlCenter" then
         Q[NG] = "ControlCenterDone"
     end
 end
 
-NPCTopic {
+Quest {
     BaseName = NG,
     NPC = oracle,
     Slot = 2,
-    --NeverGiven = true,
-    Gold = 387483974, -- gold reward
-    Exp = 43848234, -- exp reward
+    NeverGiven = true,
+    Gold = 3874, -- gold reward
+    Exp = 4823434, -- exp reward
     CheckDone = true, -- always completable
     CanShow = function()
         return Q[NG] == "ControlCenterDone"
     end,
-    Done = function()
+    ControlCenterDone = function()
+        evt.Sub("QBits", qBits.controlCenter)
         Q[NG] = "Done"
         -- enable new game stuff here
     end,
