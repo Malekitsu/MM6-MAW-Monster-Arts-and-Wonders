@@ -1,7 +1,9 @@
 local mysteriousScrollId = 580
 local oracle, seer = 8, 9 -- npc IDs
-local NG = "newGamePlus" -- quest ID as a string, mmext quests are identified by them
+local NGSeer = "newGamePlusSeer" -- quest ID as a string, mmext quests are identified by them
+local NGOracle = "newGamePlusOracle"
 vars.Quests = vars.Quests or {} -- just in case, this is the table where quest data is saved by default
+vars.newGameQuest = vars.newGameQuest or {}
 local Q = vars.Quests -- convenient alias
 -- helpers for testing
 function goToQueen()
@@ -28,14 +30,8 @@ function killMouseover()
     Map.Monsters[Mouse:GetTarget().Index].HP = 0
 end
 
-function getState()
-    return Q[NG]
-end
-
 local qBits = {seer = 238, oracle = 239, controlCenter = 240}
 Game.QuestsTxt[qBits.seer] = "You found mysterious scroll. Go talk to seer to shed some light on its purpose."
-Game.QuestsTxt[qBits.oracle] = "Ask the Oracle about the Misterious Scroll"
-Game.QuestsTxt[qBits.controlCenter] = "Open the dimensional prison in Control Center."
 
 -- give scroll to queen
 function events.AfterLoadMap()
@@ -59,76 +55,74 @@ function events.PickCorpse(t)
 end
 
 Quest {
-    NG, -- quest id
+    NGSeer, -- quest id
     NPC = seer, -- NPC who manages quest
     Slot = 2, -- topic number (0-2 in mm6, 0-5 in mm7+) which will host quest topic
-    CheckDone = false, -- quest can't be completed here, can also be a function which returns whether quest is completed
+    Quest = qBits.oracle,
+    CheckDone = function()
+        return Q[NGOracle] -- if oracle quest is started, this is completed
+    end,
     CanShow = function() -- if it returns false, no topic will appear
-        return evt.All.Cmp("Inventory", mysteriousScrollId) and not Q[NG] -- has item and quest is not started
+        return evt.All.Cmp("Inventory", mysteriousScrollId) or Q[NGSeer] -- has item or quest is started
     end,
     Texts = {
         Topic = "Mysterious Scroll",
         Give = "Ah, the scroll you bring holds the key to a forgotten prophecy, seek the wisdom of the Oracle to unveil its true purpose.",
-        TopicGiven = false, -- no topic if quest is in "Given" state
-        TopicDone = false, -- no topic if quest is in "Done" state
+        Undone = "Just do it.",
+        Done = "Good job!",
+        After = "Thanks.",
+        Quest = "Ask the Oracle about the Misterious Scroll",
     },
     Give = function() -- run on topic click if quest is given
-        Q[NG] = "GoToOracle" -- custom quest state
         evt.Sub("QBits", qBits.seer) -- remove "go to seer" quest
-        evt.Set("QBits", qBits.oracle) -- add "go to oracle" quest
     end
 }
 
 Quest {
-    BaseName = NG, -- link to other quest, means that it's another part of same quest
+    NGOracle,
     NPC = oracle,
     Slot = 2,
-    CheckDone = false,
-    CanShow = function()
-        return Q[NG] == "GoToOracle" -- check that quest state is appropriate
+    Gold = 3874, -- gold reward
+    Exp = 4823434, -- exp reward
+    Quest = qBits.controlCenter,
+    CheckDone = function()
+        return vars.newGameQuest.ccDone
     end,
-    GoToOracle = function() -- run on "GoToOracle" quest state
-        Q[NG] = "ControlCenter"
-        evt.Add("QBits", qBits.controlCenter)
-        evt.Sub("QBits", qBits.oracle)
+    CanShow = function()
+        return Q[NGSeer] or Q[NGOracle]
+    end,
+    Give = function()
         -- uncomment to remove item from inventory
         -- evt.All.Sub("Inventory", mysteriousScrollId)
+
+        -- uncomment to remove seer quest here (might be confusing)
+        -- evt.Sub("QBits", qBits.oracle)
+    end,
+    Done = function()
+        -- enable new game stuff here
+        
+        -- if you need to test later whether quest is done, this will suffice:
+        -- if Q[NGOracle] == "Done" then ...
     end,
     Texts = {
         Topic = "Dimensional Prison", -- topic text
-        GoToOracle = "Ah, seeker of truth, your arrival heralds a long-awaited moment, for the scroll you possess holds within it the means to unlock the dimensional prison in control center, a place where an insidious and malevolent evil has been locked away for ages, and I, as the keeper of prophecies, have patiently awaited its arrival so that we may join forces and wield the combined might of the scroll and your valiant spirit to vanquish this ancient threat once and for all, restoring peace and harmony to our troubled world." -- message text shown on "GoToOracle" quest state
+        -- shown when quest is done and clicked previous topic
+        -- if you wish for it to change after completing objective, but before clicking, this can be done too
+        TopicDone = "The End",
+        Give = "Ah, seeker of truth, your arrival heralds a long-awaited moment, for the scroll you possess holds within it the means to unlock the dimensional prison in control center, a place where an insidious and malevolent evil has been locked away for ages, and I, as the keeper of prophecies, have patiently awaited its arrival so that we may join forces and wield the combined might of the scroll and your valiant spirit to vanquish this ancient threat once and for all, restoring peace and harmony to our troubled world.",
+        Undone = "Just do it.",
+        Done = "Heroes of unwavering valor, you have proven yourselves capable of defeating the Creator, but in the process, a space-time fracture has manifested within the control center; should you choose to investigate it, be aware that there might be no coming back, yet the opportunity to uncover hidden truths and mend the shattered reality awaits those who dare to venture forth.",
+        Quest = "Open the dimensional prison in Control Center.",
+        After = "The End text",
     }
 }
 
 function events.LeaveMap()
     -- put check for having cleared control center here
-    if Map.Name == "sci-fi.blv" and Q[NG] == "ControlCenter" then
-        Q[NG] = "ControlCenterDone"
+    if Map.Name == "sci-fi.blv" and Q[NGOracle] == "Given" then
+        vars.newGameQuest.ccDone = true
     end
 end
-
-Quest {
-    BaseName = NG,
-    NPC = oracle,
-    Slot = 2,
-    NeverGiven = true,
-    Gold = 3874, -- gold reward
-    Exp = 4823434, -- exp reward
-    CheckDone = true, -- always completable
-    CanShow = function()
-        return Q[NG] == "ControlCenterDone"
-    end,
-    ControlCenterDone = function()
-        evt.Sub("QBits", qBits.controlCenter)
-        Q[NG] = "Done"
-        -- enable new game stuff here
-    end,
-    Texts = {
-        Topic = "The End",
-        TopicDone = false,
-        ControlCenterDone = "Heroes of unwavering valor, you have proven yourselves capable of defeating the Creator, but in the process, a space-time fracture has manifested within the control center; should you choose to investigate it, be aware that there might be no coming back, yet the opportunity to uncover hidden truths and mend the shattered reality awaits those who dare to venture forth."
-    }
-}
 
 --[[
 so:
