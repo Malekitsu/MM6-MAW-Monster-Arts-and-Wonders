@@ -2,7 +2,7 @@ local oldGame = structs.f.GameStructure
 function structs.f.GameStructure(define, ...)
     oldGame(define, ...)
     local cs = const.Stats
-    define[0x56B7E8].union("ExtraStatDescriptions") -- random address
+    define[0x56B7E8].union("ExtraStatDescriptions")
     .EditPChar(cs.HP)
     .EditPChar(cs.SP)
     .EditPChar(cs.ArmorClass)
