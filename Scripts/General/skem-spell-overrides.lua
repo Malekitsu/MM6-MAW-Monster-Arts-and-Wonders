@@ -2,7 +2,9 @@
 	Skill Emphasis Mod - RawSugar's Spell Overrides
 	Supersedes various parts of Core; segments list lines to remove from 0.8.2
 ]]
-if SETTINGS["255MOD"]~=true then
+if SETTINGS["255MOD"]==true then
+	return
+end
 -- set to true to show damage in the spell descriptions as a dice string
 local SHOW_DAMAGE_AS_DICE = SETTINGS["ShowDiceInSpellDescription"]
 local ADAPTIVE = string.lower(SETTINGS["AdaptiveMonsterMode"])
@@ -1340,4 +1342,17 @@ function events.CalcSpellDamage(t)
 		t.Result = t.HP*0.15+t.HP*t.Skill*0.01
 	end
 end
+
+local function GetObject(ptr)
+	local i = (ptr - Map.Objects[0]["?ptr"]) / Map.Objects[0]["?size"]
+	return Map.Objects[i], i
+end
+
+mem.autohook(0x45D816, function(d)
+	local t = {Object = GetObject(d.esi), Monster = Map.Monsters[d.edi / Map.Monsters[0]["?size"]]}
+	events.call("MonsterHitByObject", t) -- works only for "non-damage" objects apparently
+end)
+
+function events.MonsterHitByObject(t)
+	--debug.Message(dump(Game.ObjListBin[t.Object.TypeIndex], 1), t.Monster.Name)
 end
