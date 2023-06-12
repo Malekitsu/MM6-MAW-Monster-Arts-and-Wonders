@@ -1348,11 +1348,12 @@ local function GetObject(ptr)
 	return Map.Objects[i], i
 end
 
-mem.autohook(0x45D816, function(d)
-	local t = {Object = GetObject(d.esi), Monster = Map.Monsters[d.edi / Map.Monsters[0]["?size"]]}
+mem.autohook2(0x45D80D, function(d)
+	local t = {Object = GetObject(d.esi), Monster = Map.Monsters[d.edi / Map.Monsters[0]["?size"]], Allow = d.eax ~= 0}
 	events.call("MonsterHitByObject", t) -- works only for "non-damage" objects apparently
+	d.eax = t.Allow and 1 or 0
 end)
 
 function events.MonsterHitByObject(t)
-	--debug.Message(dump(Game.ObjListBin[t.Object.TypeIndex], 1), t.Monster.Name)
+	--debug.Message(dump(Game.ObjListBin[t.Object.TypeIndex], 1), t.Monster.Name, t.Allow)
 end
