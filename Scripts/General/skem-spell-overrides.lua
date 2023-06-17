@@ -1349,9 +1349,10 @@ local function GetObject(ptr)
 end
 
 mem.autohook2(0x45D80D, function(d)
-	local t = {Object = GetObject(d.esi), Monster = Map.Monsters[d.edi / Map.Monsters[0]["?size"]], Allow = d.eax ~= 0}
+	local t = {Object = GetObject(d.esi), Monster = Map.Monsters[d.edi / Map.Monsters[0]["?size"]], Allow = d.eax ~= 0, SpellSkill = d.ebp}
 	events.call("MonsterHitByObject", t) -- works only for "non-damage" objects apparently
 	d.eax = t.Allow and 1 or 0
+	d.ebp = t.SpellSkill
 end)
 
 function events.MonsterHitByObject(t)
