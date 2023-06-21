@@ -1358,15 +1358,3 @@ end)
 function events.MonsterHitByObject(t)
 	--debug.Message(dump(Game.ObjListBin[t.Object.TypeIndex], 1), t.Monster.Name, t.Allow)
 end
-
-local function getSFTItem(p)
-	local i = (p - Game.SFTBin.Frames["?ptr"]) / Game.SFTBin.Frames[0]["?size"]
-	return Game.SFTBin.Frames[i]
-end
-
-mem.autohook(0x46B56D, function(d)
-	local t = {Scale = d.edx, Frame = getSFTItem(d.eax)}
-	t.MonsterIndex, t.Monster = GetMonster(d.edi - 0x80)
-	events.call("MonsterSpriteScale", t)
-	d.edx = t.Scale
-end)
