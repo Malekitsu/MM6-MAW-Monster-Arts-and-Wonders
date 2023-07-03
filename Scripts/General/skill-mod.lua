@@ -3696,9 +3696,12 @@ local function getSFTItem(p)
 	return Game.SFTBin.Frames[i]
 end
 
-mem.autohook(0x46B56D, function(d)
+local function scaleHook(d)
 	local t = {Scale = d.edx, Frame = getSFTItem(d.eax)}
 	t.MonsterIndex, t.Monster = GetMonster(d.edi - 0x80)
 	events.call("MonsterSpriteScale", t)
 	d.edx = t.Scale
-end)
+end
+
+mem.autohook(0x46B56D, scaleHook)
+mem.autohook2(0x433D53, scaleHook)
