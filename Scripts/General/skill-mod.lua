@@ -3705,3 +3705,10 @@ end
 
 mem.autohook(0x46B56D, scaleHook)
 mem.autohook2(0x433D53, scaleHook)
+
+-- adjust item values
+mem.hookfunction(0x448610, 1, 0, function(d, def, itemPtr)
+	local t = {Item = structs.Item:new(itemPtr), Value = def(itemPtr)}
+	events.call("CalcItemValue", t)
+	return t.Value
+end)
