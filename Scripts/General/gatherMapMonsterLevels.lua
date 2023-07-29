@@ -4,7 +4,7 @@ sortableMonsters = { }
 
 function calculateAdjustedAverage(total_levels, total_monsters)
 	naive = (total_levels / total_monsters)
-	local total = 0
+	local total = 0 
 	local sd = 0
 	for i = 0, Map.Monsters.High do
 		monster = Map.Monsters[i]
