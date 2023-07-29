@@ -18,6 +18,40 @@ local function getSlot(player)
 			return i
 		end
 	end
+end						
+
+local function getSpellQueueData(spellQueuePtr, targetPtr)
+	local t = {Spell = i2[spellQueuePtr], Caster = Party.PlayersArray[i2[spellQueuePtr + 2]]}
+	t.SpellSchool = ceil(t.Spell / 11)
+	local flags = u2[spellQueuePtr + 8]
+	if flags:And(0x10) ~= 0 then -- caster is target
+		t.Caster = Party[i2[spellQueuePtr + 4]]
+	end
+    t.CasterIndex = getSlot(t.Caster)
+
+	if flags:And(1) ~= 0 then
+		t.FromScroll = true
+		t.Skill, t.Mastery = SplitSkill(u2[spellQueuePtr + 0xA])
+	else
+		if mmver > 6 then
+			t.Skill, t.Mastery = SplitSkill(t.Caster:GetSkill(const.Skills.Fire + t.SpellSchool - 1))
+		else -- no GetSkill
+			t.Skill, t.Mastery = SplitSkill(t.Caster.Skills[const.Skills.Fire + t.SpellSchool - 1])
+		end
+	end
+
+	local targetIdKey = mmv("TargetIndex", "TargetIndex", "TargetRosterId")
+	if targetPtr then
+		if type(targetPtr) == "number" then
+			t[targetIdKey], t.Target = internal.GetPlayer(targetPtr)
+		else
+			t[targetIdKey], t.Target = targetPtr:GetIndex(), targetPtr
+		end
+	else
+		local pl = Party[i2[spellQueuePtr + 4]]
+		t[targetIdKey], t.Target = pl:GetIndex(), pl
+	end
+	return t
 end
 
 --[[ 
@@ -1230,41 +1264,7 @@ local healingSpellPowers =
 		[const.Master] = {fixedMin = 150, fixedMax = 150, variableMin = 25, variableMax = 25, },				
 	},					
 						
-}						
-
-local function getSpellQueueData(spellQueuePtr, targetPtr)
-	local t = {Spell = i2[spellQueuePtr], Caster = Party.PlayersArray[i2[spellQueuePtr + 2]]}
-	t.SpellSchool = ceil(t.Spell / 11)
-	local flags = u2[spellQueuePtr + 8]
-	if flags:And(0x10) ~= 0 then -- caster is target
-		t.Caster = Party[i2[spellQueuePtr + 4]]
-	end
-    t.CasterIndex = getSlot(t.Caster)
-
-	if flags:And(1) ~= 0 then
-		t.FromScroll = true
-		t.Skill, t.Mastery = SplitSkill(u2[spellQueuePtr + 0xA])
-	else
-		if mmver > 6 then
-			t.Skill, t.Mastery = SplitSkill(t.Caster:GetSkill(const.Skills.Fire + t.SpellSchool - 1))
-		else -- no GetSkill
-			t.Skill, t.Mastery = SplitSkill(t.Caster.Skills[const.Skills.Fire + t.SpellSchool - 1])
-		end
-	end
-
-	local targetIdKey = mmv("TargetIndex", "TargetIndex", "TargetRosterId")
-	if targetPtr then
-		if type(targetPtr) == "number" then
-			t[targetIdKey], t.Target = internal.GetPlayer(targetPtr)
-		else
-			t[targetIdKey], t.Target = targetPtr:GetIndex(), targetPtr
-		end
-	else
-		local pl = Party[i2[spellQueuePtr + 4]]
-		t[targetIdKey], t.Target = pl:GetIndex(), pl
-	end
-	return t
-end
+}
 
 -- def is addHP()
 local function modifiedHealCharacterWithSpell(d, def, targetPtr, amount)
