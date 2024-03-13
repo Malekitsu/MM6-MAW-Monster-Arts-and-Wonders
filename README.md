@@ -5,6 +5,8 @@ Creators: Tnevolin, Rawsugar, Malekith, Eksekk, Raekuul.
 
 Names are not ordered by importance: everyone had a key role and put a lot of effort into this.
 
+MAW is still being maintained but the project has in large part moved into https://github.com/Malekitsu/Maw-Mod-MMMerge which features most of the same mechanics and changes but in a world where MM6 has been connected to the worlds of MM7 and MM8.
+
 Note to users
 
 ## **Goal**
